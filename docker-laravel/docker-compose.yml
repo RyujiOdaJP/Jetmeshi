@@ -84,10 +84,10 @@ services:
     volumes:
       - redis-store:/data
 
-  mail:
-    image: mailhog/mailhog
-    ports:
-      - ${MAILHOG_PORT:-18025}:8025
+  # mail:
+  #   image: mailhog/mailhog
+  #   ports:
+  #     - ${MAILHOG_PORT:-18025}:8025
 
 volumes:
   db-store:

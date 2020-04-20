@@ -1,5 +1,5 @@
 FROM php:7.4-fpm-alpine
-LABEL maintainer="ucan-lab <info@u-can.tech>"
+LABEL maintainer="RyujiOdaJP <ryuji.oda@gmail.com>"
 
 SHELL ["/bin/ash", "-oeux", "pipefail", "-c"]
 
