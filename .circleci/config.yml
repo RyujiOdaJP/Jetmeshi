@@ -16,7 +16,7 @@ jobs:
       # Using the RAM variation mitigates I/O contention
       # for database intensive operations.
       - image: circleci/mysql:8.0-ram
-      - image: circleci/node:12.14-alpine
+      # - image: circleci/node:12.14-alpine
       - image: redis:5.0.0-alpine
 
     steps:
