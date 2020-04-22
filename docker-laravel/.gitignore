@@ -1,6 +1,10 @@
-/.idea
-/docker/ash/.ash_history
-/docker/php/psysh
-!/docker/php/psysh/config.php
-/logs/
-/.env
+mobile_jetmeshi_green.mp4
+Adobe/mobile_jetmeshi_blue.xd
+Adobe/mobile_jetmeshi.xd
+docker-laravel
+Adobe
+.env
+.circleci
+.vscode
+logs
+README.md

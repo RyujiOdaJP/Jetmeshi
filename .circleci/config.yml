@@ -5,11 +5,10 @@
 version: 2
 jobs:
   build:
-    working_directory: ./docker-laravel
     docker:
       # Specify the version you desire here
       - image: circleci/php:7.4-fpm
-
+      # - image: circleci/php:7.3-node-browsers
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
@@ -19,54 +18,62 @@ jobs:
         command: mysqld --default-authentication-plugin=mysql_native_password
       # - image: circleci/node:12.14-alpine
       - image: redis:5.0.0-alpine
-    
     environment:
         - APP_DEBUG: true
         - APP_ENV: testing
-        - APP_KEY: env('APP_KEY')
+        # - APP_KEY: env('APP_KEY')
         - DB_CONNECTION: circleci
-
+    working_directory: ~/ci-laravel
     steps:
       - checkout
       # Install the required files from own git repository into empty container based on CircleCI.
       - run:
-        name: install dockerize
-        command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
-        environment:
-          DOCKERIZE_VERSION: v0.6.1
-      - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
-      - run: sudo docker-php-ext-install zip
+          name: install dockerize
+          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          environment:
+            DOCKERIZE_VERSION: v0.6.1
+      - run:
+          name: Update apt-get
+          command: sudo apt-get update
+          # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
+      - run:
+          name: Docker php extensions install
+          command: sudo docker-php-ext-install pdo_mysql
 
       # Download and cache dependencies
       - restore_cache:
           keys:
             # "composer.lock" can be used if it is committed to the repo
-            - v1-dependencies-{{ checksum "composer.json" }}
+            - v1-dependencies-{{ checksum "docker-laravel/src/composer.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: composer install -n --prefer-dist
+      - run:
+          paths: ./docker-laravel/src
+          name: Install PHP libraries
+          command: cd ./docker-laravel/src && composer install -n --prefer-dist && cd ../../
 
       - save_cache:
-          key: v1-dependencies-{{ checksum "composer.json" }}
           paths:
             - ./vendor
-      - restore_cache:
-          keys:
-            - node-v1-{{ checksum "package.json" }}
-            - node-v1-
-      - run: yarn install
-      - save_cache:
-          key: node-v1-{{ checksum "package.json" }}
-          paths:
-            - node_modules
+          key: v1-dependencies-{{ checksum "docker-laravel/src/composer.json" }}
+      # - restore_cache:
+      #     keys:
+      #       - node-v1-{{ checksum "package.json" }}
+      #       - node-v1-
+      # - run: yarn install
+      # - save_cache:
+      #     key: node-v1-{{ checksum "package.json" }}
+      #     paths:
+      #       - ./node_modules
 
-      # prepare the database
-      - run: touch storage/testing.sqlite
-      - run: php artisan migrate --env=testing --database=sqlite_testing --force
+      # # prepare the database
+      # - run: touch storage/testing.sqlite
+      # - run: php artisan migrate --env=testing --database=sqlite_testing --force
 
       # run tests with phpunit or codecept
-      - run: ./vendor/bin/phpunit
+      #     - "1c:ca:0f:f8:ac:e2:3d:b9:a5:4c:6e:2e:f1:d5:ea:ee"
+      - run: cd docker-laravel/src/ && composer test && cd ../../
       # - run: ./vendor/bin/codecept build
       # - run: ./vendor/bin/codecept run
 
