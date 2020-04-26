@@ -11,7 +11,7 @@ Let's share everyone's ideas!
 + Infrastructure: AWS_lightsail, S3
 
 
-### Sequence
+### Login process
 ```mermaid
 sequenceDiagram
 participant U as User
@@ -19,7 +19,7 @@ participant Cl as Client
 participant La as Laravel
 participant DB as Data Base
 participant Ml as Mailgun
-    Note over U: LOGIN PROCESS
+    Note over U: Show up LOGIN form
     U ->>+ Cl: Http access
     Cl ->> Cl: Store cache
     Cl ->> La: Through req
@@ -87,7 +87,8 @@ else dnied 7 times
         U ->>- U: Back to Input Email & secret
         
         end
-    
-
 end
 ```
+### 
+
+
