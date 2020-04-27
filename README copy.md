@@ -5,7 +5,7 @@ participant U as User
 participant Cl as Client
 participant La as Laravel
 participant Re as Redis
-participant DB as Data Base
+
 
     Note over U: Show the TOP
     U ->>+ Cl: Http Req
@@ -59,18 +59,130 @@ participant DB as Data Base
     
     else is not yet
         La -->> Cl: Redirect LOGIN
+        Note over La: Redirect
         Cl -->> U: Show LOGIN page
     
     end
-    Note over U: behavior of Post
-    Note over U: behavior of Review
-    Note over U: behavior of Post
-    U ->>+ Cl: Http Req(logged in)
-    Cl ->> La: Send data
-    La ->>DB: Send data
-    DB ->> DB: Store data
-    DB -->> La: Get data
-    La -->>Cl: Show data
+```
+### Behavior of User's Action
+```mermaid
+sequenceDiagram
+participant U as User
+participant Cl as Client
+participant La as Laravel
+participant DB as Data Base
 
+    Note over U: behavior of Post
+ 
+    U ->> Cl: Send JPEG/PNG(logged in)
+    Cl ->>+ La: Send photos up to5
+    Note over La: Validation
+    alt is over 600*315px
+        
+        La -->>- Cl: Show preview on sumnails
+        U ->>+ Cl: edit or delete
+        Cl ->> La: Send data
+        Note over La: Triming window
+        La -->> Cl: show preview for editing
+        Cl -->>- U: show preview for editing
+        
+        U ->>+ Cl : req Post
+        Cl ->>- La : req Post
+        La ->>+ DB: Send data
+        Note over DB: showing apllied size
+        DB ->> DB: Store for sumnail
+        DB ->> DB: Store for WEB
+        DB ->> DB: Store for Mobile
+        DB ->> S3: Store images
+        Note Over S3: Contents Server
+        U ->> Cl: Req show the post
+        Cl ->>+ La: Req show the post
+        DB -->>- La: Get data
+        La -->>- Cl: Show the post
+
+    else is under 600*315px
+    La -->> Cl: Validate fail
+    Cl -->> U: Should be over 600*315px
+    
+    else is invalid format
+    La -->> Cl: Validate fail
+    Cl -->> U: Should be PNG or JPEG
+
+    else is over 2MB FOR EACH
+    La -->> Cl: Validate fail
+    Cl -->> U: Should be less than 2MB
+    end
+
+   Note over U: behavior of Review
+    U ->>+ Cl: Req review window
+    Cl ->> La: Req reviw Window
+    La -->>Cl: Show window
+    Cl -->> U: Req title & comment
+    U ->> U: Abandon
+    U ->> Cl: req Post comment
+    Cl ->> La: req Post Comment
+    Note over La: Validation
+    alt title shorter than 40 & comment shorter than 140
+        La ->>+ DB: Store it
+        DB ->> DB: Store sum of score on creator
+        DB ->>- DB: Store rate of evaluation
+    else Too long
+        
+        La -->> Cl:be shorter than 40 & 140
+        Cl -->> U:be shorter than 40 & 140
+    else No title
+        La -->> Cl: Place title please
+        Cl -->> U:Place title please
+    else No Stars
+        La -->> Cl: Evaluate please
+        Cl -->>- U: Evaluate please
+
+    end 
+
+   Note over U: behavior of LIKE
+    U ->>+ Cl: Push LIKE
+    Cl ->> La: Send LIKE
+    La ->>+ DB: Store it
+    DB ->> DB: Store LIKE List for User
+    DB ->> DB: Store number of LIKES on Recipe
+    DB ->> DB: Store number of LIKES on Creator
+
+    DB -->> La: Show on User's LIKE LIST
+    DB -->>- La: Show on number of LIKES on Recipe
+    La -->>Cl: Show LIKED
+    Cl -->>- U: Show LIKED
+
+    U ->>+ Cl: Push Unlike
+    Cl ->> La: Send Unlike
+    La ->>+ DB: Store it
+    DB ->> DB: Eliminate List for User
+    DB ->> DB: Eliminate number of LIKES on Recipe
+    DB ->> DB: Eliminate number of LIKES on Creator
+
+    DB -->> La: Remove from User's LIKE LIST
+    DB -->>- La: Show on number of LIKES on Recipe
+    La -->>Cl: Show Unliked
+    Cl -->>- U: Show Unliked
+
+    Note over U: behavior of Search Recipe
+    U ->>+ Cl: Set conditions
+    Cl ->> La: Send
+    La ->>+ DB: Serach it lim. 10
+    DB ->> DB: Type, Time, Cost, Tags
+    DB ->> DB: KEYWORD Elastic search
+
+    DB -->>- La: Show results lists
+    La -->>Cl: Show 10 results
+    Note over La: Pagenations
+    Cl -->>- U: Show 10 results
+    loop if there are more results
+        U ->>+ Cl: Scroll down
+        Cl ->> La: Req
+        La ->> DB: Req
+        DB -->> La: Show results lists
+    La -->>Cl: Show 10 results
+    Cl -->>- U: Show 10 results
+    end
+    
 ```
 ### 
