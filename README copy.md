@@ -72,7 +72,7 @@ participant Cl as Client
 participant La as Laravel
 participant DB as Data Base
 
-    Note over U: behavior of Post
+    Note over U: Post & Edit
  
     U ->> Cl: Send JPEG/PNG(logged in)
     Cl ->>+ La: Send photos up to5
@@ -99,10 +99,14 @@ participant DB as Data Base
         Cl ->>+ La: Req show the post
         DB -->>- La: Get data
         La -->>- Cl: Show the post
-
+    
+    else Nothing is selected
+        La -->> Cl: Validate fail
+        Cl -->> U: Slect at least 1 image
+        Cl -->> U: Must fill in Title
     else is under 600*315px
-    La -->> Cl: Validate fail
-    Cl -->> U: Should be over 600*315px
+        La -->> Cl: Validate fail
+        Cl -->> U: Should be over 600*315px
     
     else is invalid format
     La -->> Cl: Validate fail
@@ -112,6 +116,31 @@ participant DB as Data Base
     La -->> Cl: Validate fail
     Cl -->> U: Should be less than 2MB
     end
+
+    Note over U: Delete Post
+    U ->> Cl: Req to delete posts
+    La --> Cl: confirm
+    Cl -->> U: show alert
+    alt Delete
+        U ->>+ Cl: Push delete
+        Cl ->> La: Req to delete
+        La ->> DB: Req delete
+        La ->> S3: Req Delete
+        S3 ->>S3: Delete Post
+        DB ->> DB: Delete Post
+        La -->> Cl: Show popup
+        Cl -->> U: req to push OK
+        U ->>Cl: OK
+        Cl ->> La: Ok prevoius
+        La -->>Cl: Redirect to previous
+        Cl -->>-U: Back to Previous
+
+    else Cancel
+        U ->> Cl: Cancel
+        Cl -->>U: Back to Previous
+
+    end
+
 
    Note over U: behavior of Review
     U ->>+ Cl: Req review window
@@ -184,5 +213,111 @@ participant DB as Data Base
     Cl -->>- U: Show 10 results
     end
     
+    Note over U: Create account
+    U ->> Cl: Put info
+    Cl ->>+ La: Req validation
+    Note over La: Validation
+    alt is valid
+    La ->> DB: send info
+
+    else invalid e-mail format
+    La -->> Cl: invalid email format
+
+    else invalid PW
+    La -->> Cl: must Include char and number
+    La -->>- Cl: must be longer than 6
+
+    end
+
+    U ->> Cl: Creat with Twitter
+    U ->> Cl: Create with Google
+    U ->> Cl: Creat with LINE
+    Cl ->>+ La: Req
+    alt is valid
+    La ->> La: Redirect to service
+    La ->> DB: store E-mails
+    La ->> Cl: Redirect WELCOME page
+
+
+
+    else does not exist
+    La -->> Cl: does not exist
+
+    end
+
+    Note over U: Edit profile photo
+    
+    U ->> Cl: Req changing photo
+    Cl ->>+ La: Req to change
+    Note over La: Validation
+    alt is over 200*200px
+        
+        La -->>- Cl: Show preview on sumnails
+        U ->>+ Cl: edit
+        Cl ->> La: Send data
+        Note over La: Triming window
+        La -->> Cl: show preview for editing
+        Cl -->>- U: show preview for editing
+        
+        U ->>+ Cl : req Post
+        Cl ->>- La : req Post
+        La ->>+ DB: Send data
+        Note over DB: showing apllied size
+        DB ->> DB: Store for sumnail
+        DB ->> DB: Store for WEB
+        DB ->> DB: Store for Mobile
+        DB ->> S3: Store images
+        Note Over S3: Contents Server
+        U ->> Cl: Req show the post
+        Cl ->>+ La: Req show the post
+        DB -->>- La: Get data
+        La -->>- Cl: Show the post
+    
+    else Nothing is selected
+        La -->> Cl: Validate fail
+        Cl -->> U: Slect at least 1 image
+    else is under 200*200px
+        La -->> Cl: Validate fail
+        Cl -->> U: Should be over 200*200px
+    
+    else is invalid format
+    La -->> Cl: Validate fail
+    Cl -->> U: Should be PNG or JPEG
+
+    else is over 2MB FOR EACH
+    La -->> Cl: Validate fail
+    Cl -->> U: Should be less than 2MB
+    end
+
+Note over U: Edit profile sentence
+    
+    U ->>+ Cl: Req Edit
+    Cl ->> La: Req to change
+        Note over La: Overlay window
+        La -->> Cl: Show window
+        U ->> Cl: edit
+        Cl ->> La: Send data
+    alt is valid
+        La ->> DB: Send data
+        Note over DB: showing apllied size
+        DB ->> DB: Store for sumnail
+        DB ->> DB: Store for WEB
+        DB ->> DB: Store for Mobile
+        DB ->> S3: Store images
+        Note Over S3: Contents Server
+        U ->> Cl: Req show the post
+        Cl ->> La: Req show the post
+        DB -->> La: Get data
+        La -->> Cl: Show the post
+    
+    else over 400 words
+        La -->> Cl: Validate fail
+        Cl -->> U: less than 400 words
+
+    else is invalid format
+    La -->> Cl: Validate fail
+    Cl -->> U: Not allow to use special char 
+    end
+
 ```
 ### 
