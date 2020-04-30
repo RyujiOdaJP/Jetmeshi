@@ -55,7 +55,8 @@ services:
       - MYSQL_ROOT_PASSWORD=${DB_PASS:-secret}
       - TZ=${TZ:-Asia/Tokyo}
     ports:
-      - ${DB_PORT:-13306}:13306
+      # - ${DB_PORT:-13306}:13306
+      - 3307:3306
 
   db-testing:
     image: mysql:8.0
