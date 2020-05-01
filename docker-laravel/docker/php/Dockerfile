@@ -39,3 +39,11 @@ RUN apk update && \
   composer config -g process-timeout 3600 && \
   composer config -g repos.packagist composer https://packagist.jp && \
   composer global require hirak/prestissimo
+
+# RUN apt-get -y update
+# RUN apt-get install -y \
+#     curl \
+#     gnupg
+# RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
+# RUN apt-get install -y nodejs
+# RUN npm install npm@latest -g
