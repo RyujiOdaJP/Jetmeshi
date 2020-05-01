@@ -15,9 +15,18 @@ class AddSnsRecognitionToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //add column
-            $table->boolean('LINE');
-            $table->boolean('Twitter');
-            $table->boolean('Google');
+            $table->string('provider_id')->unique()->nullable();
+            $table->string('provider_name')->nullable();
+            // $table->boolean('LINE');
+            // $table->boolean('Twitter');
+            // $table->boolean('Google');
+
+            //add index
+            $table->unique(['provider_id', 'provider_name']);
+
+            // Making email and password nullable
+            $table->string('email')->nullable()->change();
+            $table->string('password')->nullable()->change();
         });
     }
     // SNS認証を選んだユーザーにはパスワード設定を通常は求めません（OAuth認証後にパスワードを要求するのは避けてください）。
@@ -33,7 +42,15 @@ class AddSnsRecognitionToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //drop column
-            $table->dropColumn('');
+            $table->dropColumn('provider_id');
+            $table->dropColumn('provider_name');
+            // $table->dropColumn('LINE');
+            // $table->dropColumn('Twitter');
+            // $table->dropColumn('Google');
+            $table->dropUnique(['provider_id', 'provider_name']);
+
+            $table->string('email')->nullable(false)->change();
+            $table->string('password')->nullable(false)->change();
         });
     }
 }
