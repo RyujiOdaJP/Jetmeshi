@@ -20,6 +20,24 @@ class AddNullableToPostsTable extends Migration
             $table->string('image_4')->nullable()->change();
             $table->string('image_5')->nullable()->change();
         });
+
+        Schema::table('tags', function (Blueprint $table) {
+            //外部キー用のuser_idカラムをpostsテーブルに追加します。
+            // $table->integer('user_id')->unsigned()->default(1);
+            // $table->foreign('user_id')
+            //       ->references('id')->on('users')
+            // foreignIdメソッドはunsignedBigIntegerのエイリアスです。
+            // 一方のconstrainedメソッドはテーブルとカラム名をforeignIdで指定した
+            // カラム名をもとに規約により決定します。
+            // テーブル名が規約と合っていない場合は、constrainedメソッドの引数にテーブル名を渡してください。
+
+            $table->foreignId('user_id')->constrained()
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            $table->foreignId('post_id')->constrained('post_id')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+        });
     }
 
     /**
@@ -35,6 +53,10 @@ class AddNullableToPostsTable extends Migration
             $table->string('image_3')->nullable(false)->change();
             $table->string('image_4')->nullable(false)->change();
             $table->string('image_5')->nullable(false)->change();
+        });
+        Schema::table('tags', function (Blueprint $table) {
+            $table->dropColumn('user_id');
+            $table->dropColumn('post_id');
         });
     }
 }
