@@ -20,6 +20,9 @@ class AddSnsRecognitionToUsersTable extends Migration
             $table->boolean('Google');
         });
     }
+    // SNS認証を選んだユーザーにはパスワード設定を通常は求めません（OAuth認証後にパスワードを要求するのは避けてください）。
+    // さらに選択したOAuthプロバイダーには登録メールアドレスがないかもしれません。したがって、
+    // usersテーブルのemailとpasswordフィールドをnullableにします。
 
     /**
      * Reverse the migrations.
