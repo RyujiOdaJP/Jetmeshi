@@ -34,20 +34,6 @@ class CreatePostsTable extends Migration
             $table->text('sequence');
             $table->unsignedInteger('cooking_time');
             $table->unsignedInteger('budget');
-
-            //外部キー用のuser_idカラムをpostsテーブルに追加します。
-            // $table->integer('user_id')->unsigned()->default(1);
-            // $table->foreign('user_id')
-            //       ->references('id')->on('users')
-            // foreignIdメソッドはunsignedBigIntegerのエイリアスです。
-            // 一方のconstrainedメソッドはテーブルとカラム名をforeignIdで指定したカラム名をもとに規約により決定します。
-            // テーブル名が規約と合っていない場合は、constrainedメソッドの引数にテーブル名を渡してください。
-            $table->foreignId('user_id')->constrained()
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
-            $table->foreignId('tag_id')->constrained()
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
         });
 
         // To modify or drop table, no need to create new migration file, instead do like below.
@@ -60,7 +46,8 @@ class CreatePostsTable extends Migration
      * Reverse the migrations.
      * resetでは、存在するすべてのマイグレーションファイルのdown()が実行されます。
      * rollbackでは、直近にまとめて実行したマイグレーションファイルのdown()がすべて実行されます。
-     * --stepを付加すると逆上るマイグレーションファイル数を指定できます。例えば下記では最新から1つ目までのマイグレーションファイルのdown()のみが実行されます。
+     * --stepを付加すると逆上るマイグレーションファイル数を指定できます。
+     * 例えば下記では最新から1つ目までのマイグレーションファイルのdown()のみが実行されます。
      * $ php artisan migrate:rollback --step=1
      * @return void
      */
