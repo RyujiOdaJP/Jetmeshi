@@ -15,20 +15,25 @@ ARG TZ
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /composer
 
+# Node.jsをインストール
+RUN apk add --update nodejs nodejs-npm
+
 RUN apk update && \
   apk add --update --no-cache --virtual=.build-dependencies \
     autoconf=~2.69 \
     gcc=~9.2 \
     g++=~9.2 \
     make=~4.2 \
-    tzdata=2019c-r0 \
+    # tzdata=2019c-r0 \
     git=~2.24 && \
+  # apt-get update \
+  # && apt-get install -y tzdata \
   apk add --update --no-cache \
     icu-dev=~64.2 \
     libzip-dev=~1.5 \
     oniguruma-dev=~6.9 && \
-  cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
-  echo ${TZ} > /etc/timezone && \
+  # cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
+  # echo ${TZ} > /etc/timezone && \
   pecl install xdebug && \
   git clone https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis && \
   apk del .build-dependencies && \
@@ -40,10 +45,4 @@ RUN apk update && \
   composer config -g repos.packagist composer https://packagist.jp && \
   composer global require hirak/prestissimo
 
-# RUN apt-get -y update
-# RUN apt-get install -y \
-#     curl \
-#     gnupg
-# RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
-# RUN apt-get install -y nodejs
-# RUN npm install npm@latest -g
+
