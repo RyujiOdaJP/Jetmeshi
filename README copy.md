@@ -1,4 +1,7 @@
-### Login process
+# Sequence
+
+## Login process
+
 ```mermaid
 sequenceDiagram
 participant U as User
@@ -36,7 +39,7 @@ alt success to login within 6 times
         U->>U: back to LOGIN
     end
 
-    
+
 
 else dnied 7 times
     DB -->>+ Cl: Lock account to keep secure
@@ -47,19 +50,19 @@ else dnied 7 times
     Cl ->> La: Forgot PW req
     La -->> Cl : Returns form
     Cl -->>- U: Display Forgot PW form
-    
+
     U ->>+ Cl: Input Email and secret
     Cl ->>+ La: Validation
     alt is correct
         La ->> Cl: (nothing display)
 
-        
+
     else is wrong
         La -->> Cl: Invalid format. Try again.
         Cl -->>- U: Invalid format. Try again.
         U ->> U: Back to Input Email & secret
     end
-    
+
     Cl ->>+ La: Through info
     La ->> DB: Confirm
     DB -->> La: returns result
@@ -72,12 +75,13 @@ else dnied 7 times
         La -->>- Cl : Email or Secret is wrong
         Cl -->> U: Email or Secret is wrong
         U ->>- U: Back to Input Email & secret
-        
+
         end
 end
 ```
 
-### Redirect process
+## Redirect process
+
 ```mermaid
 sequenceDiagram
 participant U as User
@@ -90,14 +94,14 @@ participant Re as Redis
     U ->>+ Cl: Http Req
     Cl ->> Cl: store cache as cookie
     Cl ->>+ La: Send cookie
-    
+
     alt is logged in
         La ->>+ Re: Set ID
         Re ->> Re: Store ID
         La -->>- Cl: Session ID
         Cl -->> U: Display UserName
         Cl -->>- U: Display TOP
-        
+
         loop Keep session ID
             U ->>+ Cl: Http Req
             Cl ->>+ La: Session ID
@@ -118,15 +122,15 @@ participant Re as Redis
     U ->>+ Cl: Http Req
     Cl ->> Cl: store cache as cookie
     Cl ->>+ La: Send cookie
-    
+
     alt is logged in
-        
+
         La ->>+ Re: Set ID
         Re ->> Re: Store ID
         La -->>- Cl: Session ID
         Cl -->> U: Display UserName
         Cl -->>- U: Display Specic page
-        
+
         loop Keep session ID
             U ->>+ Cl: Http Req
             Cl ->>+ La: Session ID
@@ -135,16 +139,20 @@ participant Re as Redis
             Cl -->> U: Display UserName
             Cl -->>- U: Display specific page
         end
-    
+
     else is not yet
         La -->> Cl: Redirect LOGIN
         Note over La: Redirect
         Cl -->> U: Show LOGIN page
-    
+
     end
+
 ```
-### Behavior of User's Action
+
+## Behavior of User's Action
+
 ```mermaid
+
 sequenceDiagram
 participant U as User
 participant Cl as Client
@@ -152,19 +160,19 @@ participant La as Laravel
 participant DB as Data Base
 
     Note over U: Post & Edit
- 
+
     U ->> Cl: Send JPEG/PNG(logged in)
     Cl ->>+ La: Send photos up to5
     Note over La: Validation
     alt is over 600*315px
-        
+
         La -->>- Cl: Show preview on sumnails
         U ->>+ Cl: edit or delete
         Cl ->> La: Send data
         Note over La: Triming window
         La -->> Cl: show preview for editing
         Cl -->>- U: show preview for editing
-        
+
         U ->>+ Cl : req Post
         Cl ->>- La : req Post
         La ->>+ DB: Send data
@@ -178,7 +186,7 @@ participant DB as Data Base
         Cl ->>+ La: Req show the post
         DB -->>- La: Get data
         La -->>- Cl: Show the post
-    
+
     else Nothing is selected
         La -->> Cl: Validate fail
         Cl -->> U: Slect at least 1 image
@@ -186,7 +194,7 @@ participant DB as Data Base
     else is under 600*315px
         La -->> Cl: Validate fail
         Cl -->> U: Should be over 600*315px
-    
+
     else is invalid format
     La -->> Cl: Validate fail
     Cl -->> U: Should be PNG or JPEG
@@ -235,7 +243,7 @@ participant DB as Data Base
         DB ->> DB: Store sum of score on creator
         DB ->>- DB: Store rate of evaluation
     else Too long
-        
+
         La -->> Cl:be shorter than 40 & 140
         Cl -->> U:be shorter than 40 & 140
     else No title
@@ -245,7 +253,7 @@ participant DB as Data Base
         La -->> Cl: Evaluate please
         Cl -->>- U: Evaluate please
 
-    end 
+    end
 
    Note over U: behavior of LIKE
     U ->>+ Cl: Push LIKE
@@ -291,7 +299,7 @@ participant DB as Data Base
     La -->>Cl: Show 10 results
     Cl -->>- U: Show 10 results
     end
-    
+
     Note over U: Create account
     U ->> Cl: Put info
     Cl ->>+ La: Req validation
@@ -325,19 +333,19 @@ participant DB as Data Base
     end
 
     Note over U: Edit profile photo
-    
+
     U ->> Cl: Req changing photo
     Cl ->>+ La: Req to change
     Note over La: Validation
     alt is over 200*200px
-        
+
         La -->>- Cl: Show preview on sumnails
         U ->>+ Cl: edit
         Cl ->> La: Send data
         Note over La: Triming window
         La -->> Cl: show preview for editing
         Cl -->>- U: show preview for editing
-        
+
         U ->>+ Cl : req Post
         Cl ->>- La : req Post
         La ->>+ DB: Send data
@@ -351,14 +359,14 @@ participant DB as Data Base
         Cl ->>+ La: Req show the post
         DB -->>- La: Get data
         La -->>- Cl: Show the post
-    
+
     else Nothing is selected
         La -->> Cl: Validate fail
         Cl -->> U: Slect at least 1 image
     else is under 200*200px
         La -->> Cl: Validate fail
         Cl -->> U: Should be over 200*200px
-    
+
     else is invalid format
     La -->> Cl: Validate fail
     Cl -->> U: Should be PNG or JPEG
@@ -369,7 +377,7 @@ participant DB as Data Base
     end
 
 Note over U: Edit profile sentence
-    
+
     U ->>+ Cl: Req Edit
     Cl ->> La: Req to change
         Note over La: Overlay window
@@ -388,15 +396,14 @@ Note over U: Edit profile sentence
         Cl ->> La: Req show the post
         DB -->> La: Get data
         La -->> Cl: Show the post
-    
+
     else over 400 words
         La -->> Cl: Validate fail
         Cl -->> U: less than 400 words
 
     else is invalid format
     La -->> Cl: Validate fail
-    Cl -->> U: Not allow to use special char 
+    Cl -->> U: Not allow to use special char
     end
 
 ```
-### 
