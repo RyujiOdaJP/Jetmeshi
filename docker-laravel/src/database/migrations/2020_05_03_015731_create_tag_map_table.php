@@ -17,7 +17,7 @@ class CreateTagMapTable extends Migration
         //     $table->renameColumn('tag_id','id');
         // });
 
-        Schema::create('tag_map', function (Blueprint $table) {
+        Schema::create('tag_maps', function (Blueprint $table) {
             $table->id();
             $table->foreignId('post_id')->constrained()
             ->onDelete('cascade')->onUpdate('cascade')->change();
@@ -34,7 +34,7 @@ class CreateTagMapTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tag_map');
+        Schema::dropIfExists('tag_maps');
         // Schema::table('posts', function (Blueprint $table) {
         //     $table->renameColumn('id','post_id');
         // });

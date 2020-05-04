@@ -32,7 +32,7 @@ class AddNullableToPostsTable extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('tag_map');
+        // Schema::dropIfExists('tag_maps');
         Schema::table('posts', function (Blueprint $table) {
 
             //remove nullable from optional photos

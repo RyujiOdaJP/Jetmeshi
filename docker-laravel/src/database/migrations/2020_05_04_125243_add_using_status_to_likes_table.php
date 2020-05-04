@@ -25,7 +25,7 @@ class AddUsingStatusToLikesTable extends Migration
             //add column using_status
             $table->boolean('using_status');
         });
-        Schema::table('tag_map', function (Blueprint $table) {
+        Schema::table('tag_maps', function (Blueprint $table) {
             //add column using_status
             $table->boolean('using_status');
         });
@@ -58,7 +58,7 @@ class AddUsingStatusToLikesTable extends Migration
             //drop column
             $table->dropColumn('using_status');
         });
-        Schema::table('tag_map', function (Blueprint $table) {
+        Schema::table('tag_maps', function (Blueprint $table) {
             //drop column
             $table->dropColumn('using_status');
         });
