@@ -19,8 +19,10 @@ class CreateTagMapTable extends Migration
 
         Schema::create('tag_map', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('post_id')->constrained();
-            $table->foreignId('tag_id')->constrained();
+            $table->foreignId('post_id')->constrained()
+            ->onDelete('cascade')->onUpdate('cascade')->change();
+            $table->foreignId('tag_id')->constrained()
+            ->onDelete('cascade')->onUpdate('cascade')->change();;
             $table->timestamps();
         });
     }
