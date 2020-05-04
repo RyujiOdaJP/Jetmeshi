@@ -20,7 +20,9 @@ class AddNullableToPostsTable extends Migration
             $table->string('image_4')->nullable()->change();
             $table->string('image_5')->nullable()->change();
             // $table->dropColumn('tag_id');
+
         });
+
     }
 
     /**
@@ -30,12 +32,14 @@ class AddNullableToPostsTable extends Migration
      */
     public function down()
     {
+        // Schema::dropIfExists('tag_map');
         Schema::table('posts', function (Blueprint $table) {
+
             //remove nullable from optional photos
-            $table->string('image_2')->nullable(false)->change();
-            $table->string('image_3')->nullable(false)->change();
-            $table->string('image_4')->nullable(false)->change();
-            $table->string('image_5')->nullable(false)->change();
+            // $table->string('image_2')->nullable(false)->change();
+            // $table->string('image_3')->nullable(false)->change();
+            // $table->string('image_4')->nullable(false)->change();
+            // $table->string('image_5')->nullable(false)->change();
             // $table->dropColumn('tag_id');
 
         });

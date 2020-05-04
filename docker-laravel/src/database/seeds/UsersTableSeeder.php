@@ -13,8 +13,12 @@ class UsersTableSeeder extends Seeder
     {
         // Fakerを使う
         $faker = Faker\Factory::create('ja_JP');
+
+        //clear data
+        // DB::table('users')->truncate();
+
         //set admim & random user
-        // 固定ユーザーを作成
+        //固定ユーザーを作成
         DB::table('users')->insert([
             'name' => 'RyujiOdaJP',
             'email' => 'ryuji.oda@gmail.com',
@@ -23,6 +27,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => $faker->dateTime(),
             'created_at' => $faker->dateTime(),
             'updated_at' => $faker->dateTime(),
+            'using_status' => true
         ]);
         DB::table('users')->insert([
             'name' => 'foo1',
@@ -32,7 +37,24 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => $faker->dateTime(),
             'created_at' => $faker->dateTime(),
             'updated_at' => $faker->dateTime(),
+            'using_status' => false
         ]);
+
+        $providers = [];
+        $provider_id = [];
+
+        for($i = 0; $i < 18; $i++){
+            $providers[$i] = $faker->randomElement(['Google', 'Twitter', 'Facebook']);
+            if ($providers[$i] === 'Google') {
+                $provider_id[$i] = 1;
+            }
+            elseif ($providers[$i] === 'Twitter') {
+                $provider_id[$i] = 2;
+            }
+            elseif($providers[$i] === 'Facebook') {
+                $provider_id[$i] = 3;
+            }
+        }
 
         // ランダムにユーザーを作成
         for ($i = 0; $i < 18; $i++) {
@@ -43,7 +65,11 @@ class UsersTableSeeder extends Seeder
                 'lang' => $faker->randomElement(['en', 'ja']),
                 'email_verified_at' => $faker->dateTime(),
                 'created_at' => $faker->dateTime(),
-                'updated_at' => $faker->dateTime()
+                'updated_at' => $faker->dateTime(),
+                'provider_id' => $provider_id[$i],
+                'provider_name' => $providers[$i],
+                'using_status' => $faker->boolean(50)
+
             ]);
         }
     }

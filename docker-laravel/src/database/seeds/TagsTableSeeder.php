@@ -1,9 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Predis\Command\ListLength;
-
-use function GuzzleHttp\_current_time;
+use Illuminate\Support\Facades\DB;
 
 class TagsTableSeeder extends Seeder
 {
@@ -14,8 +12,10 @@ class TagsTableSeeder extends Seeder
      */
     public function run()
     {
+         //Use faker
+         $faker = Faker\Factory::create('ja_JP');
         //clear data
-        // DB::table('posts')->truncate();
+        //  DB::table('tags')->truncate();
 
         //insert tags
         $tags=
@@ -36,8 +36,9 @@ class TagsTableSeeder extends Seeder
             ];
 
         for ($i = 0; $i < count($tags); $i++)
-        DB::table('tags')->insert([
-            'name' => $tags[$i]
-        ]);
+            DB::table('tags')->insert([
+            'name' => $tags[$i],
+            'using_status' => $faker->boolean(50)
+            ]);
     }
 }

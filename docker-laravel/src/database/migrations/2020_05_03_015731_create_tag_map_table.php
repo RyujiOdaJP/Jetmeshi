@@ -13,9 +13,9 @@ class CreateTagMapTable extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->renameColumn('post_id','id');
-        });
+        // Schema::table('tags', function (Blueprint $table) {
+        //     $table->renameColumn('tag_id','id');
+        // });
 
         Schema::create('tag_map', function (Blueprint $table) {
             $table->id();
@@ -35,8 +35,8 @@ class CreateTagMapTable extends Migration
     public function down()
     {
         Schema::dropIfExists('tag_map');
-        Schema::table('posts', function (Blueprint $table) {
-            $table->renameColumn('id','post_id');
-        });
+        // Schema::table('posts', function (Blueprint $table) {
+        //     $table->renameColumn('id','post_id');
+        // });
     }
 }
