@@ -211,14 +211,17 @@ participant DB as Data Base
     alt Delete
         U ->>+ Cl: Push delete
         Cl ->> La: Req to delete
-        La ->> DB: Req delete
-        La ->> S3: Req Delete
-        S3 ->>S3: Delete Post
-        DB ->> DB: Delete Post
         La -->> Cl: Show popup
         Cl -->> U: req to push OK
         U ->>Cl: OK
-        Cl ->> La: Ok prevoius
+        La ->> DB: Req delete
+        La ->> S3: Req Delete
+        S3 ->>S3: Delete Image
+        DB ->> DB: Flag false
+        La -->> Cl: Coplete to delete
+        Cl -->> U : Complete to delete
+        U ->> Cl: send ok
+        Cl ->> La: req to prevoius
         La -->>Cl: Redirect to previous
         Cl -->>-U: Back to Previous
 
@@ -256,19 +259,23 @@ participant DB as Data Base
     end
 
    Note over U: behavior of LIKE
-    U ->>+ Cl: Push LIKE
-    Cl ->> La: Send LIKE
+    
+    Note over La: Validation
+    alt if not exist
+    Cl -->> U: turns heart always gray
+    U ->>+ Cl: Push heart
+    Cl ->>+ La: Send LIKE
     La ->>+ DB: Store it
     DB ->> DB: Store LIKE List for User
     DB ->> DB: Store number of LIKES on Recipe
-    DB ->> DB: Store number of LIKES on Creator
-
     DB -->> La: Show on User's LIKE LIST
     DB -->>- La: Show on number of LIKES on Recipe
-    La -->>Cl: Show LIKED
-    Cl -->>- U: Show LIKED
+    La -->>Cl: Show pink heart
+    Cl -->>- U: Show pink heart
 
-    U ->>+ Cl: Push Unlike
+    else if exist on "likes table"
+    Cl -->> U: turns heart always pink
+    U ->>+ Cl: Push heart
     Cl ->> La: Send Unlike
     La ->>+ DB: Store it
     DB ->> DB: Eliminate List for User
@@ -277,8 +284,10 @@ participant DB as Data Base
 
     DB -->> La: Remove from User's LIKE LIST
     DB -->>- La: Show on number of LIKES on Recipe
-    La -->>Cl: Show Unliked
-    Cl -->>- U: Show Unliked
+    La -->>Cl: Show gray heart
+    Cl -->>- U: Show gray heart
+
+    end
 
     Note over U: behavior of Search Recipe
     U ->>+ Cl: Set conditions
