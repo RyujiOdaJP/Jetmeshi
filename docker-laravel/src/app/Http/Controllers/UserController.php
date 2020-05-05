@@ -15,6 +15,9 @@ class UserController extends Controller
     public function index()
     {
         //
+        $users = User::all();
+        //edit関数のcompact('users')は['users' => $users]としているのと同意です。
+        return view('user/index', compact('$users'));
     }
 
     /**
