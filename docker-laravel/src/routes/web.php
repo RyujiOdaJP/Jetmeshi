@@ -15,14 +15,15 @@ use Laravel\Dusk\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return view('top');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// resouce() will declare index, create, store, show, edit, update, destory methodes to controller
+// resouce(query, controller) will declare index, create, store, show, edit, update, destory methodes to controller
 Route::resource('User', 'UserController');
 
 Route::resource('Post', 'PostController');
