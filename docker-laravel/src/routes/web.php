@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Laravel\Dusk\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+// resouce() will declare index, create, store, show, edit, update, destory methodes to controller
+Route::resource('User', 'UserController');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('Post', 'PostController');
+
