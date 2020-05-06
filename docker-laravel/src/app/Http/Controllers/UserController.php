@@ -19,7 +19,7 @@ class UserController extends Controller
         //User-me
         $users = User::all();
         //edit関数のcompact('users')は['users' => $users]としているのと同意です。
-        return view('user/index', compact('users'));
+        return view('user/index', compact('users'))->paginate(5);
     }
 
     /**
@@ -55,11 +55,18 @@ class UserController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     *
+     * $user変数がApp\User Eloquentモデルとしてタイプヒントされており、
+     * 変数名が{user} URIセグメントと一致しているため、
+     * Laravelは、リクエストされたURIの対応する値に一致するIDを持つ、
+     * モデルインスタンスを自動的に注入します。
+     * 一致するモデルインスタンスがデータベースへ存在しない場合、
+     * 404 HTTPレスポンスが自動的に生成されます。
      */
-    public function show($id)
+    public function show(User $user)
     {
         //show user's profile
-        $id->posts = $id->posts();
+        $user->posts = $user->posts();
         return view('user.show', compact('user'));
     }
 
@@ -69,11 +76,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
         //edit the owner's profile
-        $this->authorize('edit', $id);
-        return view('user.edit', compact($id));
+        $this->authorize('edit', $user);
+        return view('user.edit', compact($user));
     }
 
     /**
@@ -83,18 +90,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
         //
-        $this->authorize('edit', $id);
+        $this->authorize('edit', $user);
 
         // name欄だけを検査するため、元のStoreUserクラス内のバリデーション・ルールからname欄のルールだけを取り出す。
         $request->validate([
             'name' => (new StoreUser())->rules()['name']
             ]);
-        $id->name = $request->name;
-        $id->save();
-        return redirect('User/' . $id->id)->with('my_status', __('Updated a user.'));
+        $user->name = $request->name;
+        $user->save();
+        return redirect('user/' . $user->id)->with('my_status', __('Updated a user.'));
     }
 
     /**
@@ -109,6 +116,6 @@ class UserController extends Controller
         $this->authorize('edit', $id);
         //need to change delete() to other method later
         $id->delete();
-        return redirect('User/')->with('my_status', __('Deleted a user.'));
+        return redirect('/')->with('my_status', __('Deleted a user.'));
     }
 }
