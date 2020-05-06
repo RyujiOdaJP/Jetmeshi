@@ -38,7 +38,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
+
     /**
      * リレーション (1対多の関係)
      *
@@ -47,7 +47,8 @@ class User extends Authenticatable
     public function posts() // 複数形
     {
         // 記事を新しい順で取得する
-        return $this->hasMany('app\Post')->latest();
+        return $this->hasMany('App\Post')
+        ->where('using_status',1)->latest();
     }
 
     public function sendPasswordResetNotification($token)
