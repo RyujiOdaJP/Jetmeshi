@@ -38,4 +38,31 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    /**
+     * リレーション (1対多の関係)
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function posts() // 複数形
+    {
+        // 記事を新しい順で取得する
+        return $this->hasMany('app\Post')->latest();
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new TextPasswordReset($token));
+    }
+
+     /**
+     * 現在のユーザー、または引数で渡されたIDが管理者かどうかを返す
+     *
+     * @param  number  $id  User ID
+     * @return boolean
+     */
+    public function isAdmin($id = null) {
+        $id = ($id) ? $id : $this->id;
+        return $id == config('admin_id');
+    }
 }
