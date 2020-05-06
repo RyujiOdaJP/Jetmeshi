@@ -27,8 +27,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // resouce(query, controller) will declare index, create, store, show, edit, update, destory methodes to controller
-Route::resource('User', 'UserController');
+Route::resource('user', 'UserController');
 // Route::get('/user'.$id, 'UserController@selectedUser');
 
-Route::resource('Post', 'PostController');
+Route::resource('post', 'PostController');
 
