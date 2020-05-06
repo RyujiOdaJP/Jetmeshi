@@ -18,6 +18,9 @@ Route::get('/', function () {
     // return view('welcome');
     return view('top');
 });
+Route::get('/welcome', function () {
+    return view('welcome');
+});
 
 Auth::routes();
 
@@ -25,6 +28,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // resouce(query, controller) will declare index, create, store, show, edit, update, destory methodes to controller
 Route::resource('User', 'UserController');
+// Route::get('/user'.$id, 'UserController@selectedUser');
 
 Route::resource('Post', 'PostController');
 

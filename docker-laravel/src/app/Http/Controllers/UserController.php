@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use app\Http\Requests\StoreUser;
+
 
 class UserController extends Controller
 {
@@ -14,10 +16,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        //User-me
         $users = User::all();
         //edit関数のcompact('users')は['users' => $users]としているのと同意です。
-        return view('user/index', compact('$users'));
+        return view('user/index', compact('users'));
     }
 
     /**
@@ -27,7 +29,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        //new account create
+        return view('auth/register');
     }
 
     /**
@@ -39,6 +42,12 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->save();
+        return redirect('/welcome')->with('my_status', __('Created new user.'));
     }
 
     /**
@@ -49,7 +58,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        //show user's profile
+        $id->posts = $id->posts();
+        return view('user.show', compact('user'));
     }
 
     /**
@@ -60,7 +71,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        //edit the owner's profile
+        $this->authorize('edit', $id);
+        return view('user.edit', compact($id));
     }
 
     /**
@@ -73,6 +86,15 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->authorize('edit', $id);
+
+        // name欄だけを検査するため、元のStoreUserクラス内のバリデーション・ルールからname欄のルールだけを取り出す。
+        $request->validate([
+            'name' => (new StoreUser())->rules()['name']
+            ]);
+        $id->name = $request->name;
+        $id->save();
+        return redirect('User/' . $id->id)->with('my_status', __('Updated a user.'));
     }
 
     /**
@@ -84,5 +106,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        $this->authorize('edit', $id);
+        //need to change delete() to other method later
+        $id->delete();
+        return redirect('User/')->with('my_status', __('Deleted a user.'));
     }
 }
