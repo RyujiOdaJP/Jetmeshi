@@ -17,9 +17,9 @@ class UserController extends Controller
     public function index()
     {
         //User-me
-        $users = User::all();
+        $users = User::paginate(5);
         //edit関数のcompact('users')は['users' => $users]としているのと同意です。
-        return view('user/index', compact('users'))->paginate(5);
+        return view('user.index', compact('users'));
     }
 
     /**
@@ -66,7 +66,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         //show user's profile
-        $user->posts = $user->posts();
+        $user->posts = $user->posts()->paginate(5);
         return view('user.show', compact('user'));
     }
 
