@@ -48,7 +48,8 @@ class User extends Authenticatable
     {
         // 記事を新しい順で取得する
         return $this->hasMany('App\Post')
-        ->where('using_status',1)->latest();
+        // in case of using_status==false on DB then posts will be not shown
+        ->where('using_status',true)->latest();
     }
 
     public function sendPasswordResetNotification($token)
