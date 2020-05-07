@@ -20,14 +20,14 @@
             @foreach ($posts as $post)
                 <tr>
                     <td>
-                        <a href="{{ url('users/'. $post->user->id) }}">
+                        <a href="{{ url('user/'. $post->user->id) }}">
                         {{ $post->user->name }}
                         </a>
                     </td>
                     <td>
-                        <a href="{{ url('posts/'.$post->id) }}">{{ $post->title }}</a>
+                        <a href="{{ url('post/'.$post->id) }}">{{ $post->title }}</a>
                     </td>
-                    <td>{{ $post->body }}</td>
+                    <td>{{ $post->sequence_body }}</td>
                     <td>{{ $post->created_at }}</td>
                     <td>{{ $post->updated_at }}</td>
                  </tr>
