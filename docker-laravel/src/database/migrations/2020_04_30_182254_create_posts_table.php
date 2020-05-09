@@ -23,7 +23,7 @@ class CreatePostsTable extends Migration
          * migrate:refreshは、migrate:resetしてmigrateする
          */
         Schema::create('posts', function (Blueprint $table) {
-            $table->id('post_id');
+            $table->id();
             $table->timestamps();
             $table->string('title');
             $table->string('image_top');
