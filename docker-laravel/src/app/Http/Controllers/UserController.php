@@ -23,34 +23,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //new account create
-        return view('auth/register');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->save();
-        return redirect('/welcome')->with('my_status', __('Created new user.'));
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -104,18 +76,28 @@ class UserController extends Controller
         return redirect('user/' . $user->id)->with('my_status', __('Updated a user.'));
     }
 
+    public function unable(Request $request, User $user)
+    {
+        //ここでのポイントは、DBファサードではなく、Eloquent ORM にてdelete()メソッドを実行するという事です。
+        // find()メソッドに削除対象のIDを渡してインスタンスを取得し、delete()メソッドを実行する事でdeleted_atカラムにタイムスタンプが挿入.
+        // $this->authorize('edit', $user);
+        $user = User::find($request->id);
+        $user->delete();
+        return redirect('home')->with('my_status', __('Deleted a user.'));
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-        $this->authorize('edit', $id);
-        //need to change delete() to other method later
-        $id->delete();
-        return redirect('/')->with('my_status', __('Deleted a user.'));
-    }
+    // public function destroy(User $user)
+    // {
+    //     //
+    //     $this->authorize('edit', $user);
+    //     //need to change delete() to other method later
+    //     $user->using_status = false;
+    //     return redirect('/')->with('my_status', __('Deleted a user.'));
+    // }
 }

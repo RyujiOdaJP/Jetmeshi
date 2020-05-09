@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Post; //import the post model.
+use App\Post; //import the post model.
 
 class PostController extends Controller
 {
@@ -15,7 +15,7 @@ class PostController extends Controller
     public function index()
     {
         //
-        $posts = Post::latest()->where('using_status', true)->paginate(5);
+        $posts = Post::latest()->paginate(5);
         return view('post.index', compact('posts'));
     }
 
@@ -84,4 +84,11 @@ class PostController extends Controller
     {
         //
     }
+
+    public function __construct()
+    {
+        $this->Middleware('auth')->except(['index','show']);
+    }
+
+
 }

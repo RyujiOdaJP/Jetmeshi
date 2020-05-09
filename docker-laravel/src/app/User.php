@@ -5,12 +5,22 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 //モデルはテーブルとマッピングされたオブジェクトです。
 // DB操作を行うためのクラスになります。
 class User extends Authenticatable
 {
     use Notifiable;
+    use SoftDeletes;
+
+    /**
+     * Declare soft dalete.
+     *
+     * @var array
+     */
+    protected $table = 'users';
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -48,8 +58,7 @@ class User extends Authenticatable
     {
         // 記事を新しい順で取得する
         return $this->hasMany('App\Post')
-        // in case of using_status==false on DB then posts will be not shown
-        ->where('using_status',true)->latest();
+        ->latest();
     }
 
     public function sendPasswordResetNotification($token)

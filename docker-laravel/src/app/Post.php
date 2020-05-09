@@ -14,6 +14,6 @@ class Post extends Model
     public function user() // 単数形
     {
         return $this->belongsTo('App\User')
-        ->where('using_status', true)->latest();
+        ->latest();
     }
 }
