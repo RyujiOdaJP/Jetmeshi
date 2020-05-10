@@ -81,22 +81,9 @@
         </div>
         @endif
 
-        {{-- <main class="py-4"> --}}
-        <main>
+        <main class="py-4">
             @yield('content')
         </main>
-
-        {{-- Footer --}}
-        <footer class="py-4">
-         <div class="container text-center">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <p>© 2020 RyujiOdaJP, All rights reserved</p>
-                </div>
-            </div>
-         </div>
-        </footer>
     </div>
-
 </body>
 </html>
