@@ -41,11 +41,16 @@
         <a href="{{ url('posts/'.$post->id.'/edit') }}" class="btn btn-primary">
             {{ __('Edit') }}
         </a>
-        @component('components.btn-del')
+        <form action="{{ url('user/'.$user->id) }}" method="post">
+            @csrf
+            @method('DELETE')
+            <button type="submit" name="Delete" class="btn btn-danger">{{ __('Delete') }}</button>
+        </form>
+        {{-- @component('components.btn-del')
             @slot('controller', 'posts')
             @slot('id', $post->id)
             @slot('name', $post->title)
-        @endcomponent
+        @endcomponent --}}
     </div>
 @endcan
 @endauth

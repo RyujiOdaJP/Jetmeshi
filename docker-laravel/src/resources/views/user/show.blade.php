@@ -12,9 +12,16 @@
             {{ __('Edit') }}
         </a>
         {{-- 削除ボタンは後で正式なものに置き換えます --}}
-        <a href="#" class="btn btn-danger">
+        {{-- modal window eill be installed here
+            <a href="#" class="btn btn-danger">
             {{ __('Delete') }}
-        </a>
+        </a> --}}
+        <form action="{{ url('user/'.$user->id) }}" method="post">
+            @csrf
+            @method('DELETE')
+
+            <button type="submit" name="Delete" class="btn btn-danger">{{ __('Delete') }}</button>
+        </form>
     </div>
 
     {{-- ユーザー1件の情報 --}}
@@ -66,7 +73,10 @@
                             <a href="#" class="btn btn-danger">
                                 {{ __('Delete') }}
                             </a>
-                            {{-- @component('components.btn-del')
+
+
+                            {{-- modal window eill be installed here
+                                @component('components.btn-del')
                                 @slot('controller', 'posts')
                                 @slot('id', $post->id)
                                 @slot('name', $post->title)

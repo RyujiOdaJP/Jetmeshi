@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use app\Http\Requests\StoreUser;
+// use app\Http\Requests\StoreUser;
 
 
 class UserController extends Controller
@@ -68,9 +68,9 @@ class UserController extends Controller
         $this->authorize('edit', $user);
 
         // name欄だけを検査するため、元のStoreUserクラス内のバリデーション・ルールからname欄のルールだけを取り出す。
-        $request->validate([
-            'name' => (new StoreUser())->rules()['name']
-            ]);
+        // $request->validate([
+        //     'name' => (new StoreUser())->rules()['name']
+        //     ]);
         $user->name = $request->name;
         $user->save();
         return redirect('user/' . $user->id)->with('my_status', __('Updated a user.'));
@@ -80,10 +80,10 @@ class UserController extends Controller
     {
         //ここでのポイントは、DBファサードではなく、Eloquent ORM にてdelete()メソッドを実行するという事です。
         // find()メソッドに削除対象のIDを渡してインスタンスを取得し、delete()メソッドを実行する事でdeleted_atカラムにタイムスタンプが挿入.
-        // $this->authorize('edit', $user);
+        $this->authorize('edit', $user);
         $user = User::find($request->id);
         $user->delete();
-        return redirect('home')->with('my_status', __('Deleted a user.'));
+        return redirect('/')->with('my_status', __('Deleted a user.'));
     }
 
     /**
