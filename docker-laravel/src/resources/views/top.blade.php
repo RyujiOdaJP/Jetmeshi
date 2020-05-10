@@ -5,7 +5,8 @@ $title = env('APP_NAME');
 @extends('layouts.app')
 
 @section('content')
-<div class="jumbotron jumbotron-fluid" style="position: relative; height: 100vh; background: url('./img/sample_meshi.jpg') center center; background-size: cover;">
+<div class="jumbotron jumbotron-fluid jumbotron-hero" >
+    {{-- style="position:relative; height:100vh; background: url('./img/sample_meshi.jpg') center center; background-size: cover;" --}}
     <div class="container">
         {{-- <img class="img-fluid" src="./img/sample_meshi.jpg" alt=""> --}}
       <h1 class="display-1">Fluid jumbotron</h1>
