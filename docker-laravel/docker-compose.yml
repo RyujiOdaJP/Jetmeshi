@@ -21,8 +21,6 @@ services:
       - DB_USERNAME=${DB_USERNAME:-root}
       - DB_PASSWORD=${DB_PASS:-secret}
       - TZ=${TZ:-Asia/Tokyo}
-      # - MAIL_HOST=${MAIL_HOST:-mail}
-      # - MAIL_PORT=${MAIL_PORT:-1025}
       - CACHE_DRIVER=redis
       - SESSION_DRIVER=redis
       - QUEUE_DRIVER=redis
@@ -30,8 +28,6 @@ services:
 
   web:
     image: nginx:1.17-alpine
-    # build: 
-    #   context: ./docker/nginx
     depends_on:
       - app
     ports:
@@ -44,8 +40,6 @@ services:
       - TZ=${TZ:-Asia/Tokyo}
 
   db:
-    # image: mysql:8.0
-    # image: docker-laravel_db
     build:
       context: ./docker/mysql
     container_name: db
@@ -60,7 +54,6 @@ services:
       - MYSQL_ROOT_PASSWORD=${DB_PASS:-secret}
       - TZ=${TZ:-Asia/Tokyo}
     ports:
-      # - ${DB_PORT:-13306}:13306
       - 3307:3306
 
   db-testing:
@@ -91,10 +84,30 @@ services:
     volumes:
       - redis-store:/data
 
-#   mail:
-#     image: mailhog/mailhog
-#     ports:
-#       - ${MAILHOG_PORT:-18025}:8025
+  minio:
+    image: minio/minio
+    volumes: 
+      - ./data/minio/data:/export
+      - ./data/minio/config:/root/.minio
+    environment: 
+      - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
+      - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
+    ports:
+      - 9000:9000
+    command: server /export
+
+  createbuckets:
+    image: minio/mc
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      until (/usr/bin/mc config host add myminio http://minio:9000 AKIA_MINIO_ACCESS_KEY minio_secret_key) do echo '...waiting...' && sleep 1; done;
+      /usr/bin/mc mb myminio/mybucket;
+      /usr/bin/mc policy download myminio/mybucket;
+      exit 0;
+      "
+
 
 volumes:
   db-logs-store:
