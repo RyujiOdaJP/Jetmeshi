@@ -5,16 +5,17 @@ $title = env('APP_NAME');
 @extends('layouts.app')
 
 @section('content')
-<div class="jumbotron jumbotron-fluid jumbotron-hero" >
-    {{-- style="position:relative; height:100vh; background: url('./img/sample_meshi.jpg') center center; background-size: cover;" --}}
-    <div class="container">
-        {{-- <img class="img-fluid" src="./img/sample_meshi.jpg" alt=""> --}}
-      <h1 class="display-1">Fluid jumbotron</h1>
-      <p class="lead">This is a modified jumbotron that occupies
-                      the entire horizontal space of its parent.</p>
-    </div>
-  </div>
+
 <div class="container">
+    <div class="row justify-content-center jumbotron jumbotron-fluid jumbotron-hero" >
+        {{-- style="position:relative; height:100vh; background: url('./img/sample_meshi.jpg') center center; background-size: cover;" --}}
+        <div class="container">
+            {{-- <img class="img-fluid" src="./img/sample_meshi.jpg" alt=""> --}}
+          <h1 class="display-1">Fluid jumbotron</h1>
+          <p class="lead">This is a modified jumbotron that occupies
+                          the entire horizontal space of its parent.</p>
+        </div>
+      </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

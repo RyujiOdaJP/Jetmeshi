@@ -53,3 +53,8 @@ body
 @media (max-width: 575.98px) {
 
 }
+@media (min-width: 575.98px) {
+    .jumbotron-hero{
+        background-size: 580px auto ;
+    }
+}

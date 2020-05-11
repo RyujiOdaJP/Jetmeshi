@@ -16980,3 +16980,9 @@ body {
 
 /* SP */
 
+@media (min-width: 575.98px) {
+  .jumbotron-hero {
+    background-size: 580px auto;
+  }
+}
+
