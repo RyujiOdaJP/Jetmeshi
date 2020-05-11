@@ -42,3 +42,5 @@ config('database.connections.mysql.port');
 exit
 config('database.connections.mysql.port');
 exit
+$users\040=\040App\134User::all();
+exit

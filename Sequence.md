@@ -259,7 +259,7 @@ participant DB as Data Base
     end
 
    Note over U: behavior of LIKE
-    
+
     Note over La: Validation
     alt if not exist
     Cl -->> U: turns heart always gray

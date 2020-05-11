@@ -6,3 +6,55 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// Icons
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
+.jumbotron-hero{
+    position: relative;
+    height: 100vh;
+    background: url('./img/sample_meshi.jpg') center center;
+    background-size: cover;
+}
+.main-bg{
+    background-color: var(--JetYellow);
+}
+body
+{
+    margin-top: 50px;
+}
+
+/* PC */
+@media (min-width: 992px) {
+}
+
+/* Tablet */
+@media (max-width: 991.98px) {
+}
+
+/* horizontal SP */
+@media (max-width: 767.98px) {
+
+    #js-bootstrap-offcanvas{
+        margin-top: 50px;
+    }
+    #nav-for-mobile-top{
+        margin-top: 50px;
+    }
+    #nav-for-mobile-bottom{
+        margin-top: 50px;
+    }
+}
+
+/* SP */
+@media (max-width: 575.98px) {
+
+}
+@media (min-width: 575.98px) {
+    .jumbotron-hero{
+        background-size: 580px auto ;
+    }
+}
