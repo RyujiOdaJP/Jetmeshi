@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.planeNav')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card mt-5">
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
@@ -52,20 +52,26 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
+                            <div class="col-md-8 mr-auto ml-auto text-center">
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                        {{ __('パスワードを忘れた方') }}
                                     </a>
                                 @endif
                             </div>
                         </div>
+
+
+                                @component('components.btn_auth')
+                                    @slot('controller', 'LOGIN')
+                                @endcomponent
+
                     </form>
                 </div>
+            </div>
+
+            <div class="signup text-center mt-5">
+                アカウントをお持ちではありませんか？ <a class="signup__link" href="https://signup.mailgun.com">アカウントを作成する</a>
             </div>
         </div>
     </div>
