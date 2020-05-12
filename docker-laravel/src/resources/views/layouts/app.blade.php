@@ -26,9 +26,10 @@
 
         <nav class="navbar navbar-expand-md fixed-top navbar-light bg-white shadow-sm">
 
-          <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+          <div id="inside_nav" class="container">
+                <a class="navbar-brand mb-1" href="{{ url('/') }}">
+                    {{-- {{ config('app.name', 'Laravel') }} --}}
+                    <img src="./images/logo3.png"  height="35" alt="">
                 </a>
                 <button type="button" class="navbar-toggler offcanvas-toggle mr-1"
                 data-toggle="offcanvas" data-target="#js-bootstrap-offcanvas"

@@ -15,13 +15,20 @@
 
 .jumbotron-hero{
     position: relative;
-    height: 100vh;
-    background: url('./img/sample_meshi.jpg') center center;
+    height: 60vh;
+    background: url('./images/otama_edited.png') center center;
     background-size: cover;
+      *{
+        color: $light;
+      }
+      #show_button{
+        background-color: $JetOrange;
+      }
+      #post_button{
+          background-color: $JetGreen;
+      }
 }
-.main-bg{
-    background-color: var(--JetYellow);
-}
+
 body
 {
     margin-top: 50px;
@@ -33,6 +40,10 @@ body
 
 /* Tablet */
 @media (max-width: 991.98px) {
+    nav > div.container{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
 }
 
 /* horizontal SP */
@@ -47,14 +58,18 @@ body
     #nav-for-mobile-bottom{
         margin-top: 50px;
     }
+
 }
 
 /* SP */
 @media (max-width: 575.98px) {
-
+    .jumbotron-hero {
+      background-image: url('./images/otama_meshi.jpg');
+      h1{
+        font-size: 44px;
+      }
+    }
 }
 @media (min-width: 575.98px) {
-    .jumbotron-hero{
-        background-size: 580px auto ;
-    }
+
 }
