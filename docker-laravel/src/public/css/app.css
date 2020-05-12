@@ -16945,13 +16945,21 @@ readers do not read off random characters that represent icons */
 
 .jumbotron-hero {
   position: relative;
-  height: 100vh;
-  background: url(/images/sample_meshi.jpg?b15c99f20399e662ffdd45c71f87b16c) center center;
+  height: 60vh;
+  background: url(/images/otama_edited.png?c78aadec6bba08ef360496b66c407b52) center center;
   background-size: cover;
 }
 
-.main-bg {
-  background-color: var(--JetYellow);
+.jumbotron-hero * {
+  color: #f8f9fa;
+}
+
+.jumbotron-hero #show_button {
+  background-color: #F0AD4E;
+}
+
+.jumbotron-hero #post_button {
+  background-color: #5CB85C;
 }
 
 body {
@@ -16961,6 +16969,13 @@ body {
 /* PC */
 
 /* Tablet */
+
+@media (max-width: 991.98px) {
+  nav > div.container {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
 
 /* horizontal SP */
 
@@ -16980,9 +16995,13 @@ body {
 
 /* SP */
 
-@media (min-width: 575.98px) {
+@media (max-width: 575.98px) {
   .jumbotron-hero {
-    background-size: 580px auto;
+    background-image: url(/images/otama_meshi.jpg?729aa6ba3de466ffbfd35d1a0908c984);
+  }
+
+  .jumbotron-hero h1 {
+    font-size: 44px;
   }
 }
 
