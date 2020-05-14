@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <h1>{{ $title }}</h1>
-    <form action="{{ url('post') }}" method="post">
+    <form action="{{ url('post') }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('POST')
         <div class="form-group">
@@ -28,16 +28,61 @@
                 </span>
             @endif
         </div>
-        <div class="form-group">
-            <label for="image_top">{{ __('image_top') }}</label>
-            <input id="image_top" type="url" class="form-control @if ($errors->has('image_top')) is-invalid @endif" name="image_top" rows="8" required>
-                {{ old('image_top') }}
-            </input>
-            @if ($errors->has('image_top'))
-                <span class="invalid-feedback" role="alert">
-                    {{ $errors->first('image_top') }}
-                </span>
-            @endif
+        <div class="row form-group justify-content-around">
+            <div class="col2">
+                <label for="image_top">{{ __('image_top') }}</label>
+                <input id="image_top" type="file" class="form-control
+                @if ($errors->has('image_top')) is-invalid
+                @endif" name="image_top" rows="8" required>
+                    {{ old('image_top') }}
+                </input>
+                @if ($errors->has('image_top'))
+                    <span class="invalid-feedback" role="alert">
+                        {{ $errors->first('image_top') }}
+                    </span>
+                @endif
+            </div>
+            <div class="col2">
+                <label for="image_seq1">{{ __('image_seq1') }}</label>
+                <input id="image_seq1" type="file" class="form-control
+                @if ($errors->has('image_seq1')) is-invalid
+                @endif" name="image_seq1" rows="8" required>
+                    {{ old('image_seq1') }}
+                </input>
+                @if ($errors->has('image_seq1'))
+                    <span class="invalid-feedback" role="alert">
+                        {{ $errors->first('image_seq1') }}
+                    </span>
+                @endif
+            </div>
+            <div class="row form-group justify-content-around">
+                <div class="col2">
+                    <label for="cooking_time">{{ __('cooking_time') }}</label>
+                    <input id="cooking_time" type="file" class="form-control
+                    @if ($errors->has('cooking_time')) is-invalid
+                    @endif" name="cooking_time" rows="8" required>
+                        {{ old('cooking_time') }}
+                    </input>
+                    @if ($errors->has('cooking_time'))
+                        <span class="invalid-feedback" role="alert">
+                            {{ $errors->first('cooking_time') }}
+                        </span>
+                    @endif
+                </div>
+                <div class="col2">
+                    <label for="budget">{{ __('budget') }}</label>
+                    <input id="budget" type="file" class="form-control
+                    @if ($errors->has('budget')) is-invalid
+                    @endif" name="budget" rows="8" required>
+                        {{ old('budget') }}
+                    </input>
+                    @if ($errors->has('budget'))
+                        <span class="invalid-feedback" role="alert">
+                            {{ $errors->first('budget') }}
+                        </span>
+                    @endif
+                </div>
+
         </div>
         <button type="submit" name="submit" class="btn btn-primary">{{ __('Submit') }}</button>
     </form>

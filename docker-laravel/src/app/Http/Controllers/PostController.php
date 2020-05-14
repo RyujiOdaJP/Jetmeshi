@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post; //import the post model.
+use Illuminate\Support\Facades\Storage;
 // use app\Http\Requests\StorePost;
 
 class PostController extends Controller
@@ -44,6 +45,12 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->sequence_body = $request->sequence_body;
         $post->user_id = $request->user()->id;
+        $image_top = $request->file('image_top');
+        $image_seq1 = $request->file('image_seq1');
+        $path_top = Storage::disk('s3')->put('cm-jetmeshi', $image_top, 'public');
+        $path_seq1 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq1, 'public');
+        $post->image_top = Storage::disk('s3')->url($path_top);
+        $post->image_seq1 = Storage::disk('s3')->url($path_seq1);
         $post->save();
         return redirect('post/'.$post->id)->with('my_status', __('Posted new article.'));
     }
