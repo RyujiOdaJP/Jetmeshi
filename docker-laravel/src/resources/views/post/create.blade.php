@@ -3,6 +3,7 @@
 @endphp
 @extends('layouts.app')
 @section('content')
+
 <div class="container">
     <h1>{{ $title }}</h1>
     <form action="{{ url('post') }}" method="post" enctype="multipart/form-data">
@@ -55,14 +56,16 @@
                     </span>
                 @endif
             </div>
+        </div>
+
             <div class="row form-group justify-content-around">
                 <div class="col2">
-                    <label for="cooking_time">{{ __('cooking_time') }}</label>
-                    <input id="cooking_time" type="file" class="form-control
-                    @if ($errors->has('cooking_time')) is-invalid
-                    @endif" name="cooking_time" rows="8" required>
+                    <label for="cooking_time">{{ __('調理時間 ') }} <span id="target_cooking_time">10</span>分</label>
+                    <input id="cooking_time" type="range"  min="0" max="60" value="10" step="1" class="custom-range" name="cooking_time" rows="8" required>
                         {{ old('cooking_time') }}
+
                     </input>
+
                     @if ($errors->has('cooking_time'))
                         <span class="invalid-feedback" role="alert">
                             {{ $errors->first('cooking_time') }}
@@ -70,10 +73,8 @@
                     @endif
                 </div>
                 <div class="col2">
-                    <label for="budget">{{ __('budget') }}</label>
-                    <input id="budget" type="file" class="form-control
-                    @if ($errors->has('budget')) is-invalid
-                    @endif" name="budget" rows="8" required>
+                    <label for="budget">{{ __('調理費用 ') }}<span id="target_budget">100</span>円</label>
+                    <input id="budget" type="range" min="0" max="2000" value="100" step="10" class="custom-range" name="budget" rows="8" required>
                         {{ old('budget') }}
                     </input>
                     @if ($errors->has('budget'))
@@ -84,7 +85,7 @@
                 </div>
 
         </div>
-        <button type="submit" name="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+        <button type="submit" name="submit" class="row btn btn-primary">{{ __('Submit') }}</button>
     </form>
 </div>
 @endsection
