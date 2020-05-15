@@ -14,6 +14,11 @@ class AddNullableSumnailsPostsTable extends Migration
     public function up()
     {
         //
+        Schema::table('posts', function (Blueprint $table) {
+            //add nullable to optional photos
+            $table->string('sumnail_pc')->nullable()->change();
+            $table->string('sumnail_mobile')->nullable()->change();
+        });
     }
 
     /**
