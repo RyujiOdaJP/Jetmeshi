@@ -38,7 +38,7 @@
 @can('edit', $post)
     {{-- 編集・削除ボタン --}}
     <div class="edit">
-        <a href="{{ url('posts/'.$post->id.'/edit') }}" class="btn btn-primary">
+        <a href="{{ url('post/'.$post->id.'/edit') }}" class="btn btn-primary">
             {{ __('Edit') }}
         </a>
         @component('components.btn-del')
@@ -54,7 +54,7 @@
     <dl class="row">
         <dt class="col-md-2">{{ __('Auther') }}:</dt>
         <dd class="col-md-10">
-            <a href="{{ url('users'.$post->user->id) }}">
+            <a href="{{ url('user/'.$post->user->id) }}">
                 {{ $post->user->name }}
             </a>
         </dd>
@@ -69,6 +69,12 @@
             <time itemprop="dateModified" datetime="{{ $post->updated_at }}">
                 {{ $post->updated_at }}
             </time>
+        </dd>
+        <dt class="col-md-2">{{ __('Recipe') }}:</dt>
+        <dd class="col-md-10">
+            <a href="{{ url('user/'.$post->user->id) }}">
+               <img src="{{ $post->image_top }}" alt="" width="560px"> 
+            </a>
         </dd>
     </dl>
     <hr>
