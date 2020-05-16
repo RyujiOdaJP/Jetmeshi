@@ -58,6 +58,7 @@ SOFTWARE.
 
 //slider value showing
 
+(function(){
 var valueBudget = document.getElementById('budget');
 var valueCookingTime = document.getElementById('cooking_time');
 var targetBudget = document.getElementById('target_budget');
@@ -70,4 +71,4 @@ var rtnSliderValue = function (value, target){
     }
     valueBudget.addEventListener('input', rtnSliderValue(valueBudget, targetBudget));
     valueCookingTime.addEventListener('input', rtnSliderValue(valueCookingTime, targetCokingTime));
-
+})();
