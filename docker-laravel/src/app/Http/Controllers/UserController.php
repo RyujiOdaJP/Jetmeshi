@@ -85,19 +85,4 @@ class UserController extends Controller
         $user->delete();
         return redirect('/')->with('my_status', __('Deleted a user.'));
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    // public function destroy(User $user)
-    // {
-    //     //
-    //     $this->authorize('edit', $user);
-    //     //need to change delete() to other method later
-    //     $user->using_status = false;
-    //     return redirect('/')->with('my_status', __('Deleted a user.'));
-    // }
 }
