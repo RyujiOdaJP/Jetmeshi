@@ -62,7 +62,7 @@
                         </div>
 
 
-                                @component('components.btn_auth')
+                                @component('components.btn-auth')
                                     @slot('controller', 'LOGIN')
                                 @endcomponent
 

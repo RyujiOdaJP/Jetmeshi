@@ -8,20 +8,15 @@
 
     {{-- 編集・削除ボタン --}}
     <div>
-        <a href="{{ url('users/'.$user->id.'/edit') }}" class="btn btn-primary">
+        <a href="{{ url('user/'.$user->id.'/edit') }}" class="btn btn-primary">
             {{ __('Edit') }}
         </a>
-        {{-- 削除ボタンは後で正式なものに置き換えます --}}
-        {{-- modal window eill be installed here
-            <a href="#" class="btn btn-danger">
-            {{ __('Delete') }}
-        </a> --}}
-        <form action="{{ url('user/'.$user->id) }}" method="post">
-            @csrf
-            @method('DELETE')
+        @component('components.btn-del')
+        @slot('controller', 'user')
+        @slot('id', $user->id)
+        @slot('name', $user->title)
+        @endcomponent
 
-            <button type="submit" name="Delete" class="btn btn-danger">{{ __('Delete') }}</button>
-        </form>
     </div>
 
     {{-- ユーザー1件の情報 --}}
@@ -54,7 +49,7 @@
                 @foreach ($user->posts as $post)
                     <tr>
                         <td>
-                            <a href="{{ url('posts/' . $post->id) }}">
+                            <a href="{{ url('post/' . $post->id) }}">
                                 {{ $post->title }}
                             </a>
                         </td>
@@ -62,25 +57,20 @@
                         <td>{{ $post->created_at }}</td>
                         <td>{{ $post->updated_at }}</td>
 
+
+
                     {{-- 管理者のページを表示中の場合は、編集・削除ボタンを表示させない --}}
                     @if (Auth::check() && !Auth::user()->isAdmin($user->id))
                     @auth
                         @can('edit', $user)<td nowrap>
-                            <a href="{{ url('posts/' . $post->id . '/edit') }}" class="btn btn-primary">
+                            <a href="{{ url('post/' . $post->id . '/edit') }}" class="btn btn-primary">
                                 {{ __('Edit') }}
                             </a>
-                            {{-- 削除ボタンは後で正式なものに置き換えます --}}
-                            <a href="#" class="btn btn-danger">
-                                {{ __('Delete') }}
-                            </a>
-
-
-                            {{-- modal window eill be installed here
-                                @component('components.btn-del')
-                                @slot('controller', 'posts')
-                                @slot('id', $post->id)
-                                @slot('name', $post->title)
-                            @endcomponent --}}
+                            @component('components.btn-del')
+                            @slot('controller', 'user')
+                            @slot('id', $user->id)
+                            @slot('name', $user->title)
+                            @endcomponent
                         </td>
                     @endcan
                 @endauth
