@@ -120,7 +120,15 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $post->title = $request->title;
-        $post->body =$request->body;
+        $post->sequence_body = $request->sequence_body;
+        $image_top = $request->file('image_top');
+        $image_seq1 = $request->file('image_seq1');
+        $path_top = Storage::disk('s3')->put('cm-jetmeshi', $image_top, 'public');
+        $path_seq1 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq1, 'public');
+        $post->cooking_time = $request->cooking_time;
+        $post->budget = $request->budget;
+        $post->image_top = Storage::disk('s3')->url($path_top);
+        $post->image_seq1 = Storage::disk('s3')->url($path_seq1);
         $post->save();
         $this->authorize('edit', $post);
         return redirect('post/'.$post->id)->with('my_status', __('Updated an article.'));
