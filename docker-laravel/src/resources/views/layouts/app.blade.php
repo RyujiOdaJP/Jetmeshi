@@ -11,8 +11,10 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/bootstrap.js') }}" defer></script> --}}
     {{-- <script src="{{ asset('js/js/jquery-3.5.1.min.js')}}"></script> --}}
     <script src="{{ asset('js/infinite-scroll.pkgd.min.js')}}"></script>
+    {{-- <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> --}}
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
