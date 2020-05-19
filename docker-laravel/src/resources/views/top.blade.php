@@ -49,5 +49,5 @@ $title = env('APP_NAME');
             </div>
         </div>
 </div>
-
+<script src=" {{ asset('js/top.js') }} "></script>
 @endsection

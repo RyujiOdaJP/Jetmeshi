@@ -1,11 +1,11 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
 // Variables
 @import 'variables';
 
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// @import '~bootstrap/scss/bootstrap';
 
 // Icons
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
@@ -29,9 +29,31 @@
       }
 }
 
-body
-{
-    margin-top: 50px;
+body{
+    margin-top: 70px;
+    z-index: -900;
+    background-color: $body-bg;
+}
+img.previews{
+    width: 100%;
+}
+
+@mixin aria{
+    height: 100%;
+    position: fixed;
+    overflow: scroll;
+    top: 0;
+    z-index: 100;
+}
+.standby.true{
+    @include aria;
+    width: 15%;
+    left: 80%;
+}
+.false{
+    @include aria;
+    width: 40%;
+    left: 0;
 }
 
 /* PC */

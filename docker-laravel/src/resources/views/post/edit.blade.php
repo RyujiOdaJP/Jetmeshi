@@ -34,7 +34,7 @@
                 <input id="image_top" type="file" class="form-control image
                 @if ($errors->has('image_top')) is-invalid
                 @endif" name="top" rows="8" accept="image/bmp,image/gif,image/jpeg,image/png" required>
-                    <span id="target_image_top" class="target_image"><img src="{{ old('image_top',$post->image_top) }}" alt="" width="100%"></span>
+                    <span id="target_image_top" class="target_image"><img src="{{ old('image_top',$post->image_top) }}" alt="" class="previews"></span>
                 {{-- Insert JS into src='' as tempolary URL--}}
                 </input>
                 @if ($errors->has('image_top'))
@@ -48,7 +48,7 @@
                 <input id="image_seq1" type="file" class="form-control image
                 @if ($errors->has('image_seq1')) is-invalid
                 @endif" name="seq1" rows="8" accept="image/bmp,image/gif,image/jpeg,image/png" required>
-                    <span id="target_image_seq1" class="target_image"><img src="{{ old('image_seq1',$post->image_seq1) }}" alt="" width="100%"></span>
+                    <span id="target_image_seq1" class="target_image"><img src="{{ old('image_seq1',$post->image_seq1) }}" alt="" class="previews"></span>
                 </input>
                 @if ($errors->has('image_seq1'))
                     <span class="invalid-feedback" role="alert">
@@ -61,7 +61,7 @@
                 <input id="image_seq2" type="file" class="form-control image
                 @if ($errors->has('image_seq2')) is-invalid
                 @endif" name="seq1" rows="8" accept="image/bmp,image/gif,image/jpeg,image/png" required>
-                    <span id="target_image_seq2" class="target_image"><img src="{{ old('image_seq2',$post->image_seq2) }}" alt="" width="100%"></span>
+                    <span id="target_image_seq2" class="target_image"><img src="{{ old('image_seq2',$post->image_seq2) }}" alt="" class="previews"></span>
                 </input>
                 @if ($errors->has('image_seq2'))
                     <span class="invalid-feedback" role="alert">
@@ -74,7 +74,7 @@
                 <input id="image_seq3" type="file" class="form-control image
                 @if ($errors->has('image_seq3')) is-invalid
                 @endif" name="seq1" rows="8" accept="image/bmp,image/gif,image/jpeg,image/png" required>
-                    <span id="target_image_seq3" class="target_image"><img src="{{ old('image_seq3',$post->image_seq3) }}" alt="" width="100%"></span>
+                    <span id="target_image_seq3" class="target_image"><img src="{{ old('image_seq3',$post->image_seq3) }}" alt="" class="previews"></span>
                 </input>
                 @if ($errors->has('image_seq3'))
                     <span class="invalid-feedback" role="alert">
@@ -87,7 +87,7 @@
                 <input id="image_seq4" type="file" class="form-control image
                 @if ($errors->has('image_seq4')) is-invalid
                 @endif" name="seq1" rows="8" accept="image/bmp,image/gif,image/jpeg,image/png" required>
-                    <span id="target_image_seq4" class="target_image"><img src="{{ old('image_seq4',$post->image_seq4) }}" alt="" width="100%"></span>
+                    <span id="target_image_seq4" class="target_image"><img src="{{ old('image_seq4',$post->image_seq4) }}" alt="" class="previews"></span>
                 </input>
                 @if ($errors->has('image_seq4'))
                     <span class="invalid-feedback" role="alert">
@@ -125,7 +125,8 @@
 
         </div>
         <button type="submit" name="submit" class="row btn btn-primary">{{ __('Submit') }}</button>
-
     </form>
 </div>
+<script src=" {{ asset('js/range.js') }} "></script>
+<script src=" {{ asset('js/photo-preview.js') }} "></script>
 @endsection

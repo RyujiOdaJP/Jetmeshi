@@ -88,4 +88,6 @@
         <button type="submit" name="submit" class="row btn btn-primary">{{ __('Submit') }}</button>
     </form>
 </div>
+<script src=" {{ asset('js/range.js') }} "></script>
+<script src=" {{ asset('js/photo-preview.js') }} "></script>
 @endsection
