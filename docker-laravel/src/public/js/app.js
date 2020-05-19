@@ -49877,26 +49877,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/sass/bootstrap-Offcanvas.scss":
-/*!*************************************************!*\
-  !*** ./resources/sass/bootstrap-Offcanvas.scss ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ 0:
-/*!*****************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/bootstrap-Offcanvas.scss ***!
-  \*****************************************************************************/
+/*!***********************************!*\
+  !*** multi ./resources/js/app.js ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /work/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /work/resources/sass/bootstrap-Offcanvas.scss */"./resources/sass/bootstrap-Offcanvas.scss");
+module.exports = __webpack_require__(/*! /work/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ })
