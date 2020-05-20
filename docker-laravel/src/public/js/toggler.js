@@ -1,4 +1,4 @@
-// TODO: fix it
+
 (function () {
   jQuery(function swipeMenu () {
     let status = [];
