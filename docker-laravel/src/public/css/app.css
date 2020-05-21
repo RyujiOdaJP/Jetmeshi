@@ -6090,6 +6090,11 @@ img.previews {
   width: 100%;
 }
 
+input[type=file] {
+  top: 0;
+  left: 0;
+}
+
 .standby.true {
   height: 100%;
   position: fixed;
@@ -6108,6 +6113,11 @@ img.previews {
   z-index: 100;
   width: 40%;
   left: 0;
+}
+
+.croppie-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 /* PC */
