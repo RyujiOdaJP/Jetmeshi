@@ -1,4 +1,5 @@
 (function () {
+
     let blobUrl;
     function createBlob(fileList, target=targetImage){
         for (let i = 0, l = fileList.length; l > i; i++) {
@@ -7,73 +8,78 @@
 
       // HTMLに書き出し (src属性にblob URLを指定)
       target.innerHTML = '<img src="' + blobUrl + '" width="100%">';
-      return blobUrl;
       }
     }
-  document.getElementById('image_top').addEventListener('change', function () {
-    let fileList = this.files;
-    let targetImage = document.getElementById('target_image_top');
-    createBlob(fileList, targetImage);
-    console.log(blobUrl);
 
-    $uploadCrop = $('#croppie_image_top').croppie({
+    function croppieJS(croppieDivId, blobUrl, targetImage){
+      $uploadCrop = $(croppieDivId).croppie({
         // enableExif: true,
         viewport: {
-            width: 300,
-            height: 200,
+            width: 240,
+            height: 240,
             type: 'square'
         },
         boundary: {
-            width: 300,
-            height: 300
-          },
-    });
+            width: 350,
+            height: 350
+            },
+      });
 
-    $uploadCrop.croppie('bind',{
+      $uploadCrop.croppie('bind',{
         url: blobUrl,
-        points: [77,469,280,739]
-    });
+        // points: [77,469,280,739]
+      });
 
-    $('.upload-result').on('click', function (ev) {
+      $('.upload-result').on('click', function (ev) {
         $uploadCrop.croppie('result', {
             type: 'blob',
-            size: 'viewport'
+            size: 'original'
         }).then( function(blob){
-            createBlob(blob, targetImage);
+            blobUrl = window.URL.createObjectURL(blob);
+            // HTMLに書き出し (src属性にblob URLを指定)
+            targetImage.innerHTML = '<img src="' + blobUrl + '" width="100%">';
         } )
-    });
+        // TODO: make destroy method here
+      });
+    }
+
+  document.getElementById('image_top').addEventListener('change', function () {
+    let targetImage = document.getElementById('target_image_top');
+    let fileList = this.files;
+    createBlob(fileList, targetImage);
+    croppieJS('#croppie_image_top' ,blobUrl, targetImage);
   });
 
   document.getElementById('image_seq1').addEventListener('change', function () {
     // フォームで選択された全ファイルを取得
     let fileList = this.files;
     let targetImage = document.getElementById('target_image_seq1');
-    // 個数分の画像を表示する
     createBlob(fileList, targetImage);
+    croppieJS('#croppie_image_seq1' ,blobUrl, targetImage);
   });
 
   document.getElementById('image_seq2').addEventListener('change', function () {
     // フォームで選択された全ファイルを取得
     let fileList = this.files;
     let targetImage = document.getElementById('target_image_seq2');
-    // 個数分の画像を表示する
     createBlob(fileList, targetImage);
+    croppieJS('#croppie_image_top' ,blobUrl, targetImage);
   });
 
   document.getElementById('image_seq3').addEventListener('change', function () {
     // フォームで選択された全ファイルを取得
     let fileList = this.files;
     let targetImage = document.getElementById('target_image_seq3');
-    // 個数分の画像を表示する
     createBlob(fileList, targetImage);
+    croppieJS('#croppie_image_top' ,blobUrl, targetImage);
   });
 
   document.getElementById('image_seq4').addEventListener('change', function () {
     // フォームで選択された全ファイルを取得
     let fileList = this.files;
     let targetImage = document.getElementById('target_image_seq4');
-    // 個数分の画像を表示する
     createBlob(fileList, targetImage);
+    croppieJS('#croppie_image_top' ,blobUrl, targetImage);
   });
 })();
 
