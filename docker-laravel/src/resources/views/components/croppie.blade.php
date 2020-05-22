@@ -7,7 +7,7 @@
     }
 @endphp
 
-<div id="croppie_{{ $id_attr }}" class="col-md-6">
+<div id="croppie_{{ $id_attr }}" class="col-md-5">
     <label for="cr-boundary">{{ __($image_name) }}</label>
        <span id="target_{{ $id_attr }}" class="target_image">
           <img src="{{ $src }}" alt="" class="position-static previews">
