@@ -69,10 +69,16 @@ class PostController extends Controller
         $image_seq1 = $request->file('image_seq1');
         $path_top = Storage::disk('s3')->put('cm-jetmeshi', $image_top, 'public');
         $path_seq1 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq1, 'public');
+        $path_seq2 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq1, 'public');
+        $path_seq3 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq1, 'public');
+        $path_seq4 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq1, 'public');
         $post->cooking_time = $request->cooking_time;
         $post->budget = $request->budget;
         $post->image_top = Storage::disk('s3')->url($path_top);
         $post->image_seq1 = Storage::disk('s3')->url($path_seq1);
+        $post->image_seq2 = Storage::disk('s3')->url($path_seq2);
+        $post->image_seq3 = Storage::disk('s3')->url($path_seq3);
+        $post->image_seq4 = Storage::disk('s3')->url($path_seq4);
         $post->save();
         // $file = $request->file('file');
         // 第一引数はディレクトリの指定
@@ -125,10 +131,16 @@ class PostController extends Controller
         $image_seq1 = $request->file('image_seq1');
         $path_top = Storage::disk('s3')->put('cm-jetmeshi', $image_top, 'public');
         $path_seq1 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq1, 'public');
+        $path_seq2 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq1, 'public');
+        $path_seq3 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq1, 'public');
+        $path_seq4 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq1, 'public');
         $post->cooking_time = $request->cooking_time;
         $post->budget = $request->budget;
         $post->image_top = Storage::disk('s3')->url($path_top);
         $post->image_seq1 = Storage::disk('s3')->url($path_seq1);
+        $post->image_seq2 = Storage::disk('s3')->url($path_seq2);
+        $post->image_seq3 = Storage::disk('s3')->url($path_seq3);
+        $post->image_seq4 = Storage::disk('s3')->url($path_seq4);
         $post->save();
         $this->authorize('edit', $post);
         return redirect('post/'.$post->id)->with('my_status', __('Updated an article.'));
