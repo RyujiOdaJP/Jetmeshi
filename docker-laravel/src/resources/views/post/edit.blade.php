@@ -41,6 +41,7 @@
             @slot('id', 'image_top')
             @slot('name', 'TOP画像')
             @slot('old_ref', $old_src_top)
+            @slot('input_regu', 'required')
           @endcomponent
 
           @component('components.croppie')
