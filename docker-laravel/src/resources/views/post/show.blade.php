@@ -4,12 +4,12 @@
 @extends('layouts.app')
 @section('content')
 
-<script>
+{{-- <script>
     var infScroll = new InfiniteScroll( '.scroll_area', {
       path : ".pagination a[rel=next]",
       append : ".post"
     });
-</script>
+</script> --}}
 {{-- “.pagination a[rel=next]” はLaravelの
     paginateが出力するリンクの形に合わせています --}}
 {{--
@@ -46,7 +46,7 @@
             @slot('id', $post->id)
             @slot('name', $post->title)
         @endcomponent
-        
+
     </div>
 @endcan
 @endauth
@@ -73,7 +73,7 @@
         <dt class="col-md-2">{{ __('Recipe') }}:</dt>
         <dd class="col-md-10">
             <a href="{{ url('user/'.$post->user->id) }}">
-               <img src="{{ $post->image_top }}" alt="" width="560px"> 
+               <img src="{{ $post->image_top }}" alt="" class="previews" >
             </a>
         </dd>
     </dl>

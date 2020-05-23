@@ -26,6 +26,8 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "croppie": "^2.6.4",
+        "eslint-config-standard": "^13.0.1",
         "iscroll": "^5.2.0",
         "jquery-drawer": "^3.2.2"
     }

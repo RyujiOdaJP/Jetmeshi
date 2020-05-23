@@ -85,33 +85,49 @@
 })();
 
 (function () {
-  $(function swipeMenu () {
-    alert('OK');
-    console.log('swipeFunction');
-    $('#app').bind('touchstart', onTouchStart);
-    $('#app').bind('touchmove', onTouchMove);
-    $('#app').bind('touchend', onTouchEnd);
-    let status, position;
+    jQuery(function swipeMenu() {
+        $("main").bind("touchstart", onTouchStart);
+        $("main").bind("touchmove", onTouchMove);
+        $("main").bind("touchend", onTouchEnd);
 
-    // スワイプ開始時の横方向の座標を格納
-    function onTouchStart (event) {
-	    position = getPosition(event);
-    }
+        $("#nav-button").on("click", function(){
+          if ($("#nav-button").hasClass('not-clicked')) {
+            $("#js-bootstrap-offcanvas").removeClass('out').addClass('in');
+            $("#nav-button").removeClass('not-clicked').addClass('clicked');
+            return;
+          }
+          if ($("#nav-button").hasClass('clicked')) {
+            $("#js-bootstrap-offcanvas").removeClass('in').addClass('out');
+            $("#nav-button").removeClass('clicked').addClass('not-clicked');
+          }
+        });
 
-    // スワイプの方向（left／right）を取得
-    function onTouchMove (event) {
-      status = (position > getPosition(event)) ? 'in' : '';
-    }
+        let status = [], position;
 
-    // スワイプ終了時に方向（left／right）をクラス名に指定
-    function onTouchEnd (event) {
-      $('#js-bootstrap-offcanvas').removeAttr('class').addClass(status);
-    }
+        //スワイプ開始時の横方向の座標を格納
+        function onTouchStart(event) {
+            startPosition = getPosition(event);
+        }
 
-    // 横方向の座標を取得
-    function getPosition (event) {
-      console.log('swipingNow');
-      return event.originalEvent.touches[0].pageX;
-    }
-  });
+        //スワイプの方向を取得(数値でトリガー感度を調節)
+        function onTouchMove(event) {
+            if(startPosition < getPosition(event) + 15){
+                status = ['in', 'out', 'clicked', 'not-clicked',];
+            }else{
+                status = ['out', 'in', 'not-clicked', 'clicked',];
+            }
+        }
+
+        //スワイプ終了時にstatusをクラス名に指定
+        function onTouchEnd(event) {
+            $("#js-bootstrap-offcanvas").removeClass(status[0]).addClass(status[1]);
+            $('#nav-button').removeClass(status[2]).addClass(status[3]);
+        }
+
+        //横方向の座標を取得
+        function getPosition(event) {
+            let position = event.originalEvent.touches[0].pageX
+            return position;
+        }
+    });
 })();
