@@ -1,10 +1,12 @@
 @php
     $id_attr = $id;
     $image_name = $name;
-    $src = $old_ref;
-    if( $src === null){
-        $src = 'https://cm-jetmeshi.s3-ap-northeast-1.amazonaws.com/noimage+template.jpg';
-    }
+    $src = $old_ref ?? 'https://cm-jetmeshi.s3-ap-northeast-1.amazonaws.com/noimage+template.jpg';
+    $regulation = $input_regu ?? '';
+
+    // if( $src === null){
+    //     $src = 'https://cm-jetmeshi.s3-ap-northeast-1.amazonaws.com/noimage+template.jpg';
+    // }
 @endphp
 
 <div id="croppie_{{ $id_attr }}" class="col-md-5">
@@ -23,7 +25,7 @@
             {{-- <input type="file" id="upload" value="Choose a file" accept="image/*" /> --}}
         <input id="{{ $id_attr }}" type="file" class="form-control position-absolute
             @if ($errors->has( $id_attr )) is-invalid
-            @endif" name="top" rows="8" accept="image/jpeg,image/png" style="opacity: 0;" required></input>
+            @endif" name="top" rows="8" accept="image/jpeg,image/png" style="opacity: 0;" {{ $regulation }} ></input>
         </a>
         <a class="btn btn-success upload-result">保存</a>
         <a class="btn btn-outline-secondary cancel-edit">キャンセル</a>
