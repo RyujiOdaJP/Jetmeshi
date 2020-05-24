@@ -13,8 +13,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" ></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" ></script>
     <script src="{{ asset('js/toggler.js') }}"></script>
-    <script src="{{ asset('js/infinite-scroll.pkgd.min.js') }}"></script>
-    {{-- <script src="{{ asset('js/croppie.js') }}"></script> --}}
+    <script src="{{ asset('js/lib/infinite-scroll.pkgd.min.js') }}"></script>
+    {{-- <script src="{{ asset('js/lib/croppie.js') }}"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.js"></script>
 
     <!-- Fonts -->

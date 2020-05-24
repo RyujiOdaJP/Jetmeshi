@@ -20,14 +20,16 @@
         </span>
      @endif
     <div class="actions">
-        <a class="btn btn-info position-relative file-upload">
+      <a class="btn btn-info position-relative file-upload">
             <span>Upload</span>
             {{-- <input type="file" id="upload" value="Choose a file" accept="image/*" /> --}}
         <input id="{{ $id_attr }}" type="file" class="form-control position-absolute
             @if ($errors->has( $id_attr )) is-invalid
-            @endif" name="top" rows="8" accept="image/jpeg,image/png" style="opacity: 0;" {{ $regulation }} ></input>
-        </a>
-        <a class="btn btn-success upload-result">保存</a>
-        <a class="btn btn-outline-secondary cancel-edit">キャンセル</a>
+            @endif" name="input_images" rows="8" accept="image/jpeg,image/png" style="opacity: 0;" {{ $regulation }} ></input>
+        <input id="sent_{{ $id_attr }}" type="hidden" name="hidden"></input>
+      </a>
+       {{-- // TODO delete image button on click --}}
+      <a class="btn btn-success upload-result">保存</a>
+      <a class="btn btn-outline-secondary cancel-edit">キャンセル</a>
     </div>
   </div>

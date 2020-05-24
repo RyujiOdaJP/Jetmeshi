@@ -11,7 +11,7 @@
 @section('content')
 <div class="container">
     <h1>{{ $title }}</h1>
-    <form action="{{ url('post/'.$post->id) }}" method="post">
+    <form action="{{ url('post/'.$post->id) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="form-group">
@@ -25,9 +25,7 @@
         </div>
         <div class="form-group">
             <label for="sequence_body">{{ __('Body') }}</label>
-            <textarea id="sequence_body" class="form-control @if ($errors->has('sequence_body')) is-invalid @endif" name="sequence_body" rows="8" required>
-                {{ old('sequence_body') }}
-            </textarea>
+            <textarea id="sequence_body" class="form-control @if ($errors->has('sequence_body')) is-invalid @endif" name="sequence_body" rows="8" required>{{ old('sequence_body', $post->sequence_body) }}</textarea>
             @if ($errors->has('sequence_body'))
                 <span class="invalid-feedback" role="alert">
                     {{ $errors->first('sequence_body') }}
@@ -95,7 +93,7 @@
             </div>
 
         </div>
-        <button type="submit" name="submit" class="row btn btn-primary">{{ __('Submit') }}</button>
+        <button id="submit_images" type="submit" name="submit" class="row btn btn-primary">{{ __('Submit') }}</button>
     </form>
 </div>
 <script src=" {{ asset('js/range.js') }} "></script>

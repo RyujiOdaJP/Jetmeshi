@@ -13,9 +13,14 @@ use Aws\Exception\AwsException;
 // import the Intervention Image Manager Class
 use Intervention\Image\ImageManager;
 
+use function GuzzleHttp\Psr7\str;
 
 class PostController extends Controller
 {
+    public function random($length = 8)
+        {
+            return substr(str_shuffle('1234567890abcdefghijklmnopqrstuvwxyz'), 0, $length);
+        }
     /**
      * Display a listing of the resource.
      *
@@ -67,11 +72,14 @@ class PostController extends Controller
         $post->user_id = $request->user()->id;
         $image_top = $request->file('image_top');
         $image_seq1 = $request->file('image_seq1');
+        $image_seq2 = $request->file('image_seq2');
+        $image_seq3 = $request->file('image_seq3');
+        $image_seq4 = $request->file('image_seq4');
         $path_top = Storage::disk('s3')->put('cm-jetmeshi', $image_top, 'public');
         $path_seq1 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq1, 'public');
-        $path_seq2 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq1, 'public');
-        $path_seq3 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq1, 'public');
-        $path_seq4 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq1, 'public');
+        $path_seq2 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq2, 'public');
+        $path_seq3 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq3, 'public');
+        $path_seq4 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq4, 'public');
         $post->cooking_time = $request->cooking_time;
         $post->budget = $request->budget;
         $post->image_top = Storage::disk('s3')->url($path_top);
@@ -125,15 +133,19 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $file_name = date('Y_m_d').'-'.$this->random();
         $post->title = $request->title;
         $post->sequence_body = $request->sequence_body;
-        $image_top = $request->file('image_top');
-        $image_seq1 = $request->file('image_seq1');
-        $path_top = Storage::disk('s3')->put('cm-jetmeshi', $image_top, 'public');
-        $path_seq1 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq1, 'public');
-        $path_seq2 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq1, 'public');
-        $path_seq3 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq1, 'public');
-        $path_seq4 = Storage::disk('s3')->put('cm-jetmeshi', $image_seq1, 'public');
+        $image_top = $request->file('edited_image_top');
+        $image_seq1 = $request->file('edited_image_seq1');
+        $image_seq2 = $request->file('edited_image_seq2');
+        $image_seq3 = $request->file('edited_image_seq3');
+        $image_seq4 = $request->file('edited_image_seq4');
+        $path_top = Storage::disk('s3')->put($file_name, base64_decode($image_top), 'public');
+        $path_seq1 = Storage::disk('s3')->put($file_name, base64_decode($image_seq1), 'public');
+        $path_seq2 = Storage::disk('s3')->put($file_name, base64_decode($image_seq2), 'public');
+        $path_seq3 = Storage::disk('s3')->put($file_name, base64_decode($image_seq3), 'public');
+        $path_seq4 = Storage::disk('s3')->put($file_name, base64_decode($image_seq4), 'public');
         $post->cooking_time = $request->cooking_time;
         $post->budget = $request->budget;
         $post->image_top = Storage::disk('s3')->url($path_top);
@@ -164,6 +176,10 @@ class PostController extends Controller
     public function __construct()
     {
         $this->Middleware('auth')->except(['index','show']);
+    }
+
+    public fucntion post() {
+
     }
 
 
