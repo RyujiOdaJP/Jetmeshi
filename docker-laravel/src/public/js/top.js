@@ -1,3 +1,3 @@
 (function () {
-    $('body').css('margin-top', '40px');
+  $('body').css('margin-top', '40px');
 })();
