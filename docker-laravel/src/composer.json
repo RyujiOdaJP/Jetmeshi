@@ -23,6 +23,7 @@
         "predis/predis": "^1.1"
     },
     "require-dev": {
+        "beyondcode/laravel-tinker-server": "^1.0",
         "facade/ignition": "^2.0",
         "fzaninotto/faker": "^1.9.1",
         "laravel/dusk": "^6.0",
