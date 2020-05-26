@@ -34,4 +34,4 @@ Route::delete('/user/{id}', 'UserController@unable')->name('user.unable');
 
 Route::resource('post', 'PostController');
 
-Route::post('/post', 'PostController@post')
+// Route::post('/post', 'PostController@post')
