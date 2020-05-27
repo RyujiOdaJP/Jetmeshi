@@ -14,6 +14,7 @@ use Aws\Exception\AwsException;
 use Intervention\Image\ImageManager;
 
 use function GuzzleHttp\Psr7\str;
+use function Psy\debug;
 
 class PostController extends Controller
 {
@@ -133,40 +134,40 @@ class PostController extends Controller
 	 */
 	public function update(Request $request, Post $post)
 	{
-        $file_name = date('Y_m_d_His').'-'.$this->random().'jpg';
+        $file_name = date('Y_m_d_His').'-'.$this->random();
         $items = ['top', 'seq1', 'seq2', 'seq3', 'seq4'];
         $post->title = $request->title;
         $post->sequence_body = $request->sequence_body;
 
-        $images=[];
-        // $decoded_data_top ='';
-        // $decoded_data_seq1 ='';
-        // $decoded_data_seq2 ='';
-        // $decoded_data_seq3 ='';
-        // $decoded_data_seq4 ='';
-
+        // upload images to S3 & get url to put them into DB
+        $images = [];
+        $data = '';
         $decoded_data = [];
         $paths = [];
-        // for ($i = 0; count($items) > $i; $i++){
-        //     if ($request->sent_image_.$items[$i] === null){
-        //         continue;
-        //     }
-        //     $images[] = $request->sent_image_.$items[$i];
-        //     $decoded_data[] = base64_decode($images[$i]);
-        //     $paths[] = (Storage::disk('s3')->put($file_name.$items[$i], $decoded_data[$i], 'public'));
-        //     $post->image_.$items[$i] = Storage::disk('s3')->url($paths[$i]);
-        // }
-        $images[] = $request->sent_image_top;
+        for ($i = 0, $j = 0; count($items) > $i; $i++){
+            if ($request->{'sent_image_'.$items[$i]} == null){
+                continue;
+            }
+            $images[] = $request->{'sent_image_'.$items[$i]};
+            // list(, $data) = explode(';', $images[$j]); //return array
+            // dd($images[$j]);
+            list(, $data) = explode(',', $images[$j]);
+            $decoded_data[] = base64_decode($data);
+            $paths[] = (Storage::disk('s3')->put($file_name.'_'.$items[$i], $decoded_data[$j], 'public'));
+            $post->{'image_'.$items[$i]} = Storage::disk('s3')->url($file_name.$items[$i]);
+            $j = $j + 1;
+        }
+        // $images[] = $request->sent_image_top;
         // $image_seq1 = $request->input('sent_image_seq1');
         // $image_seq2 = $request->input('sent_image_seq2');
         // $image_seq3 = $request->input('sent_image_seq3');
         // $image_seq4 = $request->input('sent_image_seq4');
 
         // Base64文字列をデコードしてバイナリに変換
-        list(, $decoded_data[0]) = explode(';', $images[0]);
-        list(, $decoded_data[0]) = explode(',', $images[0]);
-        $decoded_data[0] = base64_decode($decoded_data[0]);
-        $paths[0] = Storage::disk('s3')->put($file_name.$items[0], $decoded_data[0], 'public');
+        // list(, $decoded_data[0]) = explode(';', $images[0]);
+        // list(, $decoded_data[0]) = explode(',', $images[0]);
+        // $decoded_data[0] = base64_decode($decoded_data[0]);
+        // $paths[0] = Storage::disk('s3')->put($file_name.$items[0], $decoded_data[0], 'public');
         // $path_seq1 = Storage::disk('s3')->put($file_name.'seq1', base64_decode($image_seq1), 'public');
         // $path_seq2 = Storage::disk('s3')->put($file_name.'seq2', base64_decode($image_seq2), 'public');
         // $path_seq3 = Storage::disk('s3')->put($file_name.'seq3', base64_decode($image_seq3), 'public');
@@ -174,7 +175,7 @@ class PostController extends Controller
 
         $post->cooking_time = $request->cooking_time;
         $post->budget = $request->budget;
-        $post->image_top = Storage::disk('s3')->url($paths[0].$file_name.$items[0], null, true);
+        // $post->image_top = Storage::disk('s3')->url($file_name.$items[0], null, true);
         // $post->image_seq1 = Storage::disk('s3')->url($path_seq1);
         // $post->image_seq2 = Storage::disk('s3')->url($path_seq2);
         // $post->image_seq3 = Storage::disk('s3')->url($path_seq3);
