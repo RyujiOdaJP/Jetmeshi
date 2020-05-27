@@ -154,7 +154,7 @@ class PostController extends Controller
             list(, $data) = explode(',', $images[$j]);
             $decoded_data[] = base64_decode($data);
             $paths[] = (Storage::disk('s3')->put($file_name.'_'.$items[$i], $decoded_data[$j], 'public'));
-            $post->{'image_'.$items[$i]} = Storage::disk('s3')->url($file_name.$items[$i]);
+            $post->{'image_'.$items[$i]} = Storage::disk('s3')->url($file_name.'_'.$items[$i]);
             $j = $j + 1;
         }
         // $images[] = $request->sent_image_top;
