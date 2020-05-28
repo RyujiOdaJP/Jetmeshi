@@ -70,16 +70,48 @@
                 {{ $post->updated_at }}
             </time>
         </dd>
-        <dt class="col-md-2">{{ __('Recipe') }}:</dt>
-        <dd class="col-md-10">
-            <a href="{{ url('user/'.$post->user->id) }}">
-               <img src="{{ $post->image_top }}" alt="" class="previews" >
-            </a>
-        </dd>
     </dl>
     <hr>
-    <div id="post-body">
-        {{ $post->body }}
+    <div class="card w-75 ml-auto mr-auto">
+        <div class="bd-example">
+            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+              </ol>
+              <div class="carousel-inner" role="listbox">
+                <div class="carousel-item active">
+                  <img class="d-block w-100" src="{{ $post->image_top }}" alt="First slide">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h3>First slide label</h3>
+                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="{{ $post->image_top }}" alt="Second slide">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h3>Second slide label</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  </div>
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+        <div class="card-body col-md-6"> Some more card content </div>
+        <div class="card-body col-md-6"> Some more card content </div>
+        </div>
+
+
     </div>
-</div>
+
+
+
 @endsection
