@@ -68,7 +68,7 @@ else dnied 7 times
     DB -->> La: returns result
 
     alt is correct
-        La ->> Ml: req to send PW
+        La ->> Ml: req to submit PW
         Ml -->> U: send Email
         Note over U: End reactivation
     else is wrong
@@ -78,6 +78,15 @@ else dnied 7 times
 
         end
 end
+
+Note over U: GUEST login
+  U ->> Cl: req login as guest
+  Cl ->> La: req login as guest
+  La ->> La: random MAIL&PW will be assigned
+  La ->> DB: generate guest account
+  DB ->> La: return guest account
+  La -->> Cl: hide account-del&edit
+  La -->> Cl: hide forget PW
 ```
 
 ## Redirect process
@@ -161,39 +170,44 @@ participant DB as Data Base
 
     Note over U: Post & Edit
 
-    U ->> Cl: Send JPEG/PNG(logged in)
-    Cl ->>+ La: Send photos up to5
+    U ->> Cl: Title&body
+    U ->> Cl: Select jpg/png
+    Note over Cl: Triming window
+    Cl ->> Cl: Generate Blob
+    Cl -->> U: Edit display
+    U ->> Cl: Crop
+    Cl ->> Cl: Convert to base64
+    Cl ->> Cl: insert into img&input tag
+    Cl ->>+ La: Accept photos up to5
     Note over La: Validation
-    alt is over 600*315px
-
         La -->>- Cl: Show preview on sumnails
         U ->>+ Cl: edit or delete
-        Cl ->> La: Send data
+        Cl ->> La: Submit data
+alt is valid
         Note over La: Triming window
         La -->> Cl: show preview for editing
         Cl -->>- U: show preview for editing
-
+ 
         U ->>+ Cl : req Post
         Cl ->>- La : req Post
-        La ->>+ DB: Send data
+        La ->>+ S3: Store for sumnail
+        La ->> S3: Store for WEB
+        La ->> S3: Store for Mobile
         Note over DB: showing apllied size
-        DB ->> DB: Store for sumnail
-        DB ->> DB: Store for WEB
-        DB ->> DB: Store for Mobile
-        DB ->> S3: Store images
+        S3 -->>- DB: return URL
+        DB -->> La: URL into img tag
+
         Note Over S3: Contents Server
         U ->> Cl: Req show the post
         Cl ->>+ La: Req show the post
-        DB -->>- La: Get data
+        DB -->> La: Get data
         La -->>- Cl: Show the post
-
+    
     else Nothing is selected
+    Note over La: *in case POST
         La -->> Cl: Validate fail
         Cl -->> U: Slect at least 1 image
         Cl -->> U: Must fill in Title
-    else is under 600*315px
-        La -->> Cl: Validate fail
-        Cl -->> U: Should be over 600*315px
 
     else is invalid format
     La -->> Cl: Validate fail
@@ -216,8 +230,8 @@ participant DB as Data Base
         U ->>Cl: OK
         La ->> DB: Req delete
         La ->> S3: Req Delete
-        S3 ->>S3: Delete Image
-        DB ->> DB: Flag false
+        S3 ->>S3: Soft Delete Image
+        DB ->> DB: add 'deleted at'
         La -->> Cl: Coplete to delete
         Cl -->> U : Complete to delete
         U ->> Cl: send ok
@@ -237,7 +251,7 @@ participant DB as Data Base
     Cl ->> La: Req reviw Window
     La -->>Cl: Show window
     Cl -->> U: Req title & comment
-    U ->> U: Abandon
+    Note over Cl: 3stars as default value
     U ->> Cl: req Post comment
     Cl ->> La: req Post Comment
     Note over La: Validation
@@ -252,9 +266,7 @@ participant DB as Data Base
     else No title
         La -->> Cl: Place title please
         Cl -->> U:Place title please
-    else No Stars
-        La -->> Cl: Evaluate please
-        Cl -->>- U: Evaluate please
+
 
     end
 
@@ -264,7 +276,7 @@ participant DB as Data Base
     alt if not exist
     Cl -->> U: turns heart always gray
     U ->>+ Cl: Push heart
-    Cl ->>+ La: Send LIKE
+    Cl ->>+ La: submit LIKE
     La ->>+ DB: Store it
     DB ->> DB: Store LIKE List for User
     DB ->> DB: Store number of LIKES on Recipe
@@ -276,7 +288,7 @@ participant DB as Data Base
     else if exist on "likes table"
     Cl -->> U: turns heart always pink
     U ->>+ Cl: Push heart
-    Cl ->> La: Send Unlike
+    Cl ->> La: submit Unlike
     La ->>+ DB: Store it
     DB ->> DB: Eliminate List for User
     DB ->> DB: Eliminate number of LIKES on Recipe
@@ -291,8 +303,8 @@ participant DB as Data Base
 
     Note over U: behavior of Search Recipe
     U ->>+ Cl: Set conditions
-    Cl ->> La: Send
-    La ->>+ DB: Serach it lim. 10
+    Cl ->> La: submit
+    La ->>+ DB: Serach
     DB ->> DB: Type, Time, Cost, Tags
     DB ->> DB: KEYWORD Elastic search
 
@@ -314,7 +326,7 @@ participant DB as Data Base
     Cl ->>+ La: Req validation
     Note over La: Validation
     alt is valid
-    La ->> DB: send info
+    La ->> DB: submit info
 
     else invalid e-mail format
     La -->> Cl: invalid email format
@@ -350,14 +362,14 @@ participant DB as Data Base
 
         La -->>- Cl: Show preview on sumnails
         U ->>+ Cl: edit
-        Cl ->> La: Send data
+        Cl ->> La: submit data
         Note over La: Triming window
         La -->> Cl: show preview for editing
         Cl -->>- U: show preview for editing
 
         U ->>+ Cl : req Post
         Cl ->>- La : req Post
-        La ->>+ DB: Send data
+        La ->>+ DB: submit data
         Note over DB: showing apllied size
         DB ->> DB: Store for sumnail
         DB ->> DB: Store for WEB
@@ -392,9 +404,9 @@ Note over U: Edit profile sentence
         Note over La: Overlay window
         La -->> Cl: Show window
         U ->> Cl: edit
-        Cl ->> La: Send data
+        Cl ->> La: submit data
     alt is valid
-        La ->> DB: Send data
+        La ->> DB: submit data
         Note over DB: showing apllied size
         DB ->> DB: Store for sumnail
         DB ->> DB: Store for WEB
