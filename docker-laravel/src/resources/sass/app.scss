@@ -66,6 +66,9 @@ input[type=file]{
     margin-bottom: 10px;
 }
 
+#user_info, #slider_show, #explain_text{
+    width: 75%;
+}
 /* PC */
 @media (min-width: 992px) {
 }
@@ -100,6 +103,14 @@ input[type=file]{
       h1{
         font-size: 44px;
       }
+    }
+    .tags {
+        .card-body{
+            margin-left: 10%;
+        }
+    }
+    #user_info, #slider_show, #explain_text{
+        width: 100%;
     }
 }
 @media (min-width: 575.98px) {

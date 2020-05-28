@@ -6120,6 +6120,12 @@ input[type=file] {
   margin-bottom: 10px;
 }
 
+#user_info,
+#slider_show,
+#explain_text {
+  width: 75%;
+}
+
 /* PC */
 
 /* Tablet */
@@ -6156,6 +6162,16 @@ input[type=file] {
 
   .jumbotron-hero h1 {
     font-size: 44px;
+  }
+
+  .tags .card-body {
+    margin-left: 10%;
+  }
+
+  #user_info,
+  #slider_show,
+  #explain_text {
+    width: 100%;
   }
 }
 

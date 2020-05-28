@@ -51,7 +51,7 @@
 @endcan
 @endauth
     {{-- 記事内容 --}}
-    <dl class="row">
+    <dl id="user_info" class="row ml-auto mr-auto">
         <dt class="col-md-2">{{ __('Auther') }}:</dt>
         <dd class="col-md-10">
             <a href="{{ url('user/'.$post->user->id) }}">
@@ -71,10 +71,13 @@
             </time>
         </dd>
     </dl>
+</div>
+
+<div class="container">
     <hr>
-    <div class="card w-75 ml-auto mr-auto">
+    <div id="slider_show" class="card ml-auto mr-auto">
         <div class="bd-example">
-            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" data-interval="false">
               <ol class="carousel-indicators">
                 <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
@@ -104,14 +107,38 @@
                 <span class="sr-only">Next</span>
               </a>
             </div>
-          </div>
-        <div class="card-body col-md-6"> Some more card content </div>
-        <div class="card-body col-md-6"> Some more card content </div>
+        </div>
+        <div class="row justify-content-sm-center tags">
+            <div class="card-body col-sm-5 offset-sm-2 p-1 "> Some more card content </div>
+            <div class="card-body col-sm-5 p-1"> Some more card content </div>
+            <div class="card-body col-sm-5 offset-sm-2 p-1"> Some more card content </div>
+            <div class="card-body col-sm-5 p-1"> Some more card content </div>
+            <div class="card-body offset-sm-2 col-sm-10 p-1"> Tag </div>
+        </div>
+        </div>
+    </div>
+        <div class="container mt-5">
+            <div id="explain_text" class="card ml-auto mr-auto">
+                    <div class="card-body">
+                      <h4 class="card-title">手順</h4>
+
+                      <p class="card-text">
+                        Some quick example text to build on the card title
+                        and make up the bulk of the card's content.
+                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+                        nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                        sed diam voluptua. At vero eos et accusam et justo duo dolores et
+                        ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+                        Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+                        sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                        et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+                        accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+                        no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                      </p>
+                    </div>
+                </div>
         </div>
 
 
-    </div>
-
-
-
+<script src="{{ asset('js/show.js') }}"></script>
 @endsection
