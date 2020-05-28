@@ -187,7 +187,7 @@ alt is valid
         Note over La: Triming window
         La -->> Cl: show preview for editing
         Cl -->>- U: show preview for editing
- 
+
         U ->>+ Cl : req Post
         Cl ->>- La : req Post
         La ->>+ S3: Store for sumnail
@@ -202,7 +202,7 @@ alt is valid
         Cl ->>+ La: Req show the post
         DB -->> La: Get data
         La -->>- Cl: Show the post
-    
+
     else Nothing is selected
     Note over La: *in case POST
         La -->> Cl: Validate fail
