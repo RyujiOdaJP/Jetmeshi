@@ -1,5 +1,7 @@
 @php
     $title = $post->title;
+    $id = $post->id;
+    // $id_exist = DB::table('reviews')->where('post_id', $id) ->exists();
 @endphp
 @extends('layouts.app')
 @section('content')
@@ -143,7 +145,10 @@
         <div id="explain_text" class="card ml-auto mr-auto">
             <div class="card-body">
               <h4 class="card-title">レビュー投稿</h4>
-              <form action="" class="">
+              <form action="{{ url('post/review/'.$post->id) }}" method="post" class="" enctype="multipart/form-data">
+                @csrf
+                @method('POST')
+                {{-- <input id="post_id" type="hidden" name="post_id" value="{{$id}}"> --}}
                 <div class="form-group row mb-2">
                   <div class="col-md-4">
                     <label for="stars" class="mb-0">評価</label>
@@ -164,20 +169,17 @@
                 <div class="form-group row">
                   <div class="col-md-12">
                     <label for="review">コメント</label>
-                    <textarea type="text" name="review" id="review" class="review form-control w-100"></textarea>
+                    <textarea type="text" name="review_body" id="review_body" class="review form-control w-100"></textarea>
                   </div>
                 </div>
-                <div class="form-group row">
-                  <div class="col-md-10">
-                      <button class="btn btn-success mb-2" type="submit">投稿</button>
-                  </div>
-                </div>
+                <button class="btn btn-success mb-2" type="submit">投稿</button>
               </form>
+
               <h4 class="card-title">レビュー</h4>
-              @if( $reviews->user_id )
+              @if(! $reviews === null)
                 @foreach ($reviews as $review)
                 <h6 class="card-subtitle mb-2 text-muted">
-                    {{ $review->user_id }}
+                    User ID: {{ $review->user_id }}
                     @for ($i = 0; $i < $review->stars; $i++)
                     <i class="fas fa-star"></i>
                     @endfor

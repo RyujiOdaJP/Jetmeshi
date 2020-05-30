@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post; //import the post model.
 use App\Review;
+use App\User;
+use Hamcrest\Type\IsBoolean;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -49,11 +51,6 @@ class PostController extends Controller
         $post->sequence_body = $request->sequence_body;
         $post->user_id = $request->user()->id;
 
-        $reviews = new Review;
-        $reviews->user_id = $request->user()->id;
-        $reviews->stars = $request->stars;
-        $reviews->review_body = $request->review_body;
-
         $file_name = date('Y_m_d_His').'-'.$this->random();
         $items = ['top', 'seq1', 'seq2', 'seq3', 'seq4'];
         $images = [];
@@ -87,8 +84,11 @@ class PostController extends Controller
 	 */
 	public function show(Post $post, Review $reviews)
 	{
-        //
         $this->authorize('edit', $post);
+        $reviews = DB::table('reviews')->where('reviews.post_id', $post->id)->get();
+        // SELECT users.id, users.name, reviews.id, reviews.stars, reviews.review_body FROM JETmysql.users
+        // inner join JETmysql.reviews
+        // on users.id = reviews.user_id;
         return view('post.show', compact('post', 'reviews'));
 	}
 

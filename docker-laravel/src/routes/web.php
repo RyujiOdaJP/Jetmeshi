@@ -28,10 +28,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // resouce(query, controller) will declare index, create, store, show, edit, update, destory methodes to controller
 Route::resource('user', 'UserController',['except' => ['create', 'store', 'destroy']]);
-// Route::get('/user'.$id, 'UserController@selectedUser');
 
 Route::delete('/user/{id}', 'UserController@unable')->name('user.unable');
 
 Route::resource('post', 'PostController');
 
-// Route::post('/post', 'PostController@post')
+// Route::get('/post/{post}', 'ReviewController@show')->name('review.show');
+Route::post('/post/review/{post}', 'ReviewController@store')->name('review.store');
