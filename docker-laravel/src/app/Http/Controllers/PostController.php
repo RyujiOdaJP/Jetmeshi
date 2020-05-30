@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post; //import the post model.
+use App\Review;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -42,13 +43,18 @@ class PostController extends Controller
 	 */
 	public function store(Request $request)
 	{
-        //
-        $file_name = date('Y_m_d_His').'-'.$this->random();
+        // TODO: add comopressing metho like lambda
         $post = new Post;
         $post->title = $request->title;
         $post->sequence_body = $request->sequence_body;
         $post->user_id = $request->user()->id;
 
+        $reviews = new Review;
+        $reviews->user_id = $request->user()->id;
+        $reviews->stars = $request->stars;
+        $reviews->review_body = $request->review_body;
+
+        $file_name = date('Y_m_d_His').'-'.$this->random();
         $items = ['top', 'seq1', 'seq2', 'seq3', 'seq4'];
         $images = [];
         $data = '';
@@ -79,10 +85,11 @@ class PostController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show(Post $post)
+	public function show(Post $post, Review $reviews)
 	{
         //
-        return view('post.show', compact('post'));
+        $this->authorize('edit', $post);
+        return view('post.show', compact('post', 'reviews'));
 	}
 
 	/**

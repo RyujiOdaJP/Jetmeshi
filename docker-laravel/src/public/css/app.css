@@ -6102,7 +6102,7 @@ input[type=file] {
   top: 0;
   z-index: 100;
   width: 15%;
-  left: 80%;
+  left: 90%;
 }
 
 .false {
@@ -6120,6 +6120,36 @@ input[type=file] {
   margin-bottom: 10px;
 }
 
+#user_info,
+#slider_show,
+#explain_text {
+  width: 75%;
+}
+
+.evaluation {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+}
+
+.evaluation input[type=radio] {
+  display: none;
+}
+
+.evaluation label {
+  position: relative;
+  padding: 0 5px 0;
+  color: gray;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.evaluation label:hover,
+.evaluation label:hover ~ label,
+.evaluation input[type=radio]:checked ~ label {
+  color: #ffcc00;
+}
+
 /* PC */
 
 /* Tablet */
@@ -6134,14 +6164,8 @@ input[type=file] {
 /* horizontal SP */
 
 @media (max-width: 767.98px) {
-  #js-bootstrap-offcanvas {
-    margin-top: 50px;
-  }
-
-  #nav-for-mobile-top {
-    margin-top: 50px;
-  }
-
+  #js-bootstrap-offcanvas,
+  #nav-for-mobile-top,
   #nav-for-mobile-bottom {
     margin-top: 50px;
   }
@@ -6156,6 +6180,16 @@ input[type=file] {
 
   .jumbotron-hero h1 {
     font-size: 44px;
+  }
+
+  .tags .card-body {
+    margin-left: 10%;
+  }
+
+  #user_info,
+  #slider_show,
+  #explain_text {
+    width: 100%;
   }
 }
 

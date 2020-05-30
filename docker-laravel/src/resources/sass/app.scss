@@ -53,7 +53,7 @@ input[type=file]{
 .standby.true{
     @include swipe-aria;
     width: 15%;
-    left: 80%;
+    left: 90%;
 }
 .false{
     @include swipe-aria;
@@ -64,6 +64,34 @@ input[type=file]{
 .croppie-container{
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+#user_info, #slider_show, #explain_text{
+    width: 75%;
+}
+
+.evaluation{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+
+    input[type='radio']{
+        display: none;
+      }
+
+    label{
+    position: relative;
+    padding: 0 5px 0;
+    color: gray;
+    cursor: pointer;
+    font-size: 20px;
+    }
+    label:hover,
+    label:hover ~ label,
+    input[type='radio']:checked ~ label{
+    color: #ffcc00;
+    }
+
 }
 
 /* PC */
@@ -80,17 +108,9 @@ input[type=file]{
 
 /* horizontal SP */
 @media (max-width: 767.98px) {
-
-    #js-bootstrap-offcanvas{
+  #js-bootstrap-offcanvas, #nav-for-mobile-top, #nav-for-mobile-bottom{
         margin-top: 50px;
-    }
-    #nav-for-mobile-top{
-        margin-top: 50px;
-    }
-    #nav-for-mobile-bottom{
-        margin-top: 50px;
-    }
-
+  }
 }
 
 /* SP */
@@ -100,6 +120,14 @@ input[type=file]{
       h1{
         font-size: 44px;
       }
+    }
+    .tags {
+        .card-body{
+            margin-left: 10%;
+        }
+    }
+    #user_info, #slider_show, #explain_text{
+        width: 100%;
     }
 }
 @media (min-width: 575.98px) {
