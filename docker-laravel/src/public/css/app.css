@@ -6126,6 +6126,30 @@ input[type=file] {
   width: 75%;
 }
 
+.evaluation {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+}
+
+.evaluation input[type=radio] {
+  display: none;
+}
+
+.evaluation label {
+  position: relative;
+  padding: 0 5px 0;
+  color: gray;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.evaluation label:hover,
+.evaluation label:hover ~ label,
+.evaluation input[type=radio]:checked ~ label {
+  color: #ffcc00;
+}
+
 /* PC */
 
 /* Tablet */
@@ -6140,14 +6164,8 @@ input[type=file] {
 /* horizontal SP */
 
 @media (max-width: 767.98px) {
-  #js-bootstrap-offcanvas {
-    margin-top: 50px;
-  }
-
-  #nav-for-mobile-top {
-    margin-top: 50px;
-  }
-
+  #js-bootstrap-offcanvas,
+  #nav-for-mobile-top,
   #nav-for-mobile-bottom {
     margin-top: 50px;
   }

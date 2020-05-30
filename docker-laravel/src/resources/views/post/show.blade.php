@@ -117,28 +117,94 @@
         </div>
         </div>
     </div>
-        <div class="container mt-5">
-            <div id="explain_text" class="card ml-auto mr-auto">
-                    <div class="card-body">
-                      <h4 class="card-title">手順</h4>
+    <div class="container mt-5">
+        <div id="explain_text" class="card ml-auto mr-auto">
+            <div class="card-body">
+                <h4 class="card-title">手順</h4>
 
-                      <p class="card-text">
-                        Some quick example text to build on the card title
-                        and make up the bulk of the card's content.
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                        nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-                        sed diam voluptua. At vero eos et accusam et justo duo dolores et
-                        ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-                        Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-                        sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-                        et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                        accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-                        no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                      </p>
-                    </div>
-                </div>
+                <p class="card-text">
+                Some quick example text to build on the card title
+                and make up the bulk of the card's content.
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+                nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                sed diam voluptua. At vero eos et accusam et justo duo dolores et
+                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+                Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+                sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+                accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+                no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                </p>
+            </div>
         </div>
+    </div>
 
+    <div class="container mt-5">
+        <div id="explain_text" class="card ml-auto mr-auto">
+            <div class="card-body">
+              <h4 class="card-title">レビュー投稿</h4>
+              <form action="" class="">
+                <div class="form-group row mb-2">
+                  <div class="col-md-4">
+                    <label for="stars" class="mb-0">評価</label>
+                    <div id="stars" class="evaluation">
+                      <input id="star1" type="radio" name="star" value="5" />
+                      <label for="star1">★</label>
+                      <input id="star2" type="radio" name="star" value="4" />
+                      <label for="star2">★</label>
+                      <input id="star3" type="radio" name="star" value="3" />
+                      <label for="star3">★</label>
+                      <input id="star4" type="radio" name="star" value="2" />
+                      <label for="star4">★</label>
+                      <input id="star5" type="radio" name="star" value="1" />
+                      <label for="star5">★</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <label for="review">コメント</label>
+                    <textarea type="text" name="review" id="review" class="review form-control w-100"></textarea>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-10">
+                      <button class="btn btn-success mb-2" type="submit">投稿</button>
+                  </div>
+                </div>
+              </form>
+              <h4 class="card-title">レビュー</h4>
+              @if( $reviews->user_id )
+                @foreach ($reviews as $review)
+                <h6 class="card-subtitle mb-2 text-muted">
+                    {{ $review->user_id }}
+                    @for ($i = 0; $i < $review->stars; $i++)
+                    <i class="fas fa-star"></i>
+                    @endfor
+                    @for ($i = 0; $i < (5 - $review->stars); $i++)
+                    <i class="far fa-star"></i>
+                    @endfor
+                </h6>
+                <p class="card-text">
+                Some quick example text to build on the card title
+                and make up the bulk of the card's content.
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+                nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                sed diam voluptua. At vero eos et accusam et justo duo dolores et
+                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+                Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+                sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+                accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+                no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                </p>
+                @endforeach
+              @else
+              <h6 class="card-subtitle mb-2 text-muted">レビューがありません</h6>
+              @endif
+            </div>
+        </div>
+    </div>
 
 <script src="{{ asset('js/show.js') }}"></script>
 @endsection

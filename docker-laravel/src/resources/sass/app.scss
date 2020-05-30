@@ -69,6 +69,31 @@ input[type=file]{
 #user_info, #slider_show, #explain_text{
     width: 75%;
 }
+
+.evaluation{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+
+    input[type='radio']{
+        display: none;
+      }
+
+    label{
+    position: relative;
+    padding: 0 5px 0;
+    color: gray;
+    cursor: pointer;
+    font-size: 20px;
+    }
+    label:hover,
+    label:hover ~ label,
+    input[type='radio']:checked ~ label{
+    color: #ffcc00;
+    }
+
+}
+
 /* PC */
 @media (min-width: 992px) {
 }
@@ -83,17 +108,9 @@ input[type=file]{
 
 /* horizontal SP */
 @media (max-width: 767.98px) {
-
-    #js-bootstrap-offcanvas{
+  #js-bootstrap-offcanvas, #nav-for-mobile-top, #nav-for-mobile-bottom{
         margin-top: 50px;
-    }
-    #nav-for-mobile-top{
-        margin-top: 50px;
-    }
-    #nav-for-mobile-bottom{
-        margin-top: 50px;
-    }
-
+  }
 }
 
 /* SP */
