@@ -84,12 +84,14 @@ class PostController extends Controller
 	 */
 	public function show(Post $post, Review $reviews)
 	{
-        $this->authorize('edit', $post);
-        $reviews = DB::table('reviews')->where('reviews.post_id', $post->id)->get();
+        $reviews = Review::where('post_id', $post->id)->get();
+        $id_exist = Review::where('post_id', $post->id) ->exists();
+        // dd($id_exist);
+        return view('post.show', compact('post', 'reviews', 'id_exist'));
         // SELECT users.id, users.name, reviews.id, reviews.stars, reviews.review_body FROM JETmysql.users
         // inner join JETmysql.reviews
         // on users.id = reviews.user_id;
-        return view('post.show', compact('post', 'reviews'));
+
 	}
 
 	/**
