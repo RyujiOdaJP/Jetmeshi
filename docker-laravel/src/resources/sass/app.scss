@@ -82,16 +82,22 @@ input[type=file]{
     label{
     position: relative;
     padding: 0 5px 0;
-    color: gray;
+    color: $StarDisable;
     cursor: pointer;
     font-size: 20px;
     }
     label:hover,
     label:hover ~ label,
     input[type='radio']:checked ~ label{
-    color: #ffcc00;
+    color: $StarActive;
     }
+}
 
+.fas.fa-star{
+    color: $StarActive;
+}
+.fas.fa-star.disabled{
+    color: $StarDisable;
 }
 
 /* PC */
