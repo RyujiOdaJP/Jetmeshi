@@ -49,32 +49,34 @@
     <hr>
     <div id="slider_show" class="card ml-auto mr-auto">
         <div class="bd-example">
-            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" data-interval="false">
+            <div id="carouselCaptions" class="carousel slide" data-ride="carousel" data-interval="false">
               <ol class="carousel-indicators">
-                <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                <li data-target="#carouselCaptions" data-slide-to="0" class="active"></li>
+                @for ( $i = 1; $i < 5 ; $i++ )
+                    @if (! $post->{'image_seq'.$i})
+                    @continue
+                    @endif
+                    <li data-target="#carouselCaptions" data-slide-to="{{ $i }}"></li>
+                @endfor
               </ol>
               <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
-                  <img class="d-block w-100" src="{{ $post->image_top }}" alt="First slide">
-                  <div class="carousel-caption d-none d-md-block">
-                    <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                  </div>
+                  <img class="d-block w-100" src="{{ $post->image_top }}" alt="Top slide">
                 </div>
-                <div class="carousel-item">
-                  <img class="d-block w-100" src="{{ $post->image_top }}" alt="Second slide">
-                  <div class="carousel-caption d-none d-md-block">
-                    <h3>Second slide label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                  </div>
-                </div>
+                @for ( $i = 1; $i < 5 ; $i++ )
+                    @if (! $post->{'image_seq'.$i})
+                    @continue
+                    @endif
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="{{ $post->{'image_seq'.$i} }}" alt="{{ $i.'_slide' }}">
+                    </div>
+                @endfor
               </div>
-              <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+              <a class="carousel-control-prev" href="#carouselCaptions" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
               </a>
-              <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+              <a class="carousel-control-next" href="#carouselCaptions" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
               </a>
