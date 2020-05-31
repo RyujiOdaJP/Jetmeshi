@@ -1,7 +1,5 @@
 @php
     $title = $post->title;
-    $id = $post->id;
-    // $id_exist = DB::table('reviews')->where('post_id', $id) ->exists();
 @endphp
 @extends('layouts.app')
 @section('content')
@@ -111,11 +109,11 @@
             </div>
         </div>
         <div class="row justify-content-sm-center tags">
-            <div class="card-body col-sm-5 offset-sm-2 p-1 "> Some more card content </div>
+            <div class="card-body col-sm-5  p-1 "> Some more card content </div>
             <div class="card-body col-sm-5 p-1"> Some more card content </div>
-            <div class="card-body col-sm-5 offset-sm-2 p-1"> Some more card content </div>
+            <div class="card-body col-sm-5  p-1"> Some more card content </div>
             <div class="card-body col-sm-5 p-1"> Some more card content </div>
-            <div class="card-body offset-sm-2 col-sm-10 p-1"> Tag </div>
+            <div class="card-body  col-sm-10 p-1"> Tag </div>
         </div>
         </div>
     </div>
@@ -144,6 +142,7 @@
     <div class="container mt-5">
         <div id="explain_text" class="card ml-auto mr-auto">
             <div class="card-body">
+                @auth
               <h4 class="card-title">レビュー投稿</h4>
               <form action="{{ url('post/review/'.$post->id) }}" method="post" class="" enctype="multipart/form-data">
                 @csrf
@@ -161,44 +160,40 @@
                       <label for="star3">★</label>
                       <input id="star4" type="radio" name="star" value="2" />
                       <label for="star4">★</label>
-                      <input id="star5" type="radio" name="star" value="1" />
+                      <input id="star5" type="radio" name="star" value="1" checked />
                       <label for="star5">★</label>
                     </div>
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-md-12">
-                    <label for="review">コメント</label>
-                    <textarea type="text" name="review_body" id="review_body" class="review form-control w-100"></textarea>
+                    <label for="review">コメント(1000文字以下)</label>
+                    <textarea type="text" name="review_body" id="review_body" class="review form-control w-100
+                    @if ($errors->has('review_body')) is-invalid @endif" required>{{ old('review_body') }}</textarea>
+                    @if ($errors->has('review_body'))
+                    <span class="invalid-feedback" role="alert">
+                        {{ $errors->first('review_body') }}
+                    </span>
+                    @endif
                   </div>
                 </div>
                 <button class="btn btn-success mb-2" type="submit">投稿</button>
               </form>
-
+              @endauth
               <h4 class="card-title">レビュー</h4>
-              @if(! $reviews === null)
+              @if ($id_exist ?? '')
                 @foreach ($reviews as $review)
-                <h6 class="card-subtitle mb-2 text-muted">
+                <h6 class="card-subtitle mb-2">
                     User ID: {{ $review->user_id }}
                     @for ($i = 0; $i < $review->stars; $i++)
                     <i class="fas fa-star"></i>
                     @endfor
                     @for ($i = 0; $i < (5 - $review->stars); $i++)
-                    <i class="far fa-star"></i>
+                    <i class="fas fa-star disabled"></i>
                     @endfor
                 </h6>
                 <p class="card-text">
-                Some quick example text to build on the card title
-                and make up the bulk of the card's content.
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-                sed diam voluptua. At vero eos et accusam et justo duo dolores et
-                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-                Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-                sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-                et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-                no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                  {{ $review->review_body }}
                 </p>
                 @endforeach
               @else

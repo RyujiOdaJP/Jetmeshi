@@ -6,6 +6,8 @@
 <div class="container">
     <h1>{{ $title }}</h1>
 
+    @auth
+    @can('edit', $user)
     {{-- 編集・削除ボタン --}}
     <div>
         <a href="{{ url('user/'.$user->id.'/edit') }}" class="btn btn-primary">
@@ -16,8 +18,9 @@
         @slot('id', $user->id)
         @slot('name', $user->title)
         @endcomponent
-
     </div>
+    @endcan
+    @endauth
 
     {{-- ユーザー1件の情報 --}}
     <dl class="row">
