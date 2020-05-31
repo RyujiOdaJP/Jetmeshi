@@ -3,10 +3,6 @@
     $image_name = $name;
     $src = $old_ref ?? 'https://cm-jetmeshi.s3-ap-northeast-1.amazonaws.com/noimage+template.jpg';
     $regulation = $input_regu ?? '';
-
-    // if( $src === null){
-    //     $src = 'https://cm-jetmeshi.s3-ap-northeast-1.amazonaws.com/noimage+template.jpg';
-    // }
 @endphp
 
 <div id="croppie_{{ $id_attr }}" class="col-md-5">
@@ -33,55 +29,3 @@
       <a class="btn btn-outline-secondary cancel-edit">キャンセル</a>
     </div>
   </div>
-
-
-{{-- <script type="text/javascript">
-    $( document ).ready(function() {
-        var $uploadCrop;
-
-        function readFile(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $uploadCrop.croppie('bind', {
-                        url: e.target.result
-                    });
-                    $('.upload-demo').addClass('ready');
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $uploadCrop = $('#upload-demo').croppie({
-            viewport: {
-                width: 200,
-                height: 200,
-                type: 'circle'
-            },
-            boundary: {
-                width: 300,
-                height: 300
-            }
-        });
-
-        $('#upload').on('change', function () { readFile(this); });
-        $('.form_submit').on('click', function (ev) {
-            $uploadCrop.croppie('result', {
-                type: 'canvas',
-                size: 'original'
-            }).then(function (resp) {
-                $('#imagebase64').val(resp);
-                $('#form').submit();
-            });
-    return false;
-        });
-
-    });
-    </script>
-    <form action="testth.php" id="form" method="post">
-    <input type="file" id="upload" value="Choose a file">
-    <div id="upload-demo"></div>
-    <input type="hidden" id="imagebase64" name="imagebase64">
-    <!--<a href="#" class="upload-result">Send</a> Working with this...-->
-    <button type="button" class="form_submit">Send/button>
-    </form> --}}
