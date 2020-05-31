@@ -6139,7 +6139,7 @@ input[type=file] {
 .evaluation label {
   position: relative;
   padding: 0 5px 0;
-  color: gray;
+  color: #808080;
   cursor: pointer;
   font-size: 20px;
 }
@@ -6148,6 +6148,14 @@ input[type=file] {
 .evaluation label:hover ~ label,
 .evaluation input[type=radio]:checked ~ label {
   color: #ffcc00;
+}
+
+.fas.fa-star {
+  color: #ffcc00;
+}
+
+.fas.fa-star.disabled {
+  color: #808080;
 }
 
 /* PC */

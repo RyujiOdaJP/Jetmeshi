@@ -23,7 +23,7 @@ class UserPolicy
      *
      * @param  \App\User $user  現在ログインしているユーザー
      * @param  \App\User $model 現在表示しているプロフィールページのユーザー
-     * @return mixed
+     * @return mixed true or false
      */
     public function edit(User $user, User $model)
     {
