@@ -11,7 +11,8 @@
         @method('POST')
         <div class="form-group">
             <label for="title">{{ __('Title') }}</label>
-            <input id="title" type="text" class="form-control @if ($errors->has('title')) is-invalid @endif" name='title' value="{{ old('title') }}" required autofocus>
+            <input id="title" type="text" class="form-control @if ($errors->has('title')) is-invalid @endif"
+             name='title' value="{{ old('title') }}" required autofocus>
             @if ($errors->has('title'))
                 <span class="invalid-feedback" role="alert">
                     {{ $errors->first('title') }}
@@ -20,9 +21,8 @@
         </div>
         <div class="form-group">
             <label for="sequence_body">{{ __('Body') }}</label>
-            <textarea id="sequence_body" class="form-control @if ($errors->has('sequence_body')) is-invalid @endif" name="sequence_body" rows="8" required>
-                {{ old('sequence_body') }}
-            </textarea>
+            <textarea id="sequence_body" class="form-control @if ($errors->has('sequence_body')) is-invalid @endif"
+             name="sequence_body" rows="8" required>{{ old('sequence_body') }}</textarea>
             @if ($errors->has('sequence_body'))
                 <span class="invalid-feedback" role="alert">
                     {{ $errors->first('sequence_body') }}
