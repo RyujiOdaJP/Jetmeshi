@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Post; //import the post model.
 use App\Review;
 use App\User;
-use Hamcrest\Type\IsBoolean;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -151,12 +150,12 @@ class PostController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy(Request $request, Post $post)
+	public function destroy(Post $post)
 	{
         //Soft delete
         $this->authorize('edit', $post);
-        $post = Post::find($request->id);
-        $post->delete();
+        // dd(Post::find($post->id));
+        Post::find($post->id)->delete();
         return redirect('post')->with('my_status',__('Deleted an article.'));
 	}
 
