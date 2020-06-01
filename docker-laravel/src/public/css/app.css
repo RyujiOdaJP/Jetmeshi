@@ -6086,6 +6086,36 @@ body {
   background-color: #F6DBA6;
 }
 
+a {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+:hover {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+input[type=range]:focus {
+  outline: none;
+  /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+}
+
+.custom-range::-webkit-slider-thumb {
+  background: #5CB85C;
+}
+
+.custom-range::-moz-range-thumb {
+  background: #5CB85C;
+}
+
+.custom-range::-ms-thumb {
+  background: #5CB85C;
+}
+
 img.previews {
   width: 100%;
 }

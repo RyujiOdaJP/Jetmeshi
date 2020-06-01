@@ -51,14 +51,15 @@
           <!-- Left Side Of Navbar -->
           <ul id="nav-for-mobile-top" class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('/post') }}"><i class="fas fa-search"></i>{{ __(' 投稿を見る') }}</a>
+                <a class="nav-link" href="{{ url('/post') }}"><i class="fas fa-search"></i>{{ __(' 飯を見る') }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('/post/create') }}"><i class="fas fa-arrow-alt-circle-up"></i>{{ __(' 投稿する') }}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('') }}"><i class="fas fa-heart"></i>{{ __(' いいねリスト') }}</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('') }}"><i class="fas fa-info-circle"></i>{{ __(' アプリについて') }}</a>
-            </li>
+
           </ul>
           <!-- Right Side Of Navbar -->
           <ul id="nav-for-mobile-bottom" class="navbar-nav ml-auto">
@@ -107,13 +108,25 @@
   </main>
 
   {{-- Footer --}}
-  <footer class="py-4">
-    <div class="container text-center">
-      <div class="row justify-content-center">
-        <div class="col-md-8">
-          <p>© 2020 RyujiOdaJP, All rights reserved</p>
-        </div>
-      </div>
+  <footer >
+    <div class="container text-center text-dark">
+          <ul class="nav justify-content-md-center">
+
+              <li class=" nav-item"><a class="nav-link" href="{{ url('') }}"><i class="fas fa-info-circle"></i>{{ __(' アプリについて') }}</a></li>
+              <li class=" nav-item"><a class="nav-link" href="{{ url('') }}"><i class="fas fa-info-circle"></i>{{ __('プライバシーポリシー') }}</a></li>
+          </ul>
+      {{-- <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#!">Active</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#!">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#!">Disabled</a>
+        </li>
+      </ul> --}}
+          <div class="col-12 nav-item"><a class="nav-link">© 2020 RyujiOdaJP, All rights reserved</a></div>
     </div>
   </footer>
 

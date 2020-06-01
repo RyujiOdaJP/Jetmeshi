@@ -11,7 +11,8 @@
         @method('POST')
         <div class="form-group">
             <label for="title">{{ __('Title') }}</label>
-            <input id="title" type="text" class="form-control @if ($errors->has('title')) is-invalid @endif" name='title' value="{{ old('title') }}" required autofocus>
+            <input id="title" type="text" class="form-control @if ($errors->has('title')) is-invalid @endif"
+             name='title' value="{{ old('title') }}" required autofocus>
             @if ($errors->has('title'))
                 <span class="invalid-feedback" role="alert">
                     {{ $errors->first('title') }}
@@ -20,9 +21,8 @@
         </div>
         <div class="form-group">
             <label for="sequence_body">{{ __('Body') }}</label>
-            <textarea id="sequence_body" class="form-control @if ($errors->has('sequence_body')) is-invalid @endif" name="sequence_body" rows="8" required>
-                {{ old('sequence_body') }}
-            </textarea>
+            <textarea id="sequence_body" class="form-control @if ($errors->has('sequence_body')) is-invalid @endif"
+             name="sequence_body" rows="8" required>{{ old('sequence_body') }}</textarea>
             @if ($errors->has('sequence_body'))
                 <span class="invalid-feedback" role="alert">
                     {{ $errors->first('sequence_body') }}
@@ -30,32 +30,31 @@
             @endif
         </div>
         <div class="row form-group justify-content-around">
-            <div class="col2">
-                <label for="image_top">{{ __('image_top') }}</label>
-                <input id="image_top" type="file" class="form-control
-                @if ($errors->has('image_top')) is-invalid
-                @endif" name="image_top" rows="8" required>
-                    {{ old('image_top') }}
-                </input>
-                @if ($errors->has('image_top'))
-                    <span class="invalid-feedback" role="alert">
-                        {{ $errors->first('image_top') }}
-                    </span>
-                @endif
-            </div>
-            <div class="col2">
-                <label for="image_seq1">{{ __('image_seq1') }}</label>
-                <input id="image_seq1" type="file" class="form-control
-                @if ($errors->has('image_seq1')) is-invalid
-                @endif" name="image_seq1" rows="8" required>
-                    {{ old('image_seq1') }}
-                </input>
-                @if ($errors->has('image_seq1'))
-                    <span class="invalid-feedback" role="alert">
-                        {{ $errors->first('image_seq1') }}
-                    </span>
-                @endif
-            </div>
+            @component('components.croppie')
+            @slot('id', 'image_top')
+            @slot('name', 'TOP画像')
+            @slot('input_regu', 'required')
+            @endcomponent
+
+            @component('components.croppie')
+            @slot('id', 'image_seq1')
+            @slot('name', '画像１')
+            @endcomponent
+
+            @component('components.croppie')
+            @slot('id', 'image_seq2')
+            @slot('name', '画像2')
+            @endcomponent
+
+            @component('components.croppie')
+            @slot('id', 'image_seq3')
+            @slot('name', '画像3')
+            @endcomponent
+
+            @component('components.croppie')
+            @slot('id', 'image_seq4')
+            @slot('name', '画像4')
+            @endcomponent
         </div>
 
             <div class="row form-group justify-content-around">
