@@ -34,6 +34,32 @@ body{
     z-index: -900;
     background-color: $body-bg;
 }
+a{
+    color: $NavGray;
+}
+:hover{
+    color: $NavGrayHover;
+}
+
+input[type=range]:focus {
+    outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+  }
+
+input[type=range]::-ms-track {
+    width: 100%;
+    cursor: pointer;
+}
+.custom-range::-webkit-slider-thumb {
+    background: $JetGreen;
+  }
+
+.custom-range::-moz-range-thumb {
+    background: $JetGreen;
+  }
+
+.custom-range::-ms-thumb {
+    background: $JetGreen;
+  }
 img.previews{
     width: 100%;
 }
