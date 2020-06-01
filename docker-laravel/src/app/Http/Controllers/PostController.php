@@ -23,6 +23,15 @@ class PostController extends Controller
 	{
         //
         $posts = Post::latest()->paginate(5);
+        // foreach($posts as $post){
+        //     $star = Review::select('stars')->where('post_id', $post->id)->get();
+        //     if ($star){
+        //         $stars[] = $star;
+        //     }
+
+        // }
+        // dd($stars);
+
         return view('post.index', compact('posts'));
 	}
 
