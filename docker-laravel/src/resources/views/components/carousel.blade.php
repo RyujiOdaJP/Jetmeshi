@@ -2,8 +2,8 @@
     $post = $post;
 @endphp
 
-<div id="slider_show" class="card ml-auto mr-auto">
-    <div class="bd-example">
+<div id="{{'slide_show_'.$post->id}}" class="card ml-auto mr-auto slide_show">
+    {{-- <div class="bd-example"> --}}
         <div id="{{'carouselCaptions_'.$post->id}}" class="carousel slide" data-ride="carousel" data-interval="false">
           <ol class="carousel-indicators">
             <li data-target="{{'#carouselCaptions_'.$post->id}}" data-slide-to="0" class="active"></li>
@@ -36,7 +36,7 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-    </div>
+    {{-- </div> --}}
     <div class="row justify-content-sm-center tags">
         <div class="card-body col-sm-5  p-1 "> Some more card content </div>
         <div class="card-body col-sm-5 p-1"> Some more card content </div>

@@ -6150,6 +6150,11 @@ input[type=file] {
   margin-bottom: 10px;
 }
 
+.slide_show {
+  padding: 0;
+  margin-bottom: 20px;
+}
+
 #user_info,
 #slider_show,
 #explain_text {
