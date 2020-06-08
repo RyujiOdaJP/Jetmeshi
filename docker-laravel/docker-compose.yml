@@ -38,6 +38,7 @@ services:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:cached
     environment:
       - TZ=${TZ:-Asia/Tokyo}
+      - CLIENT_MAX_BODY_SIZE:50M
 
   db:
     build:
