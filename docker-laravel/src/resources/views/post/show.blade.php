@@ -47,6 +47,7 @@
 <div class="container">
     <hr>
     @component('components.carousel')
+    @slot('post', $post)
     @endcomponent
     </div>
     <div class="container mt-5">
