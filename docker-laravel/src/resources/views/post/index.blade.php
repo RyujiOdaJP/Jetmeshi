@@ -96,14 +96,12 @@
         </div>
         <button type="submit" class="btn btn-success">{{ __('検索') }}</button>
     </form>
-
+    <div class="slide_container">
             @foreach ($posts as $post)
                  @component('components.carousel')
                  @slot('post', $post)
                  @endcomponent
             @endforeach
-            </tbody>
-        </table>
     </div>
     {{ $posts->onEachSide(1)->links() }}
 </div>

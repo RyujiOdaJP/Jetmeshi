@@ -4,3 +4,4 @@ Adobe/mobile_jetmeshi.xd
 circleci-demo-go
 .DS_Store
 credentials.csv
+node_modules
