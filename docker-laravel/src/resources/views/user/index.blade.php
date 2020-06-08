@@ -23,6 +23,6 @@
             </tbody>
         </table>
     </div>
-    {{ $users->links() }}
+    {{ $users->onEachSide(5)->links() }}
 </div>
 @endsection
