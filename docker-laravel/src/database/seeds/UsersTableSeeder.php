@@ -1,25 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        // Fakerを使う
-        $faker = Faker\Factory::create('ja_JP');
+  /**
+   * Run the database seeds.
+   */
+  public function run(): void
+  {
+    // Fakerを使う
+    $faker = Faker\Factory::create('ja_JP');
 
-        //clear data
-        // DB::table('users')->truncate();
+    //clear data
+    // DB::table('users')->truncate();
 
-        //set admim & random user
-        //固定ユーザーを作成
-        DB::table('users')->insert([
+    //set admim & random user
+    //固定ユーザーを作成
+    DB::table('users')->insert([
             'name' => 'RyujiOdaJP',
             'email' => 'ryuji.oda@gmail.com',
             'password' => bcrypt('1234'),
@@ -27,9 +27,9 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => $faker->dateTime(),
             'created_at' => $faker->dateTime(),
             'updated_at' => $faker->dateTime(),
-            'using_status' => true
+            'using_status' => true,
         ]);
-        DB::table('users')->insert([
+    DB::table('users')->insert([
             'name' => 'foo1',
             'email' => 'foo1@foo.com',
             'password' => bcrypt('1234'),
@@ -37,28 +37,27 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => $faker->dateTime(),
             'created_at' => $faker->dateTime(),
             'updated_at' => $faker->dateTime(),
-            'using_status' => false
+            'using_status' => false,
         ]);
 
-        $providers = [];
-        $provider_id = [];
+    $providers = [];
+    $provider_id = [];
 
-        for($i = 0; $i < 18; $i++){
-            $providers[$i] = $faker->randomElement(['Google', 'Twitter', 'Facebook']);
-            if ($providers[$i] === 'Google') {
-                $provider_id[$i] = 1;
-            }
-            elseif ($providers[$i] === 'Twitter') {
-                $provider_id[$i] = 2;
-            }
-            elseif($providers[$i] === 'Facebook') {
-                $provider_id[$i] = 3;
-            }
-        }
+    for ($i = 0; $i < 18; $i++) {
+      $providers[$i] = $faker->randomElement(['Google', 'Twitter', 'Facebook']);
 
-        // ランダムにユーザーを作成
-        for ($i = 0; $i < 18; $i++) {
-            DB::table('users')->insert([
+      if ($providers[$i] === 'Google') {
+        $provider_id[$i] = 1;
+      } elseif ($providers[$i] === 'Twitter') {
+        $provider_id[$i] = 2;
+      } elseif ($providers[$i] === 'Facebook') {
+        $provider_id[$i] = 3;
+      }
+    }
+
+    // ランダムにユーザーを作成
+    for ($i = 0; $i < 18; $i++) {
+      DB::table('users')->insert([
                 'name' => $faker->unique()->userName(),
                 'email' => $faker->unique()->email(),
                 'password' => bcrypt('1234'),
@@ -68,9 +67,8 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => $faker->dateTime(),
                 'provider_id' => $provider_id[$i],
                 'provider_name' => $providers[$i],
-                'using_status' => $faker->boolean(50)
-
+                'using_status' => $faker->boolean(50),
             ]);
-        }
     }
+  }
 }

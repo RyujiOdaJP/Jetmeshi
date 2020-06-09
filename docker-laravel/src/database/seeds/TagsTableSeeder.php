@@ -1,24 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 class TagsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-         //Use faker
-         $faker = Faker\Factory::create('ja_JP');
-        //clear data
-        //  DB::table('tags')->truncate();
+  /**
+   * Run the database seeds.
+   */
+  public function run(): void
+  {
+    //Use faker
+    $faker = Faker\Factory::create('ja_JP');
+    //clear data
+    //  DB::table('tags')->truncate();
 
-        //insert tags
-        $tags=
+    //insert tags
+    $tags =
             [
             '皿洗い不要',
             'レンジのみ',
@@ -31,14 +31,14 @@ class TagsTableSeeder extends Seeder
             '長期保存可',
             '高タンパク',
             '低脂肪',
-            '低糖質'
-
+            '低糖質',
             ];
 
-        for ($i = 0; $i < count($tags); $i++)
-            DB::table('tags')->insert([
+    for ($i = 0; $i < count($tags); $i++) {
+      DB::table('tags')->insert([
             'name' => $tags[$i],
-            'using_status' => $faker->boolean(50)
+            'using_status' => $faker->boolean(50),
             ]);
     }
+  }
 }
