@@ -1,7 +1,8 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Route;
-use Laravel\Dusk\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +16,11 @@ use Laravel\Dusk\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
-    return view('top');
+  // return view('welcome');
+  return view('top');
 });
 Route::get('/welcome', function () {
-    return view('welcome');
+  return view('welcome');
 });
 
 Auth::routes();
@@ -27,7 +28,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // resouce(query, controller) will declare index, create, store, show, edit, update, destory methodes to controller
-Route::resource('user', 'UserController',['except' => ['create', 'store', 'destroy']]);
+Route::resource('user', 'UserController', ['except' => ['create', 'store', 'destroy']]);
 
 Route::delete('/user/{id}', 'UserController@unable')->name('user.unable');
 

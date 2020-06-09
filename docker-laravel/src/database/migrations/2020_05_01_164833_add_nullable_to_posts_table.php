@@ -1,49 +1,43 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class AddNullableToPostsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::table('posts', function (Blueprint $table) {
-            //add nullable to optional photos
-            $table->string('image_2')->nullable()->change();
-            $table->string('image_3')->nullable()->change();
-            $table->string('image_4')->nullable()->change();
-            $table->string('image_5')->nullable()->change();
-            // $table->dropColumn('tag_id');
+  /**
+   * Run the migrations.
+   */
+  public function up(): void
+  {
+    Schema::table('posts', function (Blueprint $table): void {
+      //add nullable to optional photos
+      $table->string('image_2')->nullable()->change();
+      $table->string('image_3')->nullable()->change();
+      $table->string('image_4')->nullable()->change();
+      $table->string('image_5')->nullable()->change();
+      // $table->dropColumn('tag_id');
+    });
+  }
 
-        });
-
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        // Schema::dropIfExists('tag_maps');
-        Schema::table('posts', function (Blueprint $table) {
-
-            //remove nullable from optional photos
+  /**
+   * Reverse the migrations.
+   */
+  public function down(): void
+  {
+    // Schema::dropIfExists('tag_maps');
+    Schema::table('posts', function (Blueprint $table): void {
+      //remove nullable from optional photos
             // $table->string('image_2')->nullable(false)->change();
             // $table->string('image_3')->nullable(false)->change();
             // $table->string('image_4')->nullable(false)->change();
             // $table->string('image_5')->nullable(false)->change();
             // $table->dropColumn('tag_id');
-
-        });
-        // Schema::table('tags', function (Blueprint $table) {
+    });
+    // Schema::table('tags', function (Blueprint $table) {
         //     外部キー用のuser_idカラムをpostsテーブルに追加します。
         //     $table->integer('user_id')->unsigned()->default(1);
         //     $table->foreign('user_id')
@@ -58,5 +52,5 @@ class AddNullableToPostsTable extends Migration
         //  $table->dropColumn('post_id');
             // $table->renameColumn('tag_id', 'id');
         // });
-    }
+  }
 }
