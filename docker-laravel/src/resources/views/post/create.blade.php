@@ -84,6 +84,7 @@
                 </div>
 
         </div>
+        {{-- <input type="file" class="btn btn-dark" name="testfile"> --}}
         <button type="submit" name="submit" class="row btn btn-primary">{{ __('Submit') }}</button>
     </form>
 </div>
