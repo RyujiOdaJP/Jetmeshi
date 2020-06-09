@@ -12,6 +12,7 @@
         "aws/aws-sdk-php": "^3.138",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.2",
+        "friendsofphp/php-cs-fixer": "^2.16",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
         "intervention/image": "^2.5",
@@ -68,6 +69,8 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-        "test": "phpunit"
+        "test": "phpunit",
+        "lint": "./vendor/bin/php-cs-fixer fix ./",
+        "lint-dry": "./vendor/bin/php-cs-fixer fix --dry-run ./"
     }
 }
