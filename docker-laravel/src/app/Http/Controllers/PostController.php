@@ -30,7 +30,7 @@ class PostController extends Controller
    */
   public function index()
   {
-    $posts = Post::latest()->paginate(8);
+    $posts = Post::latest()->Paginate(8);
     // foreach($posts as $post){
     //     $star = Review::select('stars')->where('post_id', $post->id)->get();
     //     if ($star){

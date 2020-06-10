@@ -103,7 +103,7 @@
                  @endcomponent
             @endforeach
     </div>
-    {{ $posts->onEachSide(1)->links() }}
+    {{ $posts->links('pagination::default') }}
 </div>
 <script src="{{ asset('js/search.js') }}"></script>
 @endsection
