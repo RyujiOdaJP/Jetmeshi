@@ -9,11 +9,13 @@
 
 "scripts": {
   "start": "echo 100",
-  "commit": "git cz"
+  "commit": "git cz",
+  "readme": "npx readme-md-generator"
 },
 "devDependencies": {
   "cz-emoji": "1.2.1",
-  "commitizen": "4.1.2"
+  "commitizen": "4.1.2",
+  "readme-md-generator": "1.0.0"
 },
 "config": {
   "commitizen": {
