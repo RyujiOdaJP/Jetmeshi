@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 
-class SerachController extends Controller
+class SearchController extends Controller
 {
     public function index(Request $request){
         $query = Post::query();
@@ -27,15 +27,15 @@ class SerachController extends Controller
             [$budget_min, $budget_max]!= ('')) {
             $query->whereBetween('budget', [$budget_min, $budget_max])->get();
         }
-
+        // dd($keyword);
         // ユーザ名入力フォームで入力した文字列を含むカラムを取得します
-        if ($request->has('keyword') && $keyword != '') {
-            $query->where('keyword', 'like', '%'.$keyword.'%')->get();
+        if ($request->has('keyword') && $keyword != null) {
+            $query->where('title', 'like', '%'.$keyword.'%')->get();
         }
 
     //ユーザを1ページにつき8件ずつ表示させます
-        $posts = $query->paginate(8);
+        $posts = $query->latest()->paginate(8);
 
-        return view('post.index', compact('data'));
+        return view('post.index', compact('posts'));
     }
 }
