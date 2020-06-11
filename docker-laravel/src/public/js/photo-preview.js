@@ -1,4 +1,4 @@
-(function () {
+(function() {
   // hidden button until input image
   $('a.upload-result').hide();
   $('a.cancel-edit').hide();
@@ -11,10 +11,15 @@
     image_seq1: '',
     image_seq2: '',
     image_seq3: '',
-    image_seq4: ''
+    image_seq4: '',
   };
+  /**
+ * a
+ * @param {string} fileList
+ * @param {boolean} revoke
+ */
 
-  function createBlob (fileList, revoke = false) {
+  function createBlob(fileList, revoke = false) {
     if (!revoke) {
       for (let i = 0, l = fileList.length; l > i; i++) {
         // Blob URLの作成
@@ -25,44 +30,43 @@
     }
   }
 
-  function croppieJS (imageId, croppieDivId, blobUrl, target) {
+  function croppieJS(imageId, croppieDivId, blobUrl, target) {
     $(`${croppieDivId} a.upload-result`).show();
     $(`${croppieDivId} a.cancel-edit`).show();
     $(imageId).prop('disabled', true);
     $(`${croppieDivId} a.file-upload`).addClass('disabled');
-    let $uploadCrop = $(croppieDivId).croppie({
+    const $uploadCrop = $(croppieDivId).croppie({
       viewport: {
         width: 240,
         height: 240,
-        type: 'square'
+        type: 'square',
       },
       boundary: {
         width: 320,
-        height: 320
-      }
+        height: 320,
+      },
     });
 
     $uploadCrop.croppie('bind', {
-      url: blobUrl
+      url: blobUrl,
     });
     // TODO delete image button on click
-    $('a.cancel-edit').on('click', function () {
+    $('a.cancel-edit').on('click', function() {
       destroyInstance(imageId, croppieDivId);
     });
 
-    $(`${croppieDivId} a.upload-result`).bind('click', function () {
+    $(`${croppieDivId} a.upload-result`).bind('click', function() {
       $uploadCrop.croppie('result', {
         type: 'canvas',
-        size: '1080'
-      }).then(function (resp) {
-
+        size: '1080',
+      }).then(function(resp) {
         $(`#sent_${imageId}`).val(resp);
         console.log(imageId);
         console.log(resp);
 
         // For user preview
         try {
-        target.innerHTML = `<img id="edited_${imageId}" src="${resp}" name="edited_images" width="100%" value="${resp}">`;
+          target.innerHTML = `<img id="edited_${imageId}" src="${resp}" name="edited_images" width="100%" value="${resp}">`;
         } catch (e) {
           console.log(e);
         }
@@ -72,7 +76,7 @@
     });
   }
 
-  function destroyInstance (imageId, croppieDivId, target) {
+  function destroyInstance(imageId, croppieDivId, target) {
     $(croppieDivId).removeClass('croppie-container');
     $(`${croppieDivId} .cr-boundary`).remove();
     $(`${croppieDivId} .cr-slider-wrap`).remove();
@@ -87,8 +91,10 @@
   const imageElements = document.getElementsByName('input_images');
 
   for (const imageElement of imageElements) {
-    imageElement.addEventListener('change', function (ev) {
-      if (!imageElement) { return; }
+    imageElement.addEventListener('change', function(ev) {
+      if (!imageElement) {
+        return;
+      }
       const imageId = this.getAttribute('id');
       targetImage = document.getElementById(`target_${imageId}`);
       const fileList = this.files;
@@ -97,7 +103,7 @@
     });
   }
 
-  $('#submit_images').bind('click', function () {
+  $('#submit_images').bind('click', function() {
     const hiddenElements = document.getElementsByName('hidden');
     for (let i = 0, l = hiddenElements.length; i < l; i++) {
       // get src of edited image as below statement

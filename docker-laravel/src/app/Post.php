@@ -21,11 +21,11 @@ class Post extends Model
   protected $dates = ['deleted_at'];
 
   /**
-   * Declare search index
+   * Declare search index.
    *  @var array
    */
   protected $fillable = [
-    'title', 'cooking_time', 'budget'
+    'title', 'cooking_time', 'budget',
   ];
 
   /**

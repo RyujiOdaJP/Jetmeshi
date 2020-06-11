@@ -1,12 +1,12 @@
 // slider value showing
-(function () {
-  var valueBudget = document.getElementById('budget');
-  var valueCookingTime = document.getElementById('cooking_time');
-  var targetBudget = document.getElementById('target_budget');
-  var targetCookingTime = document.getElementById('target_cooking_time');
+(function() {
+  const valueBudget = document.getElementById('budget');
+  const valueCookingTime = document.getElementById('cooking_time');
+  const targetBudget = document.getElementById('target_budget');
+  const targetCookingTime = document.getElementById('target_cooking_time');
 
-  var getSliderValue = function (value, target) {
-    return function () {
+  const getSliderValue = function(value, target) {
+    return function() {
       target.innerHTML = value.value;
     };
   };

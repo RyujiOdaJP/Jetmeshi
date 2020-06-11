@@ -32,8 +32,9 @@ class PostController extends Controller
   {
     $stars_avg = [];
     $posts = Post::latest()->Paginate(8);
-    for($i = 0; $i < count($posts); $i++){
-        $stars_avg[] = Review::where('post_id', '=', $posts[$i]->id)->avg('stars');
+
+    for ($i = 0; $i < count($posts); $i++) {
+      $stars_avg[] = Review::where('post_id', '=', $posts[$i]->id)->avg('stars');
     }
     return view('post.index', compact('posts', 'stars_avg'));
   }
@@ -81,8 +82,8 @@ class PostController extends Controller
                   1080,
                   null,
                   function ($constraint): void {
-                      $constraint->aspectRatio();
-                    }
+                    $constraint->aspectRatio();
+                  }
                 )
                   ->stream('jpg', 50);
       $paths[] = (Storage::disk('s3')->put($file_name . '_' . $items[$i], $decoded_data[$j], 'public'));
@@ -163,8 +164,8 @@ class PostController extends Controller
                   1080,
                   null,
                   function ($constraint): void {
-                      $constraint->aspectRatio();
-                    }
+                    $constraint->aspectRatio();
+                  }
                 )
                   ->stream('jpg', 50);
       $paths[] = (Storage::disk('s3')->put($file_name . '_' . $items[$i], $decoded_data[$j], 'public'));
