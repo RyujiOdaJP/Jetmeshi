@@ -18,7 +18,7 @@ class ReviewController extends Controller
 {
   public function store(StorePost $request, Review $reviews, $id)
   {
-    $this->authorize('edit', $reviews);
+    // $this->authorize('edit', $reviews);
     $reviews->user_id = $request->user()->id;
     $reviews->post_id = $id;
     $reviews->stars = $request->star;

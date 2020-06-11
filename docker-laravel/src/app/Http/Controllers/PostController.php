@@ -30,17 +30,12 @@ class PostController extends Controller
    */
   public function index()
   {
+    $stars_avg = [];
     $posts = Post::latest()->Paginate(8);
-    // foreach($posts as $post){
-    //     $star = Review::select('stars')->where('post_id', $post->id)->get();
-    //     if ($star){
-    //         $stars[] = $star;
-    //     }
-
-    // }
-    // dd($stars);
-
-    return view('post.index', compact('posts'));
+    for($i = 0; $i < count($posts); $i++){
+        $stars_avg[] = Review::where('post_id', '=', $posts[$i]->id)->avg('stars');
+    }
+    return view('post.index', compact('posts', 'stars_avg'));
   }
 
   /**
@@ -112,8 +107,10 @@ class PostController extends Controller
   {
     $reviews = Review::where('post_id', $post->id)->get();
     $id_exist = Review::where('post_id', $post->id)->exists();
-    // dd($id_exist);
-    return view('post.show', compact('post', 'reviews', 'id_exist'));
+    $star_avg = Review::where('post_id', $post->id)->avg('stars');
+    // dd($star_avg);
+
+    return view('post.show', compact('post', 'reviews', 'id_exist', 'star_avg'));
     // SELECT users.id, users.name, reviews.id, reviews.stars, reviews.review_body FROM JETmysql.users
         // inner join JETmysql.reviews
         // on users.id = reviews.user_id;
