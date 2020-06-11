@@ -5,23 +5,23 @@
 @section('content')
 <div class="container">
     <h1>{{ $title }}</h1>
-    <form action="">
+    <form action="" class="mb-5">
         <div class="container　justify-content-sm-start">
             <div id="cooking_time" class="row form-group ">
                 <div class=" col-md-4 mb-1">
                     <label for="cooking_time_min" class="d-block">{{ __('調理時間 ') }}</label>
-                    <input id="cooking_time_min" type="number" min="0" max="60" value="10" step="1" class=" custom-contro m-0" name="cooking_time_min" rows="8" required></input>
+                    <input id="cooking_time_min" type="number" min="0" max="60" value="10" class=" custom-control-inline m-0" name="cooking_time_min" required></input>
                     <span>~</span>
-                    <input id="cooking_time_max" type="number" min="0" max="60" value="10" step="1" class=" custom-control-inline m-0" name="cooking_time_max" rows="8" required></input>
+                    <input id="cooking_time_max" type="number" min="0" max="60" value="10" class=" custom-control-inline m-0" name="cooking_time_max" required></input>
                     <span>分</span>
                 </div>
             </div>
             <div id="budget" class="row form-group ">
-                <div class=" col-md-4 mb-1">
+                <div class=" col-md-6 mb-1">
                     <label for="budget_min" class="d-block">{{ __('調理費用 ') }}</label>
-                    <input id="budget_min" type="number" min="0" max="2000" value="100" step="10" class=" custom-control-inline m-0" name="budget_min" rows="8" required>
+                    <input id="budget_min" type="number" min="0" max="2000" step="50" value="100" class="form-control custom-control-inline m-0 w-25" name="budget_min" required>
                     <span>~</span>
-                    <input id="budget_max" type="number" min="0" max="2000" value="100" step="10" class=" custom-control-inline m-0" name="budget_max" rows="8" required>
+                    <input id="budget_max" type="number" min="0" max="2000" step="50" value="100" class="form-control custom-control-inline m-0 w-25" name="budget_max" required>
                     <span>円</span>
                 </div>
             </div>
@@ -92,6 +92,13 @@
                         <span>akofepwk</span>
                     </input>
                 </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row form-group">
+                <label for="keyword">キーワード</label>
+                <input class="form-control" type="text" name="keyword" id="keyword" placeholder="キーワード検索">
+
             </div>
         </div>
         <button type="submit" class="btn btn-success">{{ __('検索') }}</button>
