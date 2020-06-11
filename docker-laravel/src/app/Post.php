@@ -21,6 +21,14 @@ class Post extends Model
   protected $dates = ['deleted_at'];
 
   /**
+   * Declare search index
+   *  @var array
+   */
+  protected $fillable = [
+    'title', 'cooking_time', 'budget'
+  ];
+
+  /**
    * リレーション (従属の関係).
    *
    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
