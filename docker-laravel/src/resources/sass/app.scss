@@ -78,8 +78,8 @@ input[type=file]{
 }
 .standby.true{
     @include swipe-aria;
-    width: 15%;
-    left: 90%;
+    width: 3rem;
+    left: 95%;
 }
 .false{
     @include swipe-aria;
@@ -90,11 +90,6 @@ input[type=file]{
 .croppie-container{
     margin-top: 10px;
     margin-bottom: 10px;
-}
-
-.slide_show{
-    padding: 0;
-    margin: 1em;
 }
 
 #user_info, #slider_show, #explain_text{
@@ -130,6 +125,38 @@ input[type=file]{
 .fas.fa-star.disabled{
     color: $StarDisable;
 }
+.fas.fa-yen-sign{
+    color: $JetGreen;
+}
+.fas.fa-stopwatch{
+    color: $JetGreen;
+}
+.fas.fa-tags{
+    color: $JetBlue;
+}
+.slide_show{
+    padding: 0;
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+.slide_show:nth-child(odd){
+    margin-left: auto;
+}
+.slide_show:nth-child(even){
+    margin-right: auto;
+}
+
+.card, .card img {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+.card {
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+.card-body{
+    padding: 0.5rem
+}
 
 /* PC */
 @media (min-width: 992px) {
@@ -148,6 +175,12 @@ input[type=file]{
   #js-bootstrap-offcanvas, #nav-for-mobile-top, #nav-for-mobile-bottom{
         margin-top: 50px;
   }
+  .slide_show:nth-child(odd){
+    margin-right: 0.2em;
+  }
+  .slide_show:nth-child(even){
+    margin-left: 0.2em;
+  }
 }
 
 /* SP */
@@ -165,6 +198,15 @@ input[type=file]{
     }
     #user_info, #slider_show, #explain_text{
         width: 100%;
+    }
+    .card-body{
+        padding: 0.2rem;
+        font-size: 8px;
+    }
+
+    .slide_show{
+        flex: 0 0 45.666667%;
+        max-width: 45.666667%;
     }
 }
 @media (min-width: 575.98px) {

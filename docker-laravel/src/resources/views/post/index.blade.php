@@ -102,12 +102,13 @@
         </div>
         <button type="submit" class="btn btn-success">{{ __('検索') }}</button>
     </form>
-    <div class="slide_container">
-            @foreach ($posts as $post)
+    <div class="slide_container row">
+            @for ($i = 0; $i < count($posts); $i++)
                  @component('components.carousel')
-                 @slot('post', $post)
+                 @slot('post', $posts[$i])
+                 @slot('star_avg', $stars_avg[$i])
                  @endcomponent
-            @endforeach
+            @endfor
     </div>
     {{ $posts->links('pagination::default') }}
 </div>

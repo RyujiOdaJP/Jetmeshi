@@ -1,8 +1,9 @@
 @php
     $post = $post;
+    $star_avg = $star_avg;
 @endphp
 
-<div id="{{'slide_show_'.$post->id}}" class="card ml-auto mr-auto slide_show">
+<div id="{{'slide_show_'.$post->id}}" class="card col-5 slide_show">
         <div id="{{'carouselCaptions_'.$post->id}}" class="carousel slide" data-ride="carousel" data-interval="false">
           <ol class="carousel-indicators">
             <li data-target="{{'#carouselCaptions_'.$post->id}}" data-slide-to="0" class="active"></li>
@@ -15,14 +16,18 @@
           </ol>
           <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-              <img class="d-block w-100" src="{{ $post->image_top }}" alt="Top slide">
+                <a href="{{url('post/'.$post->id)}}">
+                    <img class="d-block w-100" src="{{ $post->image_top }}" alt="Top slide">
+                </a>
             </div>
             @for ( $i = 1; $i < 5 ; $i++ )
                 @if (! $post->{'image_seq'.$i})
                 @continue
                 @endif
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="{{ $post->{'image_seq'.$i} }}" alt="{{ $i.'_slide' }}">
+                    <a href="{{url('post/'.$post->id)}}">
+                        <img class="d-block w-100" src="{{ $post->{'image_seq'.$i} }}" alt="{{ $i.'_slide' }}">
+                    </a>
                 </div>
             @endfor
           </div>
@@ -35,11 +40,29 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-    <div class="row justify-content-sm-center tags">
-        <div class="card-body col-sm-5  p-1 "> Some more card content </div>
-        <div class="card-body col-sm-5 p-1"> Some more card content </div>
-        <div class="card-body col-sm-5  p-1"> Some more card content </div>
-        <div class="card-body col-sm-5 p-1"> Some more card content </div>
-        <div class="card-body  col-sm-10 p-1"> Tag </div>
-    </div>
-    </div>
+    {{-- <div class="row justify-content-sm-center tags"> --}}
+        <div class="card-body">
+            @if ( $star_avg !== null)
+                @for ($i = 0; $i < round($star_avg); $i++)
+                <i class="fas fa-star"></i>
+                @endfor
+                @for ($i = 0; $i < 5 - round($star_avg); $i++)
+                <i class="fas fa-star disabled"></i>
+                @endfor
+                {{ ' '.round($star_avg, 1) }}
+            @else
+            <i class="fas fa-star disabled"></i> 未評価
+            @endif
+        </div>
+        <div class="card-body">
+            <i class="fas fa-yen-sign"></i> {{ $post->budget }}
+        </div>
+        <div class="card-body">
+            <i class="fas fa-stopwatch"></i> {{ $post->cooking_time }}
+        </div>
+        <div class="card-body">
+            <i class="fas fa-tags"></i>Tag
+
+        </div>
+    {{-- </div> --}}
+</div>

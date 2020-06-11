@@ -48,6 +48,7 @@
     <hr>
     @component('components.carousel')
     @slot('post', $post)
+    @slot('star_avg', $star_avg)
     @endcomponent
     </div>
     <div class="container mt-5">

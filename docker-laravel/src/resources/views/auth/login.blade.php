@@ -71,7 +71,7 @@
             </div>
 
             <div class="signup text-center mt-5">
-                アカウントをお持ちではありませんか？ <a class="signup__link" href="https://signup.mailgun.com">アカウントを作成する</a>
+                アカウントをお持ちではありませんか？ <a class="signup__link" href="register">アカウントを作成する</a>
             </div>
         </div>
     </div>
