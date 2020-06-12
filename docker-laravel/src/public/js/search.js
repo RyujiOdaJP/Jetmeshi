@@ -1,4 +1,9 @@
-function Arrange() {
+/**
+ * Arrnge() will align items according to window size.
+ * @param {Void} arrange()
+ *
+ */
+function arrange() {
   const x = $(window).width();
   // windowの分岐幅をyに代入
   const y1 = 991.98;
@@ -28,5 +33,5 @@ function Arrange() {
   // }
 }
 $(window).on('load resize', function() {
-  Arrange();
+  arrange();
 });

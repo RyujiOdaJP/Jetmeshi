@@ -14,11 +14,10 @@
     image_seq4: '',
   };
   /**
- * a
+ * create Blob getting photos to crop
  * @param {string} fileList
  * @param {boolean} revoke
  */
-
   function createBlob(fileList, revoke = false) {
     if (!revoke) {
       for (let i = 0, l = fileList.length; l > i; i++) {
@@ -29,7 +28,13 @@
 
     }
   }
-
+  /**
+ * crop provided blobUrl
+ * @param {string} imageId
+ * @param {string} croppieDivId
+ * @param {string} blobUrl
+ * @param {object} target
+ */
   function croppieJS(imageId, croppieDivId, blobUrl, target) {
     $(`${croppieDivId} a.upload-result`).show();
     $(`${croppieDivId} a.cancel-edit`).show();
@@ -66,7 +71,9 @@
 
         // For user preview
         try {
-          target.innerHTML = `<img id="edited_${imageId}" src="${resp}" name="edited_images" width="100%" value="${resp}">`;
+          target.innerHTML =
+          `<img id="edited_${imageId}" src="${resp}" name="edited_images"
+          width="100%" value="${resp}">`;
         } catch (e) {
           console.log(e);
         }
@@ -75,7 +82,12 @@
       destroyInstance(imageId, croppieDivId, target);
     });
   }
-
+  /**
+ * crop provided blobUrl
+ * @param {string} imageId
+ * @param {string} croppieDivId
+ * @param {object} target
+ */
   function destroyInstance(imageId, croppieDivId, target) {
     $(croppieDivId).removeClass('croppie-container');
     $(`${croppieDivId} .cr-boundary`).remove();
@@ -95,8 +107,10 @@
       if (!imageElement) {
         return;
       }
+      // eslint-disable-next-line no-invalid-this
       const imageId = this.getAttribute('id');
       targetImage = document.getElementById(`target_${imageId}`);
+      // eslint-disable-next-line no-invalid-this
       const fileList = this.files;
       createBlob(fileList);
       croppieJS(imageId, `#croppie_${imageId}`, blobUrl, targetImage);

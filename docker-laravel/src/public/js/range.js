@@ -10,6 +10,8 @@
       target.innerHTML = value.value;
     };
   };
-  valueBudget.addEventListener('input', getSliderValue(valueBudget, targetBudget));
-  valueCookingTime.addEventListener('input', getSliderValue(valueCookingTime, targetCookingTime));
+  valueBudget.addEventListener('input', getSliderValue(
+      valueBudget, targetBudget));
+  valueCookingTime.addEventListener('input', getSliderValue(
+      valueCookingTime, targetCookingTime));
 })();

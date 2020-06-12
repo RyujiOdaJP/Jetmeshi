@@ -21,21 +21,32 @@
       }
     });
 
-    // スワイプ開始時の横方向の座標を格納
+    //
+    /**
+     *スワイプ開始時の横方向の座標を格納
+     * @param {float} event
+     */
     function onTouchStart(event) {
       startPosition = getPosition(event);
     }
-
-    // スワイプの方向を取得(数値でトリガー感度を調節)
+    /**
+     *スワイプの方向を取得(数値でトリガー感度を調節)
+     * @param {float} event
+     */
     function onTouchMove(event) {
       if (startPosition < getPosition(event) + 15) {
-        status = ['in', 'out', 'clicked', 'not-clicked', 'false', 'true']; // right swipe
+        // right swipe
+        status = ['in', 'out', 'clicked', 'not-clicked', 'false', 'true'];
       } else {
-        status = ['out', 'in', 'not-clicked', 'clicked', 'true', 'false']; // left swipe
+        // left swipe
+        status = ['out', 'in', 'not-clicked', 'clicked', 'true', 'false'];
       }
     }
 
-    // スワイプ終了時にstatusをクラス名に指定
+    /**
+     *スワイプ終了時にstatusをクラス名に指定
+     * @param {float} event
+     */
     function onTouchEnd(event) {
       $('#js-bootstrap-offcanvas').removeClass(status[0]).addClass(status[1]);
       $('#nav-button').removeClass(status[2]).addClass(status[3]);
@@ -43,7 +54,11 @@
       console.log(status);
     }
 
-    // 横方向の座標を取得
+    /**
+     * 横方向の座標を取得
+     * @param {float} event
+     * @return {object}
+     */
     function getPosition(event) {
       const position = event.originalEvent.touches[0].pageX;
       return position;
