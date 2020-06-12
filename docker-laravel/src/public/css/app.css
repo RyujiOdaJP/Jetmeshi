@@ -6125,6 +6125,11 @@ input[type=file] {
   left: 0;
 }
 
+.croppie-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .standby.true {
   height: 100%;
   position: fixed;
@@ -6143,17 +6148,6 @@ input[type=file] {
   z-index: 100;
   width: 40%;
   left: 0;
-}
-
-.croppie-container {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-#user_info,
-#slider_show,
-#explain_text {
-  width: 75%;
 }
 
 .evaluation {
@@ -6178,6 +6172,11 @@ input[type=file] {
 .evaluation label:hover ~ label,
 .evaluation input[type=radio]:checked ~ label {
   color: #ffcc00;
+}
+
+.form-budget-time input {
+  width: 25%;
+  margin: 0;
 }
 
 .fas.fa-star {
@@ -6208,10 +6207,12 @@ input[type=file] {
 
 .slide_show:nth-child(odd) {
   margin-left: auto;
+  margin-right: 0.5rem;
 }
 
 .slide_show:nth-child(even) {
   margin-right: auto;
+  margin-left: 0.5rem;
 }
 
 .card,
@@ -6273,19 +6274,18 @@ input[type=file] {
     margin-left: 10%;
   }
 
-  #user_info,
-  #slider_show,
-  #explain_text {
-    width: 100%;
-  }
-
   .card-body {
     padding: 0.2rem;
+    font-size: 12px;
   }
 
   .slide_show {
     flex: 0 0 45.666667%;
     max-width: 45.666667%;
+  }
+
+  #tag_container input[type=checkbox] + span {
+    font-size: 12px;
   }
 }
 

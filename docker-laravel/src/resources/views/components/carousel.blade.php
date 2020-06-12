@@ -55,13 +55,13 @@
             @endif
         </div>
         <div class="card-body">
-            <i class="fas fa-yen-sign"></i> {{ $post->budget }}
+            <i class="fas fa-yen-sign"></i> {{ $post->budget }}円
         </div>
         <div class="card-body">
-            <i class="fas fa-stopwatch"></i> {{ $post->cooking_time }}
+            <i class="fas fa-stopwatch"></i> {{ $post->cooking_time }}分
         </div>
         <div class="card-body">
-            <i class="fas fa-tags"></i>Tag
+            <i class="fas fa-tags"></i>Tag,Tag,Tag,Tag,Tag,Tag,uuuu,ojjjj
 
         </div>
     {{-- </div> --}}
