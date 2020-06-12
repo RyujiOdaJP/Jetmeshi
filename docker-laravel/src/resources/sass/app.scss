@@ -168,9 +168,15 @@ input[type=file]{
     padding: 0.5rem
 }
 
+
+
 // Window size responsive
 /* PC */
 @media (min-width: 992px) {
+// post.show(blade)
+.post_show{
+    width: 50%;
+}
 }
 
 /* Tablet */
@@ -179,6 +185,11 @@ input[type=file]{
         padding-left: 0px;
         padding-right: 0px;
     }
+      // post.show(blade)
+.post_show{
+    width: 75%;
+}
+
 }
 
 /* horizontal SP */
@@ -212,9 +223,13 @@ input[type=file]{
         font-size: 12px;
     }
 
-    .slide_show{
+    .slide_show.col-5{
         flex: 0 0 45.666667%;
         max-width: 45.666667%;
+    }
+    // post.show(blade)
+    .post_show{
+        width: 100%;
     }
     // #tag_container input[type="checkbox"]+label {
     //     font-size: 12px;

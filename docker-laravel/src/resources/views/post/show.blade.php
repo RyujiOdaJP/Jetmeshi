@@ -44,15 +44,17 @@
     </dl>
 </div>
 
-<div class="container">
+<div class="container post_show">
     <hr>
-    @component('components.carousel')
-    @slot('post', $post)
-    @slot('star_avg', $star_avg)
-    @endcomponent
-    </div>
     <div class="container mt-5">
-        <div id="explain_text" class="card ml-auto mr-auto">
+        @component('components.carousel')
+            @slot('post', $post)
+            @slot('star_avg', $star_avg)
+            @slot('grid', 'row')
+        @endcomponent
+    </div>
+    <div class="container mb-3">
+        <div class="card ml-auto mr-auto">
             <div class="card-body">
                 <h4 class="card-title">手順</h4>
 
@@ -63,8 +65,8 @@
         </div>
     </div>
 
-    <div class="container mt-5">
-        <div id="explain_text" class="card ml-auto mr-auto">
+    <div class="container mb-3">
+        <div class="card ml-auto mr-auto">
             <div class="card-body">
                 @auth
               <h4 class="card-title">レビュー投稿</h4>
@@ -125,6 +127,6 @@
             </div>
         </div>
     </div>
-
+</div>
 <script src="{{ asset('js/show.js') }}"></script>
 @endsection

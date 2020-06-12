@@ -6230,6 +6230,10 @@ input[type=file] {
   padding: 0.5rem;
 }
 
+.post_show {
+  width: 50%;
+}
+
 /* PC */
 
 /* Tablet */
@@ -6238,6 +6242,10 @@ input[type=file] {
   nav > div.container {
     padding-left: 0px;
     padding-right: 0px;
+  }
+
+  .post_show {
+    width: 75%;
   }
 }
 
@@ -6279,13 +6287,13 @@ input[type=file] {
     font-size: 12px;
   }
 
-  .slide_show {
+  .slide_show.col-5 {
     flex: 0 0 45.666667%;
     max-width: 45.666667%;
   }
 
-  #tag_container input[type=checkbox] + span {
-    font-size: 12px;
+  .post_show {
+    width: 100%;
   }
 }
 

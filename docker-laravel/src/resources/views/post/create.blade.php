@@ -56,34 +56,12 @@
             @slot('name', '画像4')
             @endcomponent
         </div>
+            @component('components.slider')
+            @slot('post', '')
+            @endcomponent
 
-            <div class="row form-group justify-content-around">
-                <div class="col2">
-                    <label for="cooking_time">{{ __('調理時間 ') }} <span id="target_cooking_time">10</span>分</label>
-                    <input id="cooking_time" type="range"  min="0" max="60" value="10" step="1" class="custom-range" name="cooking_time" rows="8" required>
-                        {{ old('cooking_time') }}
-
-                    </input>
-
-                    @if ($errors->has('cooking_time'))
-                        <span class="invalid-feedback" role="alert">
-                            {{ $errors->first('cooking_time') }}
-                        </span>
-                    @endif
-                </div>
-                <div class="col2">
-                    <label for="budget">{{ __('調理費用 ') }}<span id="target_budget">100</span>円</label>
-                    <input id="budget" type="range" min="0" max="2000" value="100" step="10" class="custom-range" name="budget" rows="8" required>
-                        {{ old('budget') }}
-                    </input>
-                    @if ($errors->has('budget'))
-                        <span class="invalid-feedback" role="alert">
-                            {{ $errors->first('budget') }}
-                        </span>
-                    @endif
-                </div>
-
-        </div>
+            @component('components.tags')
+            @endcomponent
         {{-- <input type="file" class="btn btn-dark" name="testfile"> --}}
         <button type="submit" name="submit" class="row btn btn-primary">{{ __('Submit') }}</button>
     </form>

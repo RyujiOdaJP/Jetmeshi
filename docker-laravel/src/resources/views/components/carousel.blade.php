@@ -1,9 +1,10 @@
 @php
     $post = $post;
     $star_avg = $star_avg;
+    $grid = $grid;
 @endphp
 
-<div id="{{'slide_show_'.$post->id}}" class="card col-5 slide_show">
+<div id="{{'slide_show_'.$post->id}}" class="{{ $grid }} card slide_show">
         <div id="{{'carouselCaptions_'.$post->id}}" class="carousel slide" data-ride="carousel" data-interval="false">
           <ol class="carousel-indicators">
             <li data-target="{{'#carouselCaptions_'.$post->id}}" data-slide-to="0" class="active"></li>
