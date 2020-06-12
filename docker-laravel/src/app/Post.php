@@ -44,4 +44,8 @@ class Post extends Model
     return $this->hasMany('App\Review')
       ->latest();
   }
+
+  public function tags(){
+      return $this->hasMany('App\Tag');
+  }
 }
