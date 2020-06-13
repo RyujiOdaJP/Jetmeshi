@@ -45,7 +45,9 @@ class Post extends Model
       ->latest();
   }
 
-  public function tags(){
-      return $this->hasMany('App\Tag');
+  public function tags()
+  {
+    return $this->belongsToMany('App\Tag', 'tag_maps')
+      ->withTimestamps()->withPivot('tag_id');
   }
 }

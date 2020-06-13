@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    public function posts(){
-        $this->belongsToMany('App\Post');
-    }
+  public function posts(): void
+  {
+    $this->belongsToMany('App\Post', 'tag_maps')
+      ->withTimestamps();
+  }
 }

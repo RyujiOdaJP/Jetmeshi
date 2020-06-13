@@ -6,8 +6,10 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Review; //import the post model.
+use App\Tag;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use InterventionImage;
 
@@ -31,12 +33,28 @@ class PostController extends Controller
   public function index()
   {
     $stars_avg = [];
+    $tag_names = [];
     $posts = Post::latest()->Paginate(8);
+    // to display seraching window
+    $tags = Tag::all();
 
     for ($i = 0; $i < count($posts); $i++) {
+      $names_array = [];
       $stars_avg[] = Review::where('post_id', '=', $posts[$i]->id)->avg('stars');
+      $tag_values = $posts[$i]->tags()->get();
+
+      //   if( $tag_values[$i]->name->exists()){
+      foreach ($tag_values as $tag_value) {
+        $names_array[] = $tag_value->name;
+      }
+      $tag_names[] = $names_array;
+      //   }
     }
-    return view('post.index', compact('posts', 'stars_avg'));
+    // dd($tag_values[0]);
+    // dd($tag_names);
+
+    // $tag_list = $tags->list('name', 'id');
+    return view('post.index', compact('posts', 'stars_avg', 'tags', 'tag_names'));
   }
 
   /**
@@ -46,7 +64,9 @@ class PostController extends Controller
    */
   public function create()
   {
-    return view('post.create');
+    $tags = Tag::select('name')->get();
+    // dd($tags);
+    return view('post.create', compact('tags'));
   }
 
   /**
@@ -92,7 +112,20 @@ class PostController extends Controller
     }
     $post->cooking_time = $request->cooking_time;
     $post->budget = $request->budget;
+
+    //Tag table
+    $tag_values = $request->input('tags'); //array
+    // dd($tag_values);
+    foreach ($tag_values as $tag_value) {
+      if (!empty($tag_value)) {
+        $tag = Tag::firstOrCreate([
+                    'id' => $tag_value,
+                ]);
+        $tag_ids[] = $tag->id;
+      }
+    }
     $post->save();
+    $post->tags()->attach($tag_ids);
     return redirect('post/' . $post->id)->with('my_status', __('Posted new article.'));
   }
 
@@ -109,9 +142,14 @@ class PostController extends Controller
     $reviews = Review::where('post_id', $post->id)->get();
     $id_exist = Review::where('post_id', $post->id)->exists();
     $star_avg = Review::where('post_id', $post->id)->avg('stars');
-    // dd($star_avg);
+    $tag_values = $post->tags()->get();
+    dd($tag_values);
 
-    return view('post.show', compact('post', 'reviews', 'id_exist', 'star_avg'));
+    foreach ($tag_values as $tag_value) {
+      $tag_names[] = $tag_value->name;
+    }
+    // dd($tag_names);
+    return view('post.show', compact('post', 'reviews', 'id_exist', 'star_avg', 'tag_names'));
     // SELECT users.id, users.name, reviews.id, reviews.stars, reviews.review_body FROM JETmysql.users
         // inner join JETmysql.reviews
         // on users.id = reviews.user_id;
@@ -127,7 +165,8 @@ class PostController extends Controller
   public function edit(Post $post)
   {
     $this->authorize('edit', $post);
-    return view('post.edit', compact('post'));
+    $tags = Tag::select('name')->get();
+    return view('post.edit', compact('post', 'tags'));
   }
 
   /**
@@ -149,7 +188,6 @@ class PostController extends Controller
     $images = [];
     $data = '';
     $decoded_data = [];
-    // $resized_data = [];
     $paths = [];
 
     for ($i = 0, $j = 0; count($items) > $i; $i++) {
@@ -157,7 +195,6 @@ class PostController extends Controller
         continue;
       }
       $images[] = $request->{'sent_image_' . $items[$i]};
-      // list(, $data) = explode(';', $images[$j]); //return array
       list(, $data) = explode(',', $images[$j]);
       $decoded_data[] =
                 InterventionImage::make(base64_decode($data))->resize(
@@ -174,6 +211,21 @@ class PostController extends Controller
     }
     $post->cooking_time = $request->cooking_time;
     $post->budget = $request->budget;
+
+    //Tag table
+    $tag_values = $request->input('tags'); //array
+    // dd($tag_values);
+    foreach ($tag_values as $tag_value) {
+      if (!empty($tag_value)) {
+        $tag = Tag::firstOrCreate([
+                 'id' => $tag_value,
+             ]);
+        $tag_ids[] = $tag->id;
+      }
+    }
+    // will be updated to new tags
+    $post->tags()->sync($tag_ids);
+    // save posts table
     $post->save();
     $this->authorize('edit', $post);
     return redirect('post/' . $post->id)->with('my_status', __('Updated an article.'));
@@ -190,7 +242,6 @@ class PostController extends Controller
   {
     //Soft delete
     $this->authorize('edit', $post);
-    // dd(Post::find($post->id));
     Post::find($post->id)->delete();
     return redirect('post')->with('my_status', __('Deleted an article.'));
   }
