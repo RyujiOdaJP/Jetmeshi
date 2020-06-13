@@ -50,6 +50,7 @@
         @component('components.carousel')
             @slot('post', $post)
             @slot('star_avg', $star_avg)
+            @slot('tag_names', $tag_names)
             @slot('grid', 'row')
         @endcomponent
     </div>

@@ -2,6 +2,7 @@
     $post = $post;
     $star_avg = $star_avg;
     $grid = $grid;
+    $tag_names = $tag_names ?? '';
 @endphp
 
 <div id="{{'slide_show_'.$post->id}}" class="{{ $grid }} card slide_show">
@@ -62,7 +63,12 @@
             <i class="fas fa-stopwatch"></i> {{ $post->cooking_time }}分
         </div>
         <div class="card-body">
-            <i class="fas fa-tags"></i>Tag,Tag,Tag,Tag,Tag,Tag,uuuu,ojjjj
+            <i class="fas fa-tags"></i>
+            @if ($tag_names != '')
+            @foreach ($tag_names as $tag)
+             {{ $tag. ',' }}
+            @endforeach
+            @endif
 
         </div>
     {{-- </div> --}}

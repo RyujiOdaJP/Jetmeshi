@@ -70,6 +70,11 @@
     @component('components.slider')
     @slot('post', $post)
     @endcomponent
+
+    @component('components.tags')
+     @slot('tags', $tags)
+    @endcomponent
+
     <button id="submit_images" type="submit" name="submit" class="row btn btn-primary">{{ __('Submit') }}</button>
   </form>
   <div class="output"></div>

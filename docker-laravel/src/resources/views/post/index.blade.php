@@ -12,10 +12,10 @@
                     <label for="cooking_time_min" class="d-block">
                         <i class="fas fa-stopwatch"></i>{{ __(' 調理時間') }}
                     </label>
-                    <input id="cooking_time_min" type="number" min="0" max="60" value="5"
+                    <input id="cooking_time_min" type="number" min="0" max="60" value=""
                     class="form-control custom-control-inline " name="cooking_time_min" ></input>
                     <span>~</span>
-                    <input id="cooking_time_max" type="number" min="0" max="60" value="10"
+                    <input id="cooking_time_max" type="number" min="0" max="60" value=""
                     class="form-control custom-control-inline" name="cooking_time_max" ></input>
                     <span>分</span>
                 </div>
@@ -25,10 +25,10 @@
                     <label for="budget_min" class="d-block">
                         <i class="fas fa-yen-sign"></i>{{ __(' 調理費用') }}
                     </label>
-                    <input id="budget_min" type="number" min="0" max="2000" step="50" value="100"
+                    <input id="budget_min" type="number" min="0" max="2000" step="50" value=""
                     class="form-control custom-control-inline" name="budget_min" >
                     <span>~</span>
-                    <input id="budget_max" type="number" min="0" max="2000" step="50" value="200"
+                    <input id="budget_max" type="number" min="0" max="2000" step="50" value=""
                     class="form-control custom-control-inline" name="budget_max" >
                     <span>円</span>
                 </div>
@@ -36,6 +36,7 @@
         </div>
 
         @component('components.tags')
+            @slot('tags', $tags)
         @endcomponent
 
         <div class="container">
@@ -52,6 +53,7 @@
                  @slot('post', $posts[$i])
                  @slot('star_avg', $stars_avg[$i])
                  @slot('grid', 'col-5')
+                 @slot('tag_names', $tag_names[$i])
                  @endcomponent
             @endfor
     </div>

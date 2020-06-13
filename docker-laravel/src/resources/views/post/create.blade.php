@@ -61,6 +61,7 @@
             @endcomponent
 
             @component('components.tags')
+            @slot('tags', $tags)
             @endcomponent
         {{-- <input type="file" class="btn btn-dark" name="testfile"> --}}
         <button type="submit" name="submit" class="row btn btn-primary">{{ __('Submit') }}</button>
