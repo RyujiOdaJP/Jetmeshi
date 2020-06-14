@@ -6128,7 +6128,7 @@ a {
   border-color: #117a8b;
 }
 
-.btn-Jetblue:focus,
+:focus,
 .btn-Jetblue.focus {
   box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
 }
@@ -6241,6 +6241,10 @@ input[type=file] {
 
 .fas.fa-tags {
   color: #56C0E0;
+}
+
+.fas.fa-heart {
+  color: #F7A0E9;
 }
 
 .slide_show {

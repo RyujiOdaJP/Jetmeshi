@@ -15,6 +15,7 @@
   <script src="{{ asset('js/toggler.js') }}"></script>
   <script src="{{ asset('js/lib/infinite-scroll.pkgd.min.js') }}"></script>
   {{-- <script src="{{ asset('js/lib/croppie.js') }}"></script> --}}
+  <script src="{{ asset('js/likes-ajax.js') }}" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.js"></script>
 
   <!-- Fonts -->

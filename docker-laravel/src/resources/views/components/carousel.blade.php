@@ -74,5 +74,11 @@
             @endif
 
         </div>
-    {{-- </div> --}}
+    <div class="card-body">
+        <button type="button" id={{"btn_".$post->id}} data-like="{{ $post->id }}" name="likes"
+            class="btn btn-outline-secondary">
+            <i class="fas fa-heart"></i>{{ $post->likes ? ' いいね' : ' いいね済み' }}
+            <span id={{"count_".$post->id}}>{{ $post->likes->count() }}</span>
+        </button>
+    </div>
 </div>
