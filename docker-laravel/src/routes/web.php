@@ -34,7 +34,8 @@ Route::delete('/user/{id}', 'UserController@unable')->name('user.unable');
 
 Route::resource('post', 'PostController');
 
-// Route::get('/post/{post}', 'ReviewController@show')->name('review.show');
 Route::post('/post/review/{post}', 'ReviewController@store')->name('review.store');
 
 Route::get('/search', 'SearchController@index')->name('search');
+
+Route::post('/like', 'LikeController@ajax_get')->name('like');
