@@ -34,7 +34,7 @@ class PostController extends Controller
   {
     $stars_avg = [];
     $tag_names = [];
-    $posts = Post::latest()->Paginate(8);
+    $posts = Post::latest()->Paginate(14);
     // to display seraching window
     $tags = Tag::all();
 
@@ -143,8 +143,8 @@ class PostController extends Controller
     $id_exist = Review::where('post_id', $post->id)->exists();
     $star_avg = Review::where('post_id', $post->id)->avg('stars');
     $tag_values = $post->tags()->get();
-    dd($tag_values);
-
+    // dd($tag_values);
+    $tag_names=[];
     foreach ($tag_values as $tag_value) {
       $tag_names[] = $tag_value->name;
     }

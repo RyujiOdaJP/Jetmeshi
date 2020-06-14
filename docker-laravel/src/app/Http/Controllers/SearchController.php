@@ -50,7 +50,7 @@ class SearchController extends Controller
     }
 
     //ユーザを1ページにつき8件ずつ表示させます
-    $posts = $query->latest()->paginate(8);
+    $posts = $query->latest()->paginate(14);
     $stars_avg = [];
     $tag_names = [];
     // to display seraching window
