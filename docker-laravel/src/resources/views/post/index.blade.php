@@ -1,5 +1,5 @@
 @php
-    $title = __('Posts');
+    $title = __('🍙投稿一覧');
 @endphp
 @extends('layouts.app')
 @section('content')
@@ -41,11 +41,11 @@
 
         <div class="container">
             <div class="row form-group">
-                <label for="keyword">キーワード</label>
+                <label for="keyword"><i class="fas fa-globe"></i> キーワード</label>
                 <input class="form-control" type="text" name="keyword" id="keyword" placeholder="キーワード検索" value="">
             </div>
         </div>
-        <button type="submit" class="btn btn-success">{{ __('検索') }}</button>
+        <button type="submit" class="btn btn-success"><i class="fas fa-search"></i>{{ __(' 検 索') }}</button>
     </form>
     <div class="slide_container row">
             @for ($i = 0; $i < count($posts); $i++)
@@ -57,7 +57,7 @@
                  @endcomponent
             @endfor
     </div>
-    {{ $posts->links('pagination::default') }}
+    {{ $posts->appends(request()->except('page'))->links('pagination::default') }}
 </div>
 <script src="{{ asset('js/search.js') }}"></script>
 @endsection

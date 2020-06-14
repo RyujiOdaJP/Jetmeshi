@@ -5,7 +5,7 @@
     $regulation = $input_regu ?? '';
 @endphp
 
-<div id="croppie_{{ $id_attr }}" class="col-md-5">
+<div id="croppie_{{ $id_attr }}" class="col-md-5 m-2">
     <label for="cr-boundary">{{ __($image_name) }}</label>
        <span id="target_{{ $id_attr }}" class="target_image">
           <img src="{{ $src }}" alt="" class="position-static previews">
@@ -16,7 +16,7 @@
         </span>
      @endif
     <div class="actions">
-      <a class="btn btn-info position-relative file-upload">
+      <a class="btn btn-Jetblue position-relative file-upload">
         <span>Upload</span>
         {{-- <input type="file" id="upload" value="Choose a file" accept="image/*" /> --}}
         <input id="{{ $id_attr }}" type="file" class="form-control position-absolute
@@ -25,7 +25,7 @@
         <input id="sent_{{ $id_attr }}" type="hidden" name="sent_{{ $id_attr }}"></input>
       </a>
        {{-- // TODO delete image button on click --}}
-      <a class="btn btn-success upload-result">保存</a>
+      <a class="btn btn-Jetgreen upload-result"><span>保存</span></a>
       <a class="btn btn-outline-secondary cancel-edit">キャンセル</a>
     </div>
   </div>

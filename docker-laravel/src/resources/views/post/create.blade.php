@@ -10,9 +10,9 @@
         @csrf
         @method('POST')
         <div class="form-group">
-            <label for="title">{{ __('Title') }}</label>
+            <label for="title">{{ __('タイトル') }}</label>
             <input id="title" type="text" class="form-control @if ($errors->has('title')) is-invalid @endif"
-             name='title' value="{{ old('title') }}" required autofocus>
+             name='title' value="{{ old('title') }}" placeholder="タイトル、テーマなど" required autofocus>
             @if ($errors->has('title'))
                 <span class="invalid-feedback" role="alert">
                     {{ $errors->first('title') }}
@@ -20,9 +20,9 @@
             @endif
         </div>
         <div class="form-group">
-            <label for="sequence_body">{{ __('Body') }}</label>
+            <label for="sequence_body">{{ __('作り方') }}</label>
             <textarea id="sequence_body" class="form-control @if ($errors->has('sequence_body')) is-invalid @endif"
-             name="sequence_body" rows="8" required>{{ old('sequence_body') }}</textarea>
+             name="sequence_body" rows="8" placeholder="材料、手順、コツなど" required>{{ old('sequence_body') }}</textarea>
             @if ($errors->has('sequence_body'))
                 <span class="invalid-feedback" role="alert">
                     {{ $errors->first('sequence_body') }}
@@ -64,7 +64,9 @@
             @slot('tags', $tags)
             @endcomponent
         {{-- <input type="file" class="btn btn-dark" name="testfile"> --}}
-        <button type="submit" name="submit" class="row btn btn-primary">{{ __('Submit') }}</button>
+        <button type="submit" name="submit" class="row btn btn-Jetgreen">
+            <span>{{ __('投稿') }}</span>
+        </button>
     </form>
 </div>
 <script src=" {{ asset('js/range.js') }} "></script>

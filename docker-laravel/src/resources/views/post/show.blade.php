@@ -4,49 +4,8 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="container">
-    <h1 id="post-title">{{ $title }}</h1>
-@auth
-@can('edit', $post)
-    {{-- 編集・削除ボタン --}}
-    <div class="edit">
-        <a href="{{ url('post/'.$post->id.'/edit') }}" class="btn btn-primary">
-            {{ __('Edit') }}
-        </a>
-        @component('components.btn-del')
-            @slot('controller', 'post')
-            @slot('id', $post->id)
-            @slot('name', $post->title)
-        @endcomponent
-    </div>
-@endcan
-@endauth
-    {{-- 記事内容 --}}
-    <dl id="user_info" class="row ml-auto mr-auto">
-        <dt class="col-md-2">{{ __('Auther') }}:</dt>
-        <dd class="col-md-10">
-            <a href="{{ url('user/'.$post->user->id) }}">
-                {{ $post->user->name }}
-            </a>
-        </dd>
-        <dt class="col-md-2">{{ __('Created') }}:</dt>
-        <dd class="col-md-10">
-            <time itemprop="dateCreated" datetime="{{ $post->created_at }}">
-                {{ $post->created_at }}
-            </time>
-        </dd>
-        <dt class="col-md-2">{{ __('Updated') }}:</dt>
-        <dd class="col-md-10">
-            <time itemprop="dateModified" datetime="{{ $post->updated_at }}">
-                {{ $post->updated_at }}
-            </time>
-        </dd>
-    </dl>
-</div>
-
 <div class="container post_show">
-    <hr>
-    <div class="container mt-5">
+    <div class="container mt-2">
         @component('components.carousel')
             @slot('post', $post)
             @slot('star_avg', $star_avg)
@@ -57,7 +16,7 @@
     <div class="container mb-3">
         <div class="card ml-auto mr-auto">
             <div class="card-body">
-                <h4 class="card-title">手順</h4>
+                <h4 class="card-title">{{__('手順')}}</h4>
 
                 <p class="card-text">
                 {{ $post->sequence_body }}
@@ -71,12 +30,12 @@
             <div class="card-body">
                 @auth
               <h4 class="card-title">レビュー投稿</h4>
-              <form action="{{ url('post/review/'.$post->id) }}" method="post" class="" enctype="multipart/form-data">
+              <form action="{{ url('post/review/'.$post->id) }}" method="post" class="mb-3" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
                 <div class="form-group row mb-2">
                   <div class="col-md-4">
-                    <label for="stars" class="mb-0">評価</label>
+                    <label for="stars" class="mb-0">{{__('評価')}}</label>
                     <div id="stars" class="evaluation">
                       <input id="star1" type="radio" name="star" value="5" />
                       <label for="star1">★</label>
@@ -93,7 +52,7 @@
                 </div>
                 <div class="form-group row">
                   <div class="col-md-12">
-                    <label for="review">コメント(1000文字以下)</label>
+                    <label for="review">{{__('コメント(1000文字以下)')}}</label>
                     <textarea type="text" name="review_body" id="review_body" class="review form-control w-100
                     @if ($errors->has('review_body')) is-invalid @endif" required>{{ old('review_body') }}</textarea>
                     @if ($errors->has('review_body'))
@@ -103,14 +62,16 @@
                     @endif
                   </div>
                 </div>
-                <button class="btn btn-success mb-2" type="submit">投稿</button>
+                <button class="btn btn-Jetgreen mb-2" type="submit">
+                    <span><i class="fas fa-paper-plane"></i> {{__('投 稿')}}</span>
+                </button>
               </form>
               @endauth
-              <h4 class="card-title">レビュー</h4>
+              <h4 class="card-title">{{__('レビュー')}}</h4>
               @if ($id_exist ?? '')
                 @foreach ($reviews as $review)
                 <h6 class="card-subtitle mb-2">
-                    User ID: {{ $review->user_id }}
+                    {{ $review->user->name }}
                     @for ($i = 0; $i < $review->stars; $i++)
                     <i class="fas fa-star"></i>
                     @endfor
@@ -123,10 +84,31 @@
                 </p>
                 @endforeach
               @else
-              <h6 class="card-subtitle mb-2 text-muted">レビューがありません</h6>
+              <h6 class="card-subtitle mb-2 text-muted">{{__('レビューがありません')}}</h6>
               @endif
             </div>
         </div>
+    </div>
+</div>
+<div class="container">
+
+    <div class="row justify-content-center">
+        @auth
+        @can('edit', $post)
+            {{-- 編集・削除ボタン --}}
+            <div class="edit col-md-4 mb-2">
+                <a href="{{ url('post/'.$post->id.'/edit') }}" class="btn btn-Jetgreen w-100">
+                    <span><i class="fas fa-edit"></i>{{ __(' 編 集 ') }}</span>
+                </a>
+            </div>
+            @component('components.btn-del')
+                @slot('controller', 'post')
+                @slot('id', $post->id)
+                @slot('name', $post->title)
+            @endcomponent
+
+        @endcan
+        @endauth
     </div>
 </div>
 <script src="{{ asset('js/show.js') }}"></script>

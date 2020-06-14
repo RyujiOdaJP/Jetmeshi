@@ -6094,6 +6094,45 @@ a {
   color: rgba(0, 0, 0, 0.9);
 }
 
+.btn-Jetgreen {
+  background-color: #5CB85C;
+  border-color: #5CB85C;
+}
+
+.btn-Jetgreen span {
+  color: #fff;
+}
+
+.btn-Jetgreen:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.btn-Jetgreen:focus,
+.btn-Jetgreen.focus {
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+}
+
+.btn-Jetblue {
+  background-color: #56C0E0;
+  border-color: #56C0E0;
+}
+
+.btn-Jetblue span {
+  color: #fff;
+}
+
+.btn-Jetblue:hover {
+  color: #fff;
+  background-color: #138496;
+  border-color: #117a8b;
+}
+
+.btn-Jetblue:focus,
+.btn-Jetblue.focus {
+  box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
+}
+
 input[type=range]:focus {
   outline: none;
   /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
@@ -6116,8 +6155,13 @@ input[type=range]::-ms-track {
   background: #5CB85C;
 }
 
-img.previews {
+img.previews,
+.edited {
   width: 100%;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
 }
 
 input[type=file] {
@@ -6230,11 +6274,13 @@ input[type=file] {
   padding: 0.5rem;
 }
 
-.post_show {
-  width: 50%;
-}
-
 /* PC */
+
+@media (min-width: 992px) {
+  .post_show {
+    width: 50%;
+  }
+}
 
 /* Tablet */
 

@@ -13,6 +13,24 @@
 @import '~@fortawesome/fontawesome-free/scss/regular';
 @import '~@fortawesome/fontawesome-free/scss/brands';
 
+//mixins
+@mixin swipe-aria{
+    height: 100%;
+    position: fixed;
+    overflow: scroll;
+    top: 0;
+    z-index: 100;
+}
+
+@mixin img-radius-top{
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+@mixin img-radius-bottom{
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
 // TOP
 .jumbotron-hero{
     position: relative;
@@ -43,6 +61,36 @@ a{
     color: $NavGrayHover;
 }
 
+.btn-Jetgreen{
+    background-color: $JetGreen;
+    border-color: $JetGreen;
+    span{
+        color: $white;
+    }
+}
+.btn-Jetgreen:hover{
+    background-color: #218838;
+    border-color: #1e7e34;
+}.btn-Jetgreen:focus, .btn-Jetgreen.focus {
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+  }
+
+.btn-Jetblue{
+    background-color: $JetBlue;
+    border-color: $JetBlue;
+    span{
+        color: $white;
+    }
+}
+.btn-Jetblue:hover {
+    color: #fff;
+    background-color: #138496;
+    border-color: #117a8b;
+}
+:focus, .btn-Jetblue.focus {
+    box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
+  }
+
 // Create & Edit
 input[type=range]:focus {
     outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
@@ -63,8 +111,10 @@ input[type=range]::-ms-track {
 .custom-range::-ms-thumb {
     background: $JetGreen;
   }
-img.previews{
+img.previews, .edited {
     width: 100%;
+    @include img-radius-top;
+    @include img-radius-bottom;
 }
 
 input[type=file]{
@@ -78,13 +128,7 @@ input[type=file]{
 }
 
 // Swipe menu window
-@mixin swipe-aria{
-    height: 100%;
-    position: fixed;
-    overflow: scroll;
-    top: 0;
-    z-index: 100;
-}
+
 .standby.true{
     @include swipe-aria;
     width: 3rem;
@@ -157,12 +201,10 @@ input[type=file]{
 }
 
 .card, .card img {
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
+    @include img-radius-top;
 }
 .card {
-    border-bottom-left-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
+    @include img-radius-bottom;
 }
 .card-body{
     padding: 0.5rem

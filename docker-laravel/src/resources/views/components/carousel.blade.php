@@ -19,7 +19,7 @@
           <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
                 <a href="{{url('post/'.$post->id)}}">
-                    <img class="d-block w-100" src="{{ $post->image_top }}" alt="Top slide">
+                    <img class="d-block w-100 if-showpage-disable-anchor" src="{{ $post->image_top }}" alt="Top slide">
                 </a>
             </div>
             @for ( $i = 1; $i < 5 ; $i++ )
@@ -28,7 +28,7 @@
                 @endif
                 <div class="carousel-item">
                     <a href="{{url('post/'.$post->id)}}">
-                        <img class="d-block w-100" src="{{ $post->{'image_seq'.$i} }}" alt="{{ $i.'_slide' }}">
+                        <img class="d-block w-100 if-showpage-disable-anchor" src="{{ $post->{'image_seq'.$i} }}" alt="{{ $i.'_slide' }}">
                     </a>
                 </div>
             @endfor
@@ -43,6 +43,9 @@
           </a>
         </div>
     {{-- <div class="row justify-content-sm-center tags"> --}}
+        <div class="card-body">
+            <h5>{{ $post->title }}</h5>
+        </div>
         <div class="card-body">
             @if ( $star_avg !== null)
                 @for ($i = 0; $i < round($star_avg); $i++)
