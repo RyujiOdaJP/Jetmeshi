@@ -16,6 +16,7 @@
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
         "intervention/image": "^2.5",
+        "kyslik/column-sortable": "^6.3",
         "laravel/framework": "^7.3",
         "laravel/socialite": "^4.3",
         "laravel/tinker": "^2.0",
