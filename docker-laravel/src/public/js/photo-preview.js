@@ -72,8 +72,8 @@
         // For user preview
         try {
           target.innerHTML =
-          `<img id="edited_${imageId}" class="edited" src="${resp}" name="edited_images"
-          width="100%" value="${resp}">`;
+          `<img id="edited_${imageId}" class="edited" src="${resp}"
+          name="edited_images" width="100%" value="${resp}">`;
         } catch (e) {
           console.log(e);
         }
@@ -83,7 +83,7 @@
     });
   }
   /**
- * crop provided blobUrl
+ * delete crop instance
  * @param {string} imageId
  * @param {string} croppieDivId
  * @param {object} target
