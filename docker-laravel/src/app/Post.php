@@ -50,4 +50,8 @@ class Post extends Model
     return $this->belongsToMany('App\Tag', 'tag_maps')
       ->withTimestamps()->withPivot('tag_id');
   }
+
+  public function likes(){
+      return $this->hasMany('App\Like', 'likes');
+  }
 }
