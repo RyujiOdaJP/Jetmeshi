@@ -26,7 +26,7 @@ class SearchController extends Controller
 
     // プルダウンメニューで指定なし以外を選択した場合、$query->whereで選択と一致するカラムを取得します
     if ($request->has(['cooking_time_min', 'cooking_time_max']) &&
-            $cooking_time_min !== null && $cooking_time_max !== null){
+            $cooking_time_min !== null && $cooking_time_max !== null) {
       $query->whereBetween('cooking_time', [$cooking_time_min, $cooking_time_max])->get();
     }
 
@@ -50,7 +50,7 @@ class SearchController extends Controller
     }
 
     //ユーザを1ページにつき8件ずつ表示させます
-    $posts = $query->latest()->paginate(14);
+    $posts = $query->latest()->paginate(10);
     $stars_avg = [];
     $tag_names = [];
     // to display seraching window

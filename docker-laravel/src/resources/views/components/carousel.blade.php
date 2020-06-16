@@ -3,6 +3,18 @@
     $star_avg = $star_avg;
     $grid = $grid;
     $tag_names = $tag_names ?? '';
+
+    $count_of_likes =
+        $post->likes('post_id')
+        ->where('likes', '1')
+        ->count();
+
+    $liked_or_not =
+        $post->likes('post_id')
+        ->select('likes')
+        ->where('user_id', Auth::id())
+        ->first();
+
 @endphp
 
 <div id="{{'slide_show_'.$post->id}}" class="{{ $grid }} card slide_show">
@@ -76,12 +88,16 @@
         </div>
     @auth
     <div class="card-body">
-        <button type="button" id="{{'btn_'.$post->id}}" data-like="{{ $post->id }}" data-user="{{Auth::id()}}" name="likes"
-            data-count="{{ $post->likes->count() }}" class="btn btn-outline-secondary">
+        <button type="button" id="{{'btn_'.$post->id}}" data-like="{{ $post->id }}" name="likes"
+        class="btn btn-outline-secondary">
             <i class="fas fa-heart"></i>
-            <span id="{{'count_'.$post->id}}">
-                {{ $post->likes ? ' いいね ' : ' いいね済み ' }}
-                {{ $post->likes->count() }}
+            <span id="{{'count_'.$post->id}}" data-count="{{ $count_of_likes }}"
+            data-inserted="{{$count_of_likes}}">
+            @if ($liked_or_not['likes'] ?? '' == '1')
+                {{ ' いいね済み ' . $count_of_likes }}
+            @else
+                {{ ' いいね ' . $count_of_likes }}
+            @endif
             </span>
         </button>
     </div>

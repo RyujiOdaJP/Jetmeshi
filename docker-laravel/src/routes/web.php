@@ -38,7 +38,7 @@ Route::post('/post/review/{post}', 'ReviewController@store')->name('review.store
 
 Route::get('/search', 'SearchController@index')->name('search');
 
-Route::post('like/{post}', 'LikeController@ajax_store')->name('like.post');
+Route::post('like/{post}', 'LikeController@ajaxstore')->name('like.post');
 
 // Route::get('like', function(){
 //     return 'ok';

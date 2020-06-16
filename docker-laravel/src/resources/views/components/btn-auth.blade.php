@@ -17,15 +17,15 @@
 </style>
 <div class="form-group row ">
   <div class="col-md-10 ml-auto mr-auto">
-    <button id={{ $id_attr."-normal-user" }} class="btn btn-block " type="submit"
-    style="background: #5CB85C 0% 0% no-repeat padding-box;
+    <button id={{ $id_attr."-normal-user" }} class="btn btn-block btn-Jetgreen " type="submit"
+    style="padding-box;
     color:white; height:40px; border-radius: 24px; opacity: 1;">
       {{ $id_attr }}
     </button>
   </div>
 </div>
 <hr class="col-1 mr-auto ml-auto">
-<div class="form-group row ">
+{{-- <div class="form-group row ">
     <div class="col-md-10 ml-auto mr-auto">
       <button id={{ $id_attr."-twitter-user" }} class="btn btn-block " type="submit"
       style="border: 2px solid #5CB85C;
@@ -43,7 +43,7 @@
           <i class="fab fa-google"></i>{{ ' '.$id_attr . ' WITH GOOGLE' }}
       </button>
     </div>
-</div>
+</div> --}}
 
 
 

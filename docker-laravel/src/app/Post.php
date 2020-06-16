@@ -29,6 +29,16 @@ class Post extends Model
   ];
 
   /**
+   *casting likes value as integer.
+   * @var array
+   */
+//    protected $casts = [
+//     'likes' => 'integer',
+//     'user_id' => 'integer',
+//     'post_id' => 'integer',
+//    ];
+
+  /**
    * リレーション (従属の関係).
    *
    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -51,7 +61,13 @@ class Post extends Model
       ->withTimestamps()->withPivot('tag_id');
   }
 
-  public function likes(){
-      return $this->hasMany('App\Like', 'likes');
+  public function likes($collumn)
+  {
+    return $this->hasMany('App\Like', $collumn);
+  }
+
+  public function likes_user_id()
+  {
+    return $this->hasMany('App\Like', 'user_id');
   }
 }
