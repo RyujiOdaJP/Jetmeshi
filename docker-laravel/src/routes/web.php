@@ -38,4 +38,8 @@ Route::post('/post/review/{post}', 'ReviewController@store')->name('review.store
 
 Route::get('/search', 'SearchController@index')->name('search');
 
-Route::post('/like', 'LikeController@ajax_get')->name('like');
+Route::post('like/{post}', 'LikeController@ajax_store')->name('like.post');
+
+// Route::get('like', function(){
+//     return 'ok';
+// });

@@ -74,11 +74,16 @@
             @endif
 
         </div>
+    @auth
     <div class="card-body">
-        <button type="button" id={{"btn_".$post->id}} data-like="{{ $post->id }}" name="likes"
-            class="btn btn-outline-secondary">
-            <i class="fas fa-heart"></i>{{ $post->likes ? ' いいね' : ' いいね済み' }}
-            <span id={{"count_".$post->id}}>{{ $post->likes->count() }}</span>
+        <button type="button" id="{{'btn_'.$post->id}}" data-like="{{ $post->id }}" data-user="{{Auth::id()}}" name="likes"
+            data-count="{{ $post->likes->count() }}" class="btn btn-outline-secondary">
+            <i class="fas fa-heart"></i>
+            <span id="{{'count_'.$post->id}}">
+                {{ $post->likes ? ' いいね ' : ' いいね済み ' }}
+                {{ $post->likes->count() }}
+            </span>
         </button>
     </div>
+    @endauth
 </div>
