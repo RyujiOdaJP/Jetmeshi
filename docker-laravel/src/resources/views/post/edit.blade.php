@@ -73,6 +73,7 @@
 
     @component('components.tags')
      @slot('tags', $tags)
+     @slot('post', $post)
     @endcomponent
 
     <button id="submit_images" type="submit" name="submit" class="row btn btn-primary">{{ __('Submit') }}</button>

@@ -41,7 +41,14 @@ class LikeController extends Controller
       // ignore error of offset array
       $likes->likes = 1;
       $likes->save();
-      return ['res' => $likes_count];
+      return [
+        'title' => $likes->post()
+                    ->select('title')
+                    ->first()['title'],
+        'img' => $likes->post()
+                    ->select('sumnail_mobile')
+                    ->first()['sumnail_mobile']
+    ];
     }
 
     if ($likes_count['likes'] == 0) {
@@ -55,6 +62,14 @@ class LikeController extends Controller
       //   $likes->save();
     // dd('c');
     }
-    return ['res' => $likes_count];
+    // dd();
+    return [
+        'title' => $likes->post()
+                    ->select('title')
+                    ->first()['title'],
+        'img' => $likes->post()
+                    ->select('sumnail_mobile')
+                    ->first()['sumnail_mobile']
+    ];
   }
 }

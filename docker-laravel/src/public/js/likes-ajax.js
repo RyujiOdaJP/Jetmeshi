@@ -27,10 +27,8 @@ $(function() {
         dataType: 'json',
         timeout: 10000,
       }).done(function(res) {
-        console.log(res);
-        console.log($(`#btn_${likeId}`).html().indexOf(' いいね済み '));
-        console.log(initialCount);
-        console.log(insertedNum);
+        const title = res['title']; // object
+        const img = res['img']; // success
 
         // １回押していいねしたものを取り消す（unlike）
         if ( insertedNum - 1 === initialCount & $(`#btn_${likeId}`).html().indexOf(' いいね済み ') !== -1) {
@@ -39,6 +37,7 @@ $(function() {
                   <i class="fas fa-heart"></i> いいね <span id="count_${likeId}"
                   data-inserted="${insertedNum}" data-count="${initialCount}">${insertedNum}</span>
               `);
+          $(`#list_${likeId}`).remove();
         } else if (insertedNum === initialCount & $(`#btn_${likeId}`).html().indexOf(' いいね ') !== -1) {
           // 取り消した操作を再度戻す（like）
           insertedNum = initialCount + 1;
@@ -46,6 +45,15 @@ $(function() {
                   <i class="fas fa-heart"></i> いいね済み <span id="count_${likeId}"
                   data-inserted="${insertedNum}" data-count="${initialCount}">${insertedNum}</span>
               `);
+          document.getElementById('like-list').insertAdjacentHTML('afterbegin', `
+            <li id="list_${likeId}" class="list-group-item">
+                <img src="${img}" alt="sumnails" class="sumnails" style="width: 50px;">
+                <a href="${location.host + '/post/' + likeId}">
+                ${'　' + title}
+                </a>
+            </li>
+            `);
+          console.log('2');
         } else if (insertedNum === initialCount & $(`#btn_${likeId}`).html().indexOf(' いいね済み ') !== -1) {
           // 最初からいいね済みの状態を取り消す(unlike)
           insertedNum = initialCount - 1;
@@ -53,6 +61,7 @@ $(function() {
                   <i class="fas fa-heart"></i> いいね <span id="count_${likeId}"
                   data-inserted="${insertedNum}" data-count="${initialCount}">${insertedNum}</span>
               `);
+          $(`#list_${likeId}`).remove();
         } else if (insertedNum === initialCount - 1 & $(`#btn_${likeId}`).html().indexOf(' いいね ') !== -1) {
           // いいね済みに戻す（like）
           insertedNum = initialCount;
@@ -60,6 +69,15 @@ $(function() {
                   <i class="fas fa-heart"></i> いいね済み <span id="count_${likeId}"
                   data-inserted="${insertedNum}" data-count="${initialCount}">${insertedNum}</span>
               `);
+          document.getElementById('like-list').insertAdjacentHTML('afterbegin', `
+            <li id="list_${likeId}" class="list-group-item">
+                <img src="${img}" alt="sumnails" class="sumnails" style="width: 50px;">
+                <a href="${location.host + likeId}">
+                ${'　' + title}
+                </a>
+            </li>
+            `);
+          console.log('4');
         } else {
           // 初回いいね
           insertedNum = initialCount + 1;
@@ -67,8 +85,16 @@ $(function() {
                   <i class="fas fa-heart"></i> いいね済み <span id="count_${likeId}"
                   data-inserted="${insertedNum}" data-count="${initialCount}">${insertedNum}</span>
               `);
+          document.getElementById('like-list').insertAdjacentHTML('afterbegin', `
+            <li id="list_${likeId}" class="list-group-item">
+                <img src="${img}" alt="sumnails" class="sumnails" style="width: 50px;">
+                <a href="${location.host + likeId}">
+                ${'　' + title}
+                </a>
+            </li>
+            `);
+          console.log('5');
         }
-        console.log(insertedNum);
         $('[data-like]').off();
       }).fail(function(jqXHR, textStatus, errorThrown) {
         alert('ファイルの取得に失敗しました。');
