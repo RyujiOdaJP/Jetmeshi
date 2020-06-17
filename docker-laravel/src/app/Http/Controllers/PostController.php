@@ -7,7 +7,6 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Review; //import the post model.
 use App\Tag;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -118,8 +117,8 @@ class PostController extends Controller
           100,
           null,
           function ($constraint): void {
-              $constraint->aspectRatio();
-            }
+            $constraint->aspectRatio();
+          }
         )
           ->stream('jpg', 50);
 
@@ -136,15 +135,15 @@ class PostController extends Controller
     $tag_values = $request->input('tags'); //array
     // dd($tag_values);
     if (!empty($tag_values)) {
-        foreach ($tag_values as $tag_value) {
-            if (!empty($tag_value)) {
-                $tag = Tag::firstOrCreate([
+      foreach ($tag_values as $tag_value) {
+        if (!empty($tag_value)) {
+          $tag = Tag::firstOrCreate([
                     'id' => $tag_value,
                 ]);
-                $tag_ids[] = $tag->id;
-            }
+          $tag_ids[] = $tag->id;
         }
-        $post->tags()->attach($tag_ids);
+      }
+      $post->tags()->attach($tag_ids);
     }
 
     return redirect('post/' . $post->id)->with('my_status', __('Posted new article.'));
@@ -184,7 +183,7 @@ class PostController extends Controller
   public function edit(Post $post)
   {
     $this->authorize('edit', $post);
-    $tags = Tag::select('id','name')->orderBy('id')->get();
+    $tags = Tag::select('id', 'name')->orderBy('id')->get();
     return view('post.edit', compact('post', 'tags'));
   }
 
@@ -233,8 +232,8 @@ class PostController extends Controller
           100,
           null,
           function ($constraint): void {
-              $constraint->aspectRatio();
-            }
+            $constraint->aspectRatio();
+          }
         )
           ->stream('jpg', 50);
 
@@ -250,18 +249,18 @@ class PostController extends Controller
     $tag_values = $request->input('tags'); //array
     // dd($tag_values);
     if (!empty($tag_values)) {
-    foreach ($tag_values as $tag_value) {
-      if (!empty($tag_value)) {
-        $tag = Tag::firstOrCreate([
+      foreach ($tag_values as $tag_value) {
+        if (!empty($tag_value)) {
+          $tag = Tag::firstOrCreate([
                  'id' => $tag_value,
              ]);
-        $tag_ids[] = $tag->id;
+          $tag_ids[] = $tag->id;
+        }
       }
-    }
-     // will be updated to new tags
-     $post->tags()->sync($tag_ids);
+      // will be updated to new tags
+      $post->tags()->sync($tag_ids);
     } else {
-        $post->tags()->detach();
+      $post->tags()->detach();
     }
 
     // save posts table

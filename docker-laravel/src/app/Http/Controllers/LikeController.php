@@ -43,11 +43,11 @@ class LikeController extends Controller
       $likes->save();
       return [
         'title' => $likes->post()
-                    ->select('title')
-                    ->first()['title'],
+          ->select('title')
+          ->first()['title'],
         'img' => $likes->post()
-                    ->select('sumnail_mobile')
-                    ->first()['sumnail_mobile']
+          ->select('sumnail_mobile')
+          ->first()['sumnail_mobile'],
     ];
     }
 
@@ -65,11 +65,11 @@ class LikeController extends Controller
     // dd();
     return [
         'title' => $likes->post()
-                    ->select('title')
-                    ->first()['title'],
+          ->select('title')
+          ->first()['title'],
         'img' => $likes->post()
-                    ->select('sumnail_mobile')
-                    ->first()['sumnail_mobile']
+          ->select('sumnail_mobile')
+          ->first()['sumnail_mobile'],
     ];
   }
 }

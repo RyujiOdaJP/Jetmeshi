@@ -104,6 +104,7 @@ class Post extends Model
       ->where('id', $id)
       ->first())['title'];
   }
+
   public static function post_sumnail($id)
   {
     return
