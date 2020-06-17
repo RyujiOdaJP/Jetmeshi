@@ -14,11 +14,22 @@
 Cooking is a hassle...eating out is expensive...but I want to get nutrition...this is a site that collects the fastest food to meet such a demand.
 Let's share everyone's ideas!
 
+## Imprementions
+
++ Store image into S3 after compressing 1080px
+  and 100px sumnails by GD Library.
++ Cropping images by croppieJS.
++ LIKE posting and listing on mordal window method by AJAX.
++ Tags management.
++ Searching by title, tags, budget and cooking time.
++ Review on creator's posts and display avarage on post.
++ Responsive Nav-menu that is able to slide from right.
+
 ## Back borns
 
-+ Language: PHP, JavaScript, SCSS, HTML
-+ Framework: Laravel v7. , Bootstrap4.5, jQuery3.5.
-+ Tool: Circle CI, Docker, Adobe XD(wire frame), mermaid.js (sequence)
++ Language: PHP, JavaScript, SCSS, HTML, MySQL
++ Framework: Laravel v7., blade template, Bootstrap4.5, jQuery3.5.
++ Tool: Circle CI, Docker, Adobe XD(wire frame), mermaid.js, (sequence), lint tool(CSfixer, ESlint), cz-emoji, webpack.mix.js, MySQL Workbench, VScode
 + Infrastructure: AWS (ECS, S3, Cloud Front), Mailgun
 
 ## Install
