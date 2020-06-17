@@ -130,6 +130,7 @@ class PostController extends Controller
     }
     $post->cooking_time = $request->cooking_time;
     $post->budget = $request->budget;
+    $post->save();
 
     //Tag table
     $tag_values = $request->input('tags'); //array
@@ -145,7 +146,6 @@ class PostController extends Controller
         }
         $post->tags()->attach($tag_ids);
     }
-    $post->save();
 
     return redirect('post/' . $post->id)->with('my_status', __('Posted new article.'));
   }
