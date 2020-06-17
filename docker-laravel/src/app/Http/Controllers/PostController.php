@@ -88,7 +88,7 @@ class PostController extends Controller
     $images = [];
     $data = '';
     $decoded_data = [];
-    $paths = [];
+    $decoded_sumnail = '';
 
     for ($i = 0, $j = 0; count($items) > $i; $i++) {
       if ($request->{'sent_image_' . $items[$i]} == null) {
@@ -97,6 +97,7 @@ class PostController extends Controller
       //アスペクト比を維持、画像サイズを横幅1080pxにして保存する。
       $images[] = $request->{'sent_image_' . $items[$i]};
       list(, $data) = explode(',', $images[$j]);
+
       $decoded_data[] =
                 InterventionImage::make(base64_decode($data))->resize(
                   1080,
@@ -106,8 +107,25 @@ class PostController extends Controller
                   }
                 )
                   ->stream('jpg', 50);
-      $paths[] = (Storage::disk('s3')->put($file_name . '_' . $items[$i], $decoded_data[$j], 'public'));
+
+      Storage::disk('s3')->put($file_name . '_' . $items[$i], $decoded_data[$j], 'public');
       $post->{'image_' . $items[$i]} = Storage::disk('s3')->url($file_name . '_' . $items[$i]);
+
+      // store sumnail of top image
+      if ($i == 0) {
+        $decoded_sumnail =
+        InterventionImage::make(base64_decode($data))->resize(
+          100,
+          null,
+          function ($constraint): void {
+              $constraint->aspectRatio();
+            }
+        )
+          ->stream('jpg', 50);
+
+        Storage::disk('s3')->put($file_name . '_sumnail', $decoded_sumnail, 'public');
+        $post->sumnail_mobile = Storage::disk('s3')->url($file_name . '_sumnail');
+      }
       $j = $j + 1;
     }
     $post->cooking_time = $request->cooking_time;
@@ -116,16 +134,19 @@ class PostController extends Controller
     //Tag table
     $tag_values = $request->input('tags'); //array
     // dd($tag_values);
-    foreach ($tag_values as $tag_value) {
-      if (!empty($tag_value)) {
-        $tag = Tag::firstOrCreate([
+    if (!empty($tag_values)) {
+        foreach ($tag_values as $tag_value) {
+            if (!empty($tag_value)) {
+                $tag = Tag::firstOrCreate([
                     'id' => $tag_value,
                 ]);
-        $tag_ids[] = $tag->id;
-      }
+                $tag_ids[] = $tag->id;
+            }
+        }
+        $post->tags()->attach($tag_ids);
     }
     $post->save();
-    $post->tags()->attach($tag_ids);
+
     return redirect('post/' . $post->id)->with('my_status', __('Posted new article.'));
   }
 
@@ -151,9 +172,6 @@ class PostController extends Controller
     }
     // dd($tag_names);
     return view('post.show', compact('post', 'reviews', 'id_exist', 'star_avg', 'tag_names'));
-    // SELECT users.id, users.name, reviews.id, reviews.stars, reviews.review_body FROM JETmysql.users
-        // inner join JETmysql.reviews
-        // on users.id = reviews.user_id;
   }
 
   /**
@@ -166,7 +184,7 @@ class PostController extends Controller
   public function edit(Post $post)
   {
     $this->authorize('edit', $post);
-    $tags = Tag::select('name')->get();
+    $tags = Tag::select('id','name')->orderBy('id')->get();
     return view('post.edit', compact('post', 'tags'));
   }
 
@@ -208,6 +226,21 @@ class PostController extends Controller
                   ->stream('jpg', 50);
       $paths[] = (Storage::disk('s3')->put($file_name . '_' . $items[$i], $decoded_data[$j], 'public'));
       $post->{'image_' . $items[$i]} = Storage::disk('s3')->url($file_name . '_' . $items[$i]);
+      // store sumnail of top image
+      if ($i == 0) {
+        $decoded_sumnail =
+        InterventionImage::make(base64_decode($data))->resize(
+          100,
+          null,
+          function ($constraint): void {
+              $constraint->aspectRatio();
+            }
+        )
+          ->stream('jpg', 50);
+
+        Storage::disk('s3')->put($file_name . '_sumnail', $decoded_sumnail, 'public');
+        $post->sumnail_mobile = Storage::disk('s3')->url($file_name . '_sumnail');
+      }
       $j = $j + 1;
     }
     $post->cooking_time = $request->cooking_time;
@@ -216,6 +249,7 @@ class PostController extends Controller
     //Tag table
     $tag_values = $request->input('tags'); //array
     // dd($tag_values);
+    if (!empty($tag_values)) {
     foreach ($tag_values as $tag_value) {
       if (!empty($tag_value)) {
         $tag = Tag::firstOrCreate([
@@ -224,8 +258,12 @@ class PostController extends Controller
         $tag_ids[] = $tag->id;
       }
     }
-    // will be updated to new tags
-    $post->tags()->sync($tag_ids);
+     // will be updated to new tags
+     $post->tags()->sync($tag_ids);
+    } else {
+        $post->tags()->detach();
+    }
+
     // save posts table
     $post->save();
     $this->authorize('edit', $post);
