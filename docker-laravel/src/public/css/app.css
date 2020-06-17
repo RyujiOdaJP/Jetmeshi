@@ -6333,7 +6333,8 @@ input[type=file] {
     margin-left: 10%;
   }
 
-  .card-body {
+  .card-body,
+  button[name=likes] {
     padding: 0.2rem;
     font-size: 12px;
   }

@@ -190,6 +190,7 @@ input[type=file]{
 .fas.fa-heart{
     color: $JetPink;
 }
+
 .slide_show{
     padding: 0;
     margin-bottom: 1em;
@@ -264,7 +265,7 @@ input[type=file]{
             margin-left: 10%;
         }
     }
-    .card-body{
+    .card-body, button[name='likes']{
         padding: 0.2rem;
         font-size: 12px;
     }
@@ -273,11 +274,8 @@ input[type=file]{
         flex: 0 0 45.666667%;
         max-width: 45.666667%;
     }
-    // post.show(blade)
     .post_show{
         width: 100%;
     }
-    // #tag_container input[type="checkbox"]+label {
-    //     font-size: 12px;
-    // }
+
 }
