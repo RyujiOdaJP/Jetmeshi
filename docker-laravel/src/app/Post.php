@@ -41,7 +41,7 @@ class Post extends Model
   /**
    * リレーション (従属の関係).
    *
-   * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+   * @return Illuminate\Database\Eloquent\Concerns\HasRelationships::belongsTo
    */
   public function user() // 単数形
   {
@@ -49,25 +49,66 @@ class Post extends Model
       ->latest();
   }
 
+  /**
+   * リレーション (１対多の関係).
+   *
+   * @return Illuminate\Database\Eloquent\Concerns\HasRelationships::hasMany
+   */
   public function reviews()
   {
     return $this->hasMany('App\Review')
       ->latest();
   }
 
+  /**
+   * リレーション (多対多の関係).
+   *
+   * @return Illuminate\Database\Eloquent\Concerns\HasRelationships::belongsToMany
+   */
   public function tags()
   {
     return $this->belongsToMany('App\Tag', 'tag_maps')
       ->withTimestamps()->withPivot('tag_id');
   }
 
+  /**
+   * リレーション (１対多の関係).
+   *
+   * @param mixed $collumn
+   * @return Illuminate\Database\Eloquent\Concerns\HasRelationships::hasMany
+   */
   public function likes($collumn)
   {
     return $this->hasMany('App\Like', $collumn);
   }
 
+  /**
+   * リレーション (１対多の関係).
+   *
+   * @return Illuminate\Database\Eloquent\Concerns\HasRelationships::hasMany
+   */
   public function likes_user_id()
   {
     return $this->hasMany('App\Like', 'user_id');
+  }
+
+  /**
+   * static function getting titles for liked post on modal list.
+   * @param number $id
+   * @return int
+   */
+  public static function post_title($id)
+  {
+    return
+    (self::select('title')
+      ->where('id', $id)
+      ->first())['title'];
+  }
+  public static function post_sumnail($id)
+  {
+    return
+    (self::select('sumnail_mobile')
+      ->where('id', $id)
+      ->first())['sumnail_mobile'];
   }
 }
