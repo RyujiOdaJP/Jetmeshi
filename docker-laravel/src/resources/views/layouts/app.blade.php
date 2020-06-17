@@ -1,3 +1,6 @@
+@php
+
+@endphp
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -58,9 +61,8 @@
                 <a class="nav-link" href="{{ url('/post/create') }}"><i class="fas fa-arrow-alt-circle-up"></i>{{ __(' 投稿する') }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('') }}"><i class="fas fa-heart"></i>{{ __(' いいねリスト') }}</a>
+                <a class="nav-link" href="" data-toggle="modal" data-target="#ModalScrollable"><i class="fas fa-heart"></i>{{ __(' いいねリスト') }}</a>
             </li>
-
           </ul>
           <!-- Right Side Of Navbar -->
           <ul id="nav-for-mobile-bottom" class="navbar-nav ml-auto">
@@ -95,6 +97,34 @@
         </div>
       </div>
     </nav>
+    <!-- Modal -->
+  <div class="modal fade" id="ModalScrollable" tabindex="-1" role="dialog" aria-labelledby="ModalScrollableLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalCenteredLabel">いいねリスト</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <ul class="list-group">
+              @foreach (App\Like::liked_post_ids() as $liked_post_id)
+                <li class="list-group-item">
+                <img src="{{ App\Post::post_sumnail($liked_post_id['post_id']) }}" alt="sumnails" class="sumnails" style="width: 50px;">
+                    <a id="{{ 'list_' . $liked_post_id['post_id'] }}" href="{{ 'post/' . $liked_post_id['post_id']  }}">
+                        {{ '　' . App\Post::post_title($liked_post_id['post_id']) }}
+                    </a>
+                </li>
+              @endforeach
+            </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
   {{--Flash message--}}
   @if (session('my_status'))
   <div class="container mt-2">
@@ -116,17 +146,6 @@
               <li class=" nav-item"><a class="nav-link" href="{{ url('') }}"><i class="fas fa-info-circle"></i>{{ __(' アプリについて') }}</a></li>
               <li class=" nav-item"><a class="nav-link" href="{{ url('') }}"><i class="fas fa-info-circle"></i>{{ __('プライバシーポリシー') }}</a></li>
           </ul>
-      {{-- <ul class="nav">
-        <li class="nav-item">
-          <a class="nav-link" href="#!">Active</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#!">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#!">Disabled</a>
-        </li>
-      </ul> --}}
           <div class="col-12 nav-item"><a class="nav-link">© 2020 RyujiOdaJP, All rights reserved</a></div>
     </div>
   </footer>
