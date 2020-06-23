@@ -50,10 +50,10 @@
     <div class="slide_container row">
             @for ($i = 0; $i < count($posts); $i++)
                  @component('components.carousel')
-                 @slot('post', $posts[$i])
-                 @slot('star_avg', $stars_avg[$i])
-                 @slot('grid', 'col-5')
-                 @slot('tag_names', $tag_names[$i])
+                    @slot('post', $posts[$i])
+                    @slot('star_avg', $stars_avg[$i])
+                    @slot('grid', 'col-5')
+                    @slot('tag_names', $tag_names[$i])
                  @endcomponent
             @endfor
     </div>

@@ -6279,6 +6279,11 @@ input[type=file] {
   padding: 0.5rem;
 }
 
+.user_evaluation {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
 /* PC */
 
 @media (min-width: 992px) {
@@ -6346,6 +6351,10 @@ input[type=file] {
 
   .post_show {
     width: 100%;
+  }
+
+  .user_evaluation {
+    font-size: 1rem;
   }
 }
 

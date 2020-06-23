@@ -34,7 +34,6 @@
       @endif
     </div>
 
-    {{-- // TODO: make croppie as modal --}}
     <div class="row form-group justify-content-around">
       @component('components.croppie')
       @slot('id', 'image_top')
