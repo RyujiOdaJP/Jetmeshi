@@ -8,7 +8,6 @@ use App\Post;
 use App\Review; //import the post model.
 use App\Tag;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use InterventionImage;
 
@@ -41,6 +40,7 @@ class PostController extends Controller
       $names_array = [];
       $stars_avg[] = Review::where('post_id', '=', $posts[$i]->id)->avg('stars');
       $tag_values = $posts[$i]->tags()->get();
+      //   dd($stars_avg);
 
       //   if( $tag_values[$i]->name->exists()){
       foreach ($tag_values as $tag_value) {

@@ -63,6 +63,24 @@ class User extends Authenticatable
       ->latest();
   }
 
+  public function likes()
+  {
+    return $this->hasMany('App\Like');
+  }
+
+  public function likes_where_1()
+  {
+    return $this->hasMany('App\Like')
+      ->where('likes', '1');
+  }
+
+//   public function reviewed_posts()
+//   {
+//     return
+//     $this->hasMany('App\Post')
+//     ->reviews();
+//   }
+
   public function sendPasswordResetNotification($token): void
   {
     $this->notify(new TextPasswordReset($token));
