@@ -71,14 +71,18 @@
               @if ($id_exist ?? '')
                 @foreach ($reviews as $review)
                 <h6 class="card-subtitle mb-2">
-                    {{ $review->user->name }}
+                　<img src="{{ $review->user->image }}" alt="user_img" class="rounded-circle" style="width: 50px">
+                  {{ ' ' . $review->user->name }}
+                </h6>
+                <p>
+                    評価：
                     @for ($i = 0; $i < $review->stars; $i++)
                     <i class="fas fa-star"></i>
                     @endfor
                     @for ($i = 0; $i < (5 - $review->stars); $i++)
                     <i class="fas fa-star disabled"></i>
                     @endfor
-                </h6>
+                </p>
                 <p class="card-text">
                   {{ $review->review_body }}
                 </p>

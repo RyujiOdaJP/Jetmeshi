@@ -6344,6 +6344,10 @@ input[type=file] {
     font-size: 12px;
   }
 
+  .card-body.profile {
+    font-size: 16px;
+  }
+
   .slide_show.col-5 {
     flex: 0 0 45.666667%;
     max-width: 45.666667%;
