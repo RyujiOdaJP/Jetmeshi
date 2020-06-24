@@ -8,15 +8,18 @@ use App\Review;
 use App\Tag;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use InterventionImage;
 
 // use app\Http\Requests\StoreUser;
 
 class UserController extends Controller
 {
-    public function random($length = 8)
-    {
-      return substr(str_shuffle('1234567890abcdefghijklmnopqrstuvwxyz'), 0, $length);
-    }
+  public function random($length = 8)
+  {
+    return substr(str_shuffle('1234567890abcdefghijklmnopqrstuvwxyz'), 0, $length);
+  }
 
   /**
    * Display a listing of the resource.
@@ -119,7 +122,7 @@ class UserController extends Controller
     $this->authorize('edit', $user);
     $request->validate([
         'name' => 'min:1|max:30',
-        'bio' => 'max:500'
+        'bio' => 'max:500',
         ]);
     $user->name = $request->name;
     $user->bio = $request->bio;
@@ -133,7 +136,7 @@ class UserController extends Controller
     list(, $data) = explode(',', $image);
     $decoded_sumnail =
         InterventionImage::make(base64_decode($data))->resize(
-          100,
+          300,
           null,
           function ($constraint): void {
             $constraint->aspectRatio();
@@ -141,8 +144,8 @@ class UserController extends Controller
         )
           ->stream('jpg', 50);
 
-        Storage::disk('s3')->put($file_name . '_user_image', $decoded_sumnail, 'public');
-        $user->image = Storage::disk('s3')->url($file_name . '_user_image');
+    Storage::disk('s3')->put($file_name . '_user_image', $decoded_sumnail, 'public');
+    $user->image = Storage::disk('s3')->url($file_name . '_user_image');
 
     $user->save();
     return redirect('user/' . $user->id)->with('my_status', __('Updated a user.'));

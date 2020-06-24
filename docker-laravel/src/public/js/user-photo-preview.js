@@ -6,13 +6,6 @@
   let blobUrl;
   let targetImage;
 
-  const blobList = {
-    image_top: '',
-    image_seq1: '',
-    image_seq2: '',
-    image_seq3: '',
-    image_seq4: '',
-  };
   /**
  * create Blob getting photos to crop
  * @param {string} fileList
@@ -42,13 +35,13 @@
     $(`${croppieDivId} a.file-upload`).addClass('disabled');
     const $uploadCrop = $(croppieDivId).croppie({
       viewport: {
-        width: 100,
-        height: 100,
+        width: 200,
+        height: 200,
         type: 'circle',
       },
       boundary: {
-        width: 150,
-        height: 150,
+        width: 250,
+        height: 250,
       },
     });
 
@@ -63,7 +56,7 @@
     $(`${croppieDivId} a.upload-result`).bind('click', function() {
       $uploadCrop.croppie('result', {
         type: 'canvas',
-        size: '1080',
+        size: 'original',
       }).then(function(resp) {
         $(`#sent_${imageId}`).val(resp);
         console.log(imageId);
@@ -73,7 +66,7 @@
         try {
           target.innerHTML =
           `<img id="edited_${imageId}" class="edited round" src="${resp}"
-          name="edited_images" width="100%" value="${resp}">`;
+          name="edited_images" width="100%">`;
         } catch (e) {
           console.log(e);
         }
