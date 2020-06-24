@@ -6,13 +6,6 @@
   let blobUrl;
   let targetImage;
 
-  const blobList = {
-    image_top: '',
-    image_seq1: '',
-    image_seq2: '',
-    image_seq3: '',
-    image_seq4: '',
-  };
   /**
  * create Blob getting photos to crop
  * @param {string} fileList

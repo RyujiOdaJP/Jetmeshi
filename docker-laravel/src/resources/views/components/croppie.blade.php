@@ -7,14 +7,10 @@
     $margin = 'm-2';
     if ($image_name == 'ユーザー画像') {
         $margin = '';
-        $shape = 'round';
+        $shape = 'rounded-circle';
     }
 @endphp
-<style>
-    img.round{
-        border-radius: 50%;
-    }
-</style>
+
 <div id="croppie_{{ $id_attr }}" class="col-md-5 {{ $margin }}">
     <label for="cr-boundary">{{ __($image_name) }}</label>
        <span id="target_{{ $id_attr }}" class="target_image">
