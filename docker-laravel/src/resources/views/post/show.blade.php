@@ -62,7 +62,7 @@
                     @endif
                   </div>
                 </div>
-                <button class="btn btn-Jetgreen mb-2" type="submit">
+                <button class="btn btn-outline-success mb-2" type="submit">
                     <span><i class="fas fa-paper-plane"></i> {{__('投 稿')}}</span>
                 </button>
               </form>
@@ -71,7 +71,7 @@
               @if ($id_exist ?? '')
                 @foreach ($reviews as $review)
                 <h6 class="card-subtitle mb-2">
-                　<img src="{{ $review->user->image }}" alt="user_img" class="rounded-circle" style="width: 50px">
+                　<a href="{{ url('user/' . $review->user->id) }}" class=""><img src="{{ $review->user->image }}" alt="user_img" class="rounded-circle" style="width: 50px"></a>
                   {{ ' ' . $review->user->name }}
                 </h6>
                 <p>
@@ -100,8 +100,8 @@
         @auth
         @can('edit', $post)
             {{-- 編集・削除ボタン --}}
-            <div class="edit col-md-4 mb-2">
-                <a href="{{ url('post/'.$post->id.'/edit') }}" class="btn btn-Jetgreen w-100">
+            <div class="edit mb-2">
+                <a href="{{ url('post/'.$post->id.'/edit') }}" class="btn btn-Jetgreen">
                     <span><i class="fas fa-edit"></i>{{ __(' 編 集 ') }}</span>
                 </a>
             </div>

@@ -1,5 +1,5 @@
 @php
-    $title = __('Edit') . ': ' . $post->title;
+    $title = __('投稿を編集') . ': ' . $post->title;
     $old_src_top = old('image_top', $post->image_top);
     $old_src_seq1 = old('image_seq1', $post->image_seq1);
     $old_src_seq2 = old('image_seq1', $post->image_seq2);
@@ -75,7 +75,7 @@
      @slot('post', $post)
     @endcomponent
 
-    <button id="submit_images" type="submit" name="submit" class="row btn btn-primary">{{ __('Submit') }}</button>
+    <button id="submit_images" type="submit" name="submit" class="row ml-1 btn btn-outline-success"><i class="fas fa-paper-plane"></i>{{ __('投 稿') }}</button>
   </form>
   <div class="output"></div>
   {{-- <button id="test" class="btn btn-dark" onclick="a()">test</button> --}}

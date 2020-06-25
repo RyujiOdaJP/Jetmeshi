@@ -1,11 +1,11 @@
 @php
-    $col = 'col-4';
+    $col = 'ml-3';
     // 1ページの中で複数の削除ボタンを表示する場合があるので、
     // id属性がユニークになるようにmodal-delete-<コントローラ名>-<id番号>のように記述します。
     $id_attr = 'modal-delete-' . $controller . '-' . $id;
+    $title = '投稿';
     if ($controller == 'user') {
         $title  = 'アカウント';
-        $col = 'ml-3';
     }
 
 @endphp
@@ -13,7 +13,7 @@
 {{-- 削除ボタン --}}
 <div class="{{ $col }}">
     <button type="button" class="btn btn-danger w-100" data-toggle="modal" data-target="#{{ $id_attr }}">
-        <i class="fas fa-trash"></i>{{ __($title ?? ''.'削除') }}
+        <i class="fas fa-trash"></i>{{ $title . '削除' }}
     </button>
 </div>
 

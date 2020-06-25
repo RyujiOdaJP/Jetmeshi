@@ -57,8 +57,9 @@ body{
 a{
     color: $NavGray;
 }
-:hover{
+a:hover{
     color: $NavGrayHover;
+    text-decoration: none;
 }
 
 .btn-Jetgreen{

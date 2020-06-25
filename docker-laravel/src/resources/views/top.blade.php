@@ -19,11 +19,11 @@ $title = env('APP_NAME');
 
       <div class="row justify-content-around align-content-end h-75" style= "bottom: 0;">
         <div class="col-4">
-          <a href="{{ url('/post/create') }}" id="post_button" class="btn rounded-circle"
+          <a href="{{ url('/post/create') }}" id="post_button" class="btn btn-success rounded-circle"
           style="width: 100px; height: 100px; "><p style="margin-top: 40%">投稿する</p></a>
         </div>
         {{-- <div class="col-4"> --}}
-          <a href="{{ url('/post') }}" id="show_button" class="btn rounded-circle"
+          <a href="{{ url('/post') }}" id="show_button" class="btn btn-warning rounded-circle"
           style="width: 100px; height: 100px;"><p style="margin-top: 40%">飯を見る</p></a>
         {{-- </div> --}}
     </div>

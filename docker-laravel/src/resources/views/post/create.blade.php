@@ -1,5 +1,5 @@
 @php
-    $title = __('Create Post');
+    $title = __('投稿する');
 @endphp
 @extends('layouts.app')
 @section('content')
@@ -64,8 +64,8 @@
             @slot('tags', $tags)
             @endcomponent
         {{-- <input type="file" class="btn btn-dark" name="testfile"> --}}
-        <button type="submit" name="submit" class="row btn btn-Jetgreen">
-            <span>{{ __('投稿') }}</span>
+        <button type="submit" name="submit" class="row ml-1 btn btn-success">
+            <span><i class="fas fa-paper-plane"></i>{{ __(' 投 稿 ') }}</span>
         </button>
     </form>
 </div>
