@@ -1,3 +1,5 @@
+@extends('layouts.app')
+@section('content')
 <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8">
@@ -21,35 +23,36 @@
           @endif
 
           <div class="card-body">
-            <form method="POST" action="{{route('changepassword')}}">
-              @csrf
+            <form method="POST" action="{{'changepassword/' . Auth::id()}}">
+                @csrf
+                @method('PUT')
               <div class="form-group">
                 <label for="current">
                   現在のパスワード
                 </label>
                 <div>
-                  <input id="current" type="password" class="form-control" name="current-password" required autofocus>
+                  <input id="current" type="password" class="form-control" name="current_password" required autofocus>
                 </div>
               </div>
               <div class="form-group">
                 <label for="password">
-                  新しいのパスワード
+                  新しいパスワード
                 </label>
                 <div>
-                  <input id="password" type="password" class="form-control" name="new-password" required>
-                  @if ($errors->has('new-password'))
+                  <input id="password" type="password" class="form-control" name="new_password" required>
+                  @if ($errors->has('new_password'))
                     <span class="help-block">
-                      <strong>{{ $errors->first('new-password') }}</strong>
+                      <strong>{{ $errors->first('new_password') }}</strong>
                     </span>
                   @endif
                 </div>
               </div>
               <div class="form-group">
                 <label for="confirm">
-                  新しいのパスワード（確認用）
+                  新しいパスワード（確認用）
                 </label>
                 <div>
-                  <input id="confirm" type="password" class="form-control" name="new-password_confirmation" required>
+                  <input id="confirm" type="password" class="form-control" name="new_password_confirmation" required>
                 </div>
               </div>
               <div>
@@ -61,3 +64,4 @@
       </div>
     </div>
   </div>
+@endsection

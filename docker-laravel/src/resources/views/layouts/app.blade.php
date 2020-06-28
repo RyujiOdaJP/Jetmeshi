@@ -1,6 +1,3 @@
-@php
-
-@endphp
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -113,19 +110,14 @@
             {{ Auth::user()->name }} <span class="caret"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{{ url('user/'.Auth::id()) }}">{{ __('ユーザ画面') }}</a>
+              <a class="dropdown-item" href="{{ url('user/' . Auth::id()) }}">{{ __('ユーザ画面') }}</a>
+              <a class="dropdown-item" href="{{ url('changepassword') }}">{{ __('パスワード変更') }}</a>
               <a class="dropdown-item" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
                 {{ __('ログアウト') }}
               </a>
-              {{-- <div class="dropdown-item">
-                  @component('components.btn-del')
-                    @slot('controller', 'user')
-                    @slot('id', Auth::id())
-                    @slot('name', Auth::user()->name)
-                  @endcomponent
-              </div> --}}
+
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
