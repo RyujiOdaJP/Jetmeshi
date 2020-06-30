@@ -38,7 +38,9 @@ Route::post('/post/review/{post}', 'ReviewController@store')->name('review.store
 
 Route::get('/search', 'SearchController@index')->name('search');
 
-Route::post('like/{post}', 'LikeController@ajaxstore')->name('like.post');
+Route::post('like/{post}', 'LikeController@ajaxstore')->name('like');
+
+Route::post('post/like/{post}', 'LikeController@ajaxstore')->name('like.post');
 
 Route::get('changepassword', 'UserController@show_change_password_form');
 

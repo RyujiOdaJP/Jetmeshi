@@ -25,7 +25,7 @@ $(function() {
         type: 'POST', // GETかPOSTか
         url: 'like/' + likeId, // url+ファイル名 .htmlは省略可
         dataType: 'json',
-        timeout: 10000,
+        timeout: 15000,
       }).done(function(res) {
         const title = res['title']; // object
         const img = res['img']; // success
