@@ -54,7 +54,7 @@
                     <ul class="list-group" id="like-list">
                         @foreach ($liked_post_ids as $liked_post_id)
                         <li id="{{ 'list_' . $liked_post_id['post_id'] }}" class="list-group-item">
-                            <img src="{{ $app_post->post_sumnail($liked_post_id['post_id']) }}" alt="sumnails"
+                            <img src={{ $app_post->post_sumnail($liked_post_id['post_id']) }} alt="sumnails"
                                 class="sumnails" style="width: 50px;">
                             <a href="{{ url('post/' . $liked_post_id['post_id']) }}">
                                 {{ '  ' . $app_post->post_title($liked_post_id['post_id']) }}
