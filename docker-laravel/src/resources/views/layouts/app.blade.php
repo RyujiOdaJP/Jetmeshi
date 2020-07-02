@@ -33,7 +33,7 @@
 
 <body>
       <!-- Modal -->
-  {{-- <div class="modal fade" id="ModalScrollable" tabindex="-1" role="dialog" aria-labelledby="ModalScrollableLabel" aria-hidden="true">
+  <div class="modal fade" id="ModalScrollable" tabindex="-1" role="dialog" aria-labelledby="ModalScrollableLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -44,14 +44,14 @@
         </div>
         <div class="modal-body">
             <ul class="list-group" id="like-list">
-              @foreach (App\Like::liked_post_ids() as $liked_post_id)
+              {{-- @foreach (App\Like::liked_post_ids() as $liked_post_id)
                 <li id="{{ 'list_' . $liked_post_id['post_id'] }}" class="list-group-item">
                     <img src="{{ App\Post::post_sumnail($liked_post_id['post_id']) }}" alt="sumnails" class="sumnails" style="width: 50px;">
                     <a href="{{ 'post/' . $liked_post_id['post_id']  }}">
                         {{ '　' . App\Post::post_title($liked_post_id['post_id']) }}
                     </a>
                 </li>
-              @endforeach
+              @endforeach --}}
             </ul>
         </div>
         <div class="modal-footer">
@@ -59,7 +59,7 @@
         </div>
       </div>
     </div>
-  </div> --}}
+  </div>
 
  <!-- declare swipe senser -->
 　<div id="swipe-aria" class="standby true"></div>
