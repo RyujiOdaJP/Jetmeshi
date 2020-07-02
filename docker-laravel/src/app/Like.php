@@ -21,7 +21,7 @@ class Like extends Model
     return $this->belongsTo('App\Post');
   }
 
-  public static function liked_post_ids()
+  public function liked_post_ids()
   {
     // dd(self::select('post_id')
     // ->where('user_id', Auth::id())
