@@ -105,11 +105,11 @@ class Post extends Model
       ->first())['title'];
   }
 
-  public static function post_sumnail($id)
+  public static function post_thumbnail($id)
   {
     return
-    (self::select('sumnail_mobile')
+    (self::select('thumbnail_mobile')
       ->where('id', $id)
-      ->first())['sumnail_mobile'];
+      ->first())['thumbnail_mobile'];
   }
 }
