@@ -1,5 +1,5 @@
 @php
-    // $liked_post_ids = new App\Like::liked_post_ids();
+    $app_like = new App\Like;
     $app_post = new App\Post;
 @endphp
 
@@ -52,7 +52,7 @@
                 </div>
                 <div class="modal-body">
                     <ul class="list-group" id="like-list">
-                        {{-- @foreach ($liked_post_ids as $liked_post_id)
+                        @foreach ($app_like->liked_post_ids() as $liked_post_id)
                         <li id="{{ 'list_' . $liked_post_id['post_id'] }}" class="list-group-item">
                             <img src={{ $app_post->post_thumbnail($liked_post_id) }} alt="thumbnail"
                                 class="thumbnail" style="width: 50px;">
@@ -60,7 +60,7 @@
                                 {{ '  ' . $app_post->post_title($liked_post_id) }}
                             </a>
                         </li>
-                        @endforeach --}}
+                        @endforeach
                     </ul>
                 </div>
                 <div class="modal-footer">
