@@ -6157,8 +6157,7 @@ input[type=range]::-ms-track {
 }
 
 img.previews,
-.edited,
-.sumnails {
+.edited {
   width: 100%;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;

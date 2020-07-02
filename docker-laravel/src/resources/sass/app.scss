@@ -112,7 +112,7 @@ input[type=range]::-ms-track {
 .custom-range::-ms-thumb {
     background: $JetGreen;
   }
-img.previews, .edited, .sumnails {
+img.previews, .edited {
     width: 100%;
     @include img-radius-top;
     @include img-radius-bottom;
