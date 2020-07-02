@@ -24,8 +24,8 @@ class Like extends Model
   public static function liked_post_ids()
   {
     return
-    self::select('post_id')
+    (self::select('post_id')
       ->where('user_id', Auth::id())
-      ->where('likes', 1)->get();
+      ->where('likes', 1)->get());
   }
 }
