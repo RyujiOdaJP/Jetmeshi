@@ -1,5 +1,5 @@
 @php
-    $liked_post_ids = new App\Like::liked_post_ids();
+    // $liked_post_ids = new App\Like::liked_post_ids();
     $app_post = new App\Post;
 @endphp
 
