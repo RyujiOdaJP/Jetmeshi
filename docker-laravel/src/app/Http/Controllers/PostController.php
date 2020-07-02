@@ -227,20 +227,20 @@ class PostController extends Controller
       $paths[] = (Storage::disk('s3')->put($file_name . '_' . $items[$i], $decoded_data[$j], 'public'));
       $post->{'image_' . $items[$i]} = Storage::disk('s3')->url($file_name . '_' . $items[$i]);
       // store sumnail of top image
-    //   if ($i == 0) {
-    //     $decoded_sumnail =
-    //     InterventionImage::make(base64_decode($data))->resize(
-    //       100,
-    //       null,
-    //       function ($constraint): void {
-    //         $constraint->aspectRatio();
-    //       }
-    //     )
-    //       ->stream('jpg', 50);
+      if ($i == 0) {
+        $decoded_sumnail =
+        InterventionImage::make(base64_decode($data))->resize(
+          100,
+          null,
+          function ($constraint): void {
+            $constraint->aspectRatio();
+          }
+        )
+          ->stream('jpg', 50);
 
-    //     Storage::disk('s3')->put($file_name . '_sumnail', $decoded_sumnail, 'public');
-    //     $post->sumnail_mobile = Storage::disk('s3')->url($file_name . '_sumnail');
-    //   }
+        Storage::disk('s3')->put($file_name . '_sumnail', $decoded_sumnail, 'public');
+        $post->sumnail_mobile = Storage::disk('s3')->url($file_name . '_sumnail');
+      }
       $j = $j + 1;
     }
     $post->cooking_time = $request->cooking_time;
@@ -249,20 +249,20 @@ class PostController extends Controller
     //Tag table
     $tag_values = $request->input('tags'); //array
     // dd($tag_values);
-    if (!empty($tag_values)) {
-      foreach ($tag_values as $tag_value) {
-        if (!empty($tag_value)) {
-          $tag = Tag::firstOrCreate([
-                 'id' => $tag_value,
-             ]);
-          $tag_ids[] = $tag->id;
-        }
-      }
-      // will be updated to new tags
-      $post->tags()->sync($tag_ids);
-    } else {
-      $post->tags()->detach();
-    }
+    // if (!empty($tag_values)) {
+    //   foreach ($tag_values as $tag_value) {
+    //     if (!empty($tag_value)) {
+    //       $tag = Tag::firstOrCreate([
+    //              'id' => $tag_value,
+    //          ]);
+    //       $tag_ids[] = $tag->id;
+    //     }
+    //   }
+    //   // will be updated to new tags
+    //   $post->tags()->sync($tag_ids);
+    // } else {
+    //   $post->tags()->detach();
+    // }
 
     // save posts table
     $post->save();
