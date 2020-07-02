@@ -53,7 +53,7 @@
                 </div>
                 <div class="modal-body">
                     <ul class="list-group" id="like-list">
-                        @foreach ($user->liked_posts_by_user() as $liked_post_id)
+                        @foreach ($user->liked_posts_by_user(null) as $liked_post_id)
                         <li id="{{ 'list_' . $liked_post_id['post_id'] }}" class="list-group-item">
                             <img src={{ $app_post->post_thumbnail($liked_post_id) }} alt="thumbnail"
                                 class="thumbnail" style="width: 50px;">
