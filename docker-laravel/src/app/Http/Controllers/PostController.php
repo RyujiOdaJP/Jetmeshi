@@ -249,20 +249,20 @@ class PostController extends Controller
     //Tag table
     $tag_values = $request->input('tags'); //array
     // dd($tag_values);
-    // if (!empty($tag_values)) {
-    //   foreach ($tag_values as $tag_value) {
-    //     if (!empty($tag_value)) {
-    //       $tag = Tag::firstOrCreate([
-    //              'id' => $tag_value,
-    //          ]);
-    //       $tag_ids[] = $tag->id;
-    //     }
-    //   }
-    //   // will be updated to new tags
-    //   $post->tags()->sync($tag_ids);
-    // } else {
-    //   $post->tags()->detach();
-    // }
+    if (!empty($tag_values)) {
+      foreach ($tag_values as $tag_value) {
+        if (!empty($tag_value)) {
+          $tag = Tag::firstOrCreate([
+                 'id' => $tag_value,
+             ]);
+          $tag_ids[] = $tag->id;
+        }
+      }
+      // will be updated to new tags
+      $post->tags()->sync($tag_ids);
+    } else {
+      $post->tags()->detach();
+    }
 
     // save posts table
     $post->save();
