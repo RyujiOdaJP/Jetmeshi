@@ -1,5 +1,5 @@
 @php
-    $title = __('🍙投稿一覧');
+    $title = __('投稿一覧');
 @endphp
 @extends('layouts.app')
 @section('content')
@@ -13,10 +13,10 @@
                         <i class="fas fa-stopwatch"></i>{{ __(' 調理時間') }}
                     </label>
                     <input id="cooking_time_min" type="number" min="0" max="60" value=""
-                    class="form-control custom-control-inline " name="cooking_time_min" ></input>
+                        class="form-control custom-control-inline " name="cooking_time_min"></input>
                     <span>~</span>
                     <input id="cooking_time_max" type="number" min="0" max="60" value=""
-                    class="form-control custom-control-inline" name="cooking_time_max" ></input>
+                        class="form-control custom-control-inline" name="cooking_time_max"></input>
                     <span>分</span>
                 </div>
             </div>
@@ -26,17 +26,17 @@
                         <i class="fas fa-yen-sign"></i>{{ __(' 調理費用') }}
                     </label>
                     <input id="budget_min" type="number" min="0" max="2000" step="50" value=""
-                    class="form-control custom-control-inline" name="budget_min" >
+                        class="form-control custom-control-inline" name="budget_min">
                     <span>~</span>
                     <input id="budget_max" type="number" min="0" max="2000" step="50" value=""
-                    class="form-control custom-control-inline" name="budget_max" >
+                        class="form-control custom-control-inline" name="budget_max">
                     <span>円</span>
                 </div>
             </div>
         </div>
 
         @component('components.tags')
-            @slot('tags', $tags)
+        @slot('tags', $tags)
         @endcomponent
 
         <div class="container">
@@ -48,14 +48,14 @@
         <button type="submit" class="btn btn-success"><i class="fas fa-search"></i>{{ __(' 検 索') }}</button>
     </form>
     <div class="slide_container row">
-            @for ($i = 0; $i < count($posts); $i++)
-                 @component('components.carousel')
-                    @slot('post', $posts[$i])
-                    @slot('star_avg', $stars_avg[$i])
-                    @slot('grid', 'col-5')
-                    @slot('tag_names', $tag_names[$i])
-                 @endcomponent
-            @endfor
+        @for ($i = 0; $i < count($posts); $i++)
+            @component('components.carousel')
+            @slot('post', $posts[$i])
+            @slot('star_avg', $stars_avg[$i])
+            @slot('grid', 'col-5')
+            @slot('tag_names', $tag_names[$i])
+            @endcomponent
+        @endfor
     </div>
     {{ $posts->appends(request()->except('page'))->links('pagination::default') }}
 </div>

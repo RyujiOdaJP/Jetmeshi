@@ -10,27 +10,27 @@
             {{-- ユーザー1件の情報 --}}
             <div class="row w-100 m-0">
                 <div class="media mb-3 offset-1 align-items-center">
-                    <img class="d-flex mr-3 rounded-circle" src="{{ $user->image }}"
-                    alt="Generic placeholder image" style="width: 100px;">
+                    <img class="d-flex mr-3 rounded-circle" src="{{ $user->image }}" alt="Generic placeholder image"
+                        style="width: 100px;">
                     <div class="media-body">
-                      <h4>{{ $user->name }}</h4>
+                        <h4>{{ $user->name }}</h4>
                     </div>
                 </div>
             </div>
             <div class="row justify-content-start">
                 @auth
                 @can('edit', $user)
-                    {{-- 編集・削除ボタン --}}
-                    <div class="edit offset-1 mb-2">
-                        <a href="{{ url('user/'.$user->id.'/edit') }}" class="btn btn-outline-success w-100">
-                            <i class="fas fa-edit"></i>{{ __(' 編 集 ') }}
-                        </a>
-                    </div>
-                    @component('components.btn-del')
-                        @slot('controller', 'user')
-                        @slot('id', $user->id)
-                        @slot('name', $user->name)
-                    @endcomponent
+                {{-- 編集・削除ボタン --}}
+                <div class="edit offset-1 mb-2">
+                    <a href="{{ url('user/'.$user->id.'/edit') }}" class="btn btn-outline-success w-100">
+                        <i class="fas fa-edit"></i>{{ __(' 編 集 ') }}
+                    </a>
+                </div>
+                @component('components.btn-del')
+                @slot('controller', 'user')
+                @slot('id', $user->id)
+                @slot('name', $user->name)
+                @endcomponent
 
                 @endcan
                 @endauth
@@ -77,13 +77,13 @@
 
     <div class="slide_container row">
         @for ($i = 0; $i < count($user->posts); $i++)
-             @component('components.carousel')
-             @slot('post', $user->posts[$i])
-             @slot('star_avg', $stars_avg[$i])
-             @slot('grid', 'col-5')
-             @slot('tag_names', $tag_names[$i])
-             @endcomponent
-        @endfor
+            @component('components.carousel')
+            @slot('post', $user->posts[$i])
+            @slot('star_avg', $stars_avg[$i])
+            @slot('grid', 'col-5')
+            @slot('tag_names', $tag_names[$i])
+            @endcomponent
+            @endfor
     </div>
 </div>
 <div class="container">
