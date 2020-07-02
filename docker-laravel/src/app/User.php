@@ -68,10 +68,16 @@ class User extends Authenticatable
     return $this->hasMany('App\Like');
   }
 
-  public function likes_where_1()
+  public function likes_count($id)
   {
-    return $this->hasMany('App\Like')
-      ->where('likes', '1');
+    return
+    $this
+    ->join('posts', 'users.id', '=', 'posts.user_id')
+    ->join('likes', 'posts.id', '=', 'likes.post_id')
+    ->where('likes', 1)
+    ->where('posts.user_id', $id)
+    ->select('likes')
+    ->count();
   }
 
 //   public function reviewed_posts()
