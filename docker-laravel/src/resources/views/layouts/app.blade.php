@@ -56,7 +56,7 @@
                             <img src="{{ App\Post::post_sumnail($liked_post_id['post_id']) }}" alt="sumnails"
                                 class="sumnails" style="width: 50px;">
                             <a href="{{ 'post/' . $liked_post_id['post_id'] }}">
-                                {{ '　' . App\Post::post_title($liked_post_id['post_id']) }}
+                                {{ '  ' . App\Post::post_title($liked_post_id['post_id']) }}
                             </a>
                         </li>
                         @endforeach
