@@ -1,7 +1,7 @@
 @php
     // $app_like = new App\Like;
-    // $app_post = new App\Post;
-    $liked_posts = App\User::liked_posts_by_user();
+    $app_post = new App\Post;
+    // $liked_posts = App\User::liked_posts_by_user();
 @endphp
 
 <!doctype html>
