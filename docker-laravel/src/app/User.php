@@ -73,24 +73,30 @@ class User extends Authenticatable
   {
     return
     $this
-    ->join('posts', 'users.id', '=', 'posts.user_id')
-    ->join('likes', 'posts.id', '=', 'likes.post_id')
-    ->where('likes', 1)
-    ->where('posts.user_id', $id)
-    ->select('likes')
-    ->count();
+      ->join('posts', 'users.id', '=', 'posts.user_id')
+      ->join('likes', 'posts.id', '=', 'likes.post_id')
+      ->where('likes', 1)
+      ->where('posts.user_id', $id)
+      ->select('likes')
+      ->count();
   }
 
   public function liked_posts_by_user()
   {
+    $arr =
+        $this->join('posts', 'users.id', '=', 'posts.user_id')
+          ->join('likes', 'posts.id', '=', 'likes.post_id')
+          ->where('likes', 1)
+          ->where('likes.user_id', Auth::id())
+          ->select('post_id')
+          ->orderBy('likes.created_at')
+          ->get()->toArray();
+
+    foreach ($arr as $post_id) {
+      $post_ids[] = $post_id['post_id'];
+    }
     return
-    $this
-    ->join('posts', 'users.id', '=', 'posts.user_id')
-    ->join('likes', 'posts.id', '=', 'likes.post_id')
-    ->where('likes', 1)
-    ->where('likes.user_id', Auth::id())
-    ->select('post_id')
-    ->get()->toArray();
+    $post_ids;
   }
 
   public function sendPasswordResetNotification($token): void
