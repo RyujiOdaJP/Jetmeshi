@@ -73,7 +73,7 @@ jobs:
 
       # run tests with phpunit or codecept
       #     - "1c:ca:0f:f8:ac:e2:3d:b9:a5:4c:6e:2e:f1:d5:ea:ee"
-      - run: cd docker-laravel/src/ && composer test && cd ../../
+      # - run: cd docker-laravel/src/ && composer test && cd ../../
       # - run: ./vendor/bin/codecept build
       # - run: ./vendor/bin/codecept run
 
