@@ -46,8 +46,8 @@ class LikeController extends Controller
           ->select('title')
           ->first()['title'],
         'img' => $likes->post()
-          ->select('sumnail_mobile')
-          ->first()['sumnail_mobile'],
+          ->select('thumbnail_mobile')
+          ->first()['thumbnail_mobile'],
     ];
     }
 
@@ -68,8 +68,8 @@ class LikeController extends Controller
           ->select('title')
           ->first()['title'],
         'img' => $likes->post()
-          ->select('sumnail_mobile')
-          ->first()['sumnail_mobile'],
+          ->select('thumbnail_mobile')
+          ->first()['thumbnail_mobile'],
     ];
   }
 }

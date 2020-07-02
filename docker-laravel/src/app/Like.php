@@ -23,9 +23,6 @@ class Like extends Model
 
   public function liked_post_ids()
   {
-    // dd(self::select('post_id')
-    // ->where('user_id', Auth::id())
-    // ->where('likes', 1)->get()->toArray());
     return
     self::select('post_id')
       ->where('user_id', Auth::id())

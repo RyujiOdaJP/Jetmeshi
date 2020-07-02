@@ -1,6 +1,3 @@
-@php
-
-@endphp
 @extends('layouts.app')
 @section('content')
 
@@ -46,7 +43,7 @@
 
                 <div class="col-4">
                     <label for="like"><i class="fas fa-heart"></i>{{ __(' いいね') }}</label>
-                    <p id="like">{{ $user->likes_where_1()->count() }}</p>
+                    <p id="like">{{ $user->likes_count($user->id) }}</p>
                 </div>
 
                 <div class="col-4">
