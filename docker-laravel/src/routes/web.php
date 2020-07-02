@@ -42,6 +42,8 @@ Route::post('like/{post}', 'LikeController@ajaxstore')->name('like');
 
 Route::post('post/like/{post}', 'LikeController@ajaxstore')->name('like.post');
 
+Route::post('user/like/{post}', 'LikeController@ajaxstore')->name('like.user');
+
 Route::get('changepassword', 'UserController@show_change_password_form');
 
 Route::match(['put', 'patch'], 'changepassword/{user}', 'UserController@change_password')->name('changepassword');
