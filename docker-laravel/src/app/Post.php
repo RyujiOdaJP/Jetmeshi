@@ -97,19 +97,19 @@ class Post extends Model
    * @param number $id
    * @return int
    */
-//   public static function post_title($id)
-//   {
-//     return
-//     (self::select('title')
-//       ->where('id', $id)
-//       ->first())['title'];
-//   }
+  public static function post_title($id)
+  {
+    return
+    (self::select('title')
+      ->where('id', $id)
+      ->first())['title'];
+  }
 
-//   public static function post_sumnail($id)
-//   {
-//     return
-//     (self::select('sumnail_mobile')
-//       ->where('id', $id)
-//       ->first())['sumnail_mobile'];
-//   }
+  public static function post_sumnail($id)
+  {
+    return
+    (self::select('sumnail_mobile')
+      ->where('id', $id)
+      ->first())['sumnail_mobile'];
+  }
 }
