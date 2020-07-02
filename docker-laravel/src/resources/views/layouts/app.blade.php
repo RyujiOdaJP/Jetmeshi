@@ -1,3 +1,9 @@
+@php
+    // $app_like = new App\Like;
+    $app_post = new App\Post;
+    $user = new App\User;
+@endphp
+
 <!doctype html>
 {{-- <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"> --}}
 <html lang="en">
@@ -47,7 +53,8 @@
                 </div>
                 <div class="modal-body">
                     <ul class="list-group" id="like-list">
-                        @foreach (App\Like::liked_post_ids() as $liked_post_id)
+
+                        @foreach ($user->liked_posts_by_user() as $liked_post_id)
                         <li id="{{ 'list_' . $liked_post_id['post_id'] }}" class="list-group-item">
                             <img src={{ App\Post::post_thumbnail($liked_post_id['post_id']) }} alt="thumbnail"
                                 class="thumbnail" style="width: 50px;">

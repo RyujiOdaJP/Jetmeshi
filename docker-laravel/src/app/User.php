@@ -7,6 +7,7 @@ namespace App;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 //モデルはテーブルとマッピングされたオブジェクトです。
 // DB操作を行うためのクラスになります。
@@ -80,12 +81,17 @@ class User extends Authenticatable
     ->count();
   }
 
-//   public function reviewed_posts()
-//   {
-//     return
-//     $this->hasMany('App\Post')
-//     ->reviews();
-//   }
+  public function liked_posts_by_user()
+  {
+    return
+    $this
+    ->join('posts', 'users.id', '=', 'posts.user_id')
+    ->join('likes', 'posts.id', '=', 'likes.post_id')
+    ->where('likes', 1)
+    ->where('likes.user_id', Auth::id())
+    ->select('post_id')
+    ->get()->toArray();
+  }
 
   public function sendPasswordResetNotification($token): void
   {
