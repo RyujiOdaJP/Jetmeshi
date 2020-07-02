@@ -33,7 +33,7 @@
 
 <body>
       <!-- Modal -->
-  <div class="modal fade" id="ModalScrollable" tabindex="-1" role="dialog" aria-labelledby="ModalScrollableLabel" aria-hidden="true">
+  {{-- <div class="modal fade" id="ModalScrollable" tabindex="-1" role="dialog" aria-labelledby="ModalScrollableLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -59,7 +59,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --}}
 
  <!-- declare swipe senser -->
 　<div id="swipe-aria" class="standby true"></div>
