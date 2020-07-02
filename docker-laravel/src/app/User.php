@@ -81,10 +81,11 @@ class User extends Authenticatable
       ->count();
   }
 
-  public function liked_posts_by_user()
+
+  public static function liked_posts_by_user()
   {
     $arr =
-        $this->join('posts', 'users.id', '=', 'posts.user_id')
+        self::join('posts', 'users.id', '=', 'posts.user_id')
           ->join('likes', 'posts.id', '=', 'likes.post_id')
           ->where('likes', 1)
           ->where('likes.user_id', Auth::id())
