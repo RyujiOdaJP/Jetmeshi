@@ -87,6 +87,7 @@ class PostController extends Controller
     $images = [];
     $data = '';
     $decoded_data = [];
+    $paths = [];
     $decoded_sumnail = '';
 
     for ($i = 0, $j = 0; count($items) > $i; $i++) {
@@ -107,7 +108,7 @@ class PostController extends Controller
                 )
                   ->stream('jpg', 50);
 
-      Storage::disk('s3')->put($file_name . '_' . $items[$i], $decoded_data[$j], 'public');
+      $paths[] = Storage::disk('s3')->put($file_name . '_' . $items[$i], $decoded_data[$j], 'public');
       $post->{'image_' . $items[$i]} = Storage::disk('s3')->url($file_name . '_' . $items[$i]);
 
       // store sumnail of top image
