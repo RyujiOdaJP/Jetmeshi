@@ -56,7 +56,7 @@
                         <li id="{{ 'list_' . $liked_post_id['post_id'] }}" class="list-group-item">
                             <img src="{{ $app_post->post_sumnail($liked_post_id['post_id']) }}" alt="sumnails"
                                 class="sumnails" style="width: 50px;">
-                            <a href="{{ 'post/' . $liked_post_id['post_id'] }}">
+                            <a href="{{ url('post/' . $liked_post_id['post_id']) }}">
                                 {{ '  ' . $app_post->post_title($liked_post_id['post_id']) }}
                             </a>
                         </li>
