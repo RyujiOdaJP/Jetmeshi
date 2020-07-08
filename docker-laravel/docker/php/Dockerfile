@@ -37,7 +37,7 @@ RUN apk update && \
     libzip-dev=~1.6 \
     oniguruma-dev=~6.9 && \
   pecl install xdebug && \
-  git clone https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis && \
+  # git clone https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis && \
   apk del .build-dependencies && \
   docker-php-ext-install intl pdo_mysql mbstring zip bcmath redis && \
   docker-php-ext-enable xdebug && \
