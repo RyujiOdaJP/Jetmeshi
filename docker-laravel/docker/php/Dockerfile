@@ -21,10 +21,10 @@ RUN apk add --update nodejs nodejs-npm
 RUN apk update && \
   apk add --update --no-cache --virtual=.build-dependencies \
     autoconf=~2.69 \
-    gcc=~9.2 \
-    g++=~9.2 \
-    make=~4.2 \
-    git=~2.24 && \
+    gcc=~9.3 \
+    g++=~9.3 \
+    make=~4.3 \
+    git=~2.26 && \
   # for gd
   apk add --update --no-cache \
     freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
