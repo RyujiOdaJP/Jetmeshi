@@ -88,7 +88,7 @@ class PostController extends Controller
     $data = '';
     $decoded_data = [];
     $paths = [];
-    $decoded_sumnail = '';
+    $decoded_thumbnail = '';
 
     for ($i = 0, $j = 0; count($items) > $i; $i++) {
       if ($request->{'sent_image_' . $items[$i]} == null) {
@@ -111,9 +111,9 @@ class PostController extends Controller
       $paths[] = Storage::disk('s3')->put($file_name . '_' . $items[$i], $decoded_data[$j], 'public');
       $post->{'image_' . $items[$i]} = Storage::disk('s3')->url($file_name . '_' . $items[$i]);
 
-      // store sumnail of top image
+      // store thumbnail of top image
       if ($i == 0) {
-        $decoded_sumnail =
+        $decoded_thumbnail =
         InterventionImage::make(base64_decode($data))->resize(
           100,
           null,
@@ -123,8 +123,8 @@ class PostController extends Controller
         )
           ->stream('jpg', 50);
 
-        Storage::disk('s3')->put($file_name . '_sumnail', $decoded_sumnail, 'public');
-        $post->sumnail_mobile = Storage::disk('s3')->url($file_name . '_sumnail');
+        Storage::disk('s3')->put($file_name . '_thumbnail', $decoded_thumbnail, 'public');
+        $post->thumbnail_mobile = Storage::disk('s3')->url($file_name . '_thumbnail');
       }
       $j = $j + 1;
     }
@@ -226,9 +226,9 @@ class PostController extends Controller
                   ->stream('jpg', 50);
       $paths[] = (Storage::disk('s3')->put($file_name . '_' . $items[$i], $decoded_data[$j], 'public'));
       $post->{'image_' . $items[$i]} = Storage::disk('s3')->url($file_name . '_' . $items[$i]);
-      // store sumnail of top image
+      // store thumbnail of top image
       if ($i == 0) {
-        $decoded_sumnail =
+        $decoded_thumbnail =
         InterventionImage::make(base64_decode($data))->resize(
           100,
           null,
@@ -238,8 +238,8 @@ class PostController extends Controller
         )
           ->stream('jpg', 50);
 
-        Storage::disk('s3')->put($file_name . '_sumnail', $decoded_sumnail, 'public');
-        $post->sumnail_mobile = Storage::disk('s3')->url($file_name . '_sumnail');
+        Storage::disk('s3')->put($file_name . '_thumbnail', $decoded_thumbnail, 'public');
+        $post->thumbnail_mobile = Storage::disk('s3')->url($file_name . '_thumbnail');
       }
       $j = $j + 1;
     }
