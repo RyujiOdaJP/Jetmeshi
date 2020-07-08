@@ -33,7 +33,7 @@ RUN apk update && \
   docker-php-ext-configure gd --with-freetype --with-jpeg && \
   docker-php-ext-install -j$(nproc) gd && \
   apk add --update --no-cache \
-    icu-dev=~67.2 \
+    icu-dev=~67.1 \
     libzip-dev=~1.6 \
     oniguruma-dev=~6.9 && \
   pecl install xdebug && \
