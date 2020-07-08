@@ -43,7 +43,8 @@ RUN apk update && \
   # docker-php-ext-install intl pdo_mysql mbstring zip bcmath redis && \
   docker-php-ext-install intl pdo_mysql mbstring zip bcmath && \
   docker-php-ext-enable xdebug && \
-  mkdir $PSYSH_DIR && curl $PHP_MANUAL_URL -o $PSYSH_PHP_MANUAL && \
+  mkdir $PSYSH_DIR && curl $PHP_MANUAL_URL -o $PSYSH_PHP_MANUAL
+  # && \
   # curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
   # composer config -g process-timeout 3600 && \
   # composer config -g repos.packagist composer https://packagist.jp && \
