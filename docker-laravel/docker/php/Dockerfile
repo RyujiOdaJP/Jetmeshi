@@ -33,8 +33,8 @@ RUN apk update && \
   docker-php-ext-configure gd --with-freetype --with-jpeg && \
   docker-php-ext-install -j$(nproc) gd && \
   apk add --update --no-cache \
-    icu-dev=~64.2 \
-    libzip-dev=~1.5 \
+    icu-dev=~67.2 \
+    libzip-dev=~1.6 \
     oniguruma-dev=~6.9 && \
   pecl install xdebug && \
   git clone https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis && \
