@@ -56,6 +56,9 @@
             @slot('tag_names', $tag_names[$i])
             @endcomponent
         @endfor
+        @if (count($posts)%2 != 0)
+            <div class="col-5 slide_show"></div>
+        @endif
     </div>
     {{ $posts->appends(request()->except('page'))->links('pagination::default') }}
 </div>

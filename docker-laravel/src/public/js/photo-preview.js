@@ -57,7 +57,7 @@
       $uploadCrop.croppie('result', {
         type: 'canvas',
         size: 'viewport',
-        quality: '0.5',
+        quality: '0.8',
         format: 'jpeg',
       }).then(function(resp) {
         $(`#sent_${imageId}`).val(resp);
