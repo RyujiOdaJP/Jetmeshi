@@ -7,7 +7,9 @@
             {{-- ユーザー1件の情報 --}}
             <div class="row w-100 m-0">
                 <div class="media mb-3 offset-1 align-items-center">
-                    <img class="d-flex mr-3 rounded-circle" src="{{ $user->image }}" alt="Generic placeholder image"
+                    <img class="d-flex mr-3 rounded-circle"
+                        src="{{ $user->image ?? 'https://cm-jetmeshi.s3-ap-northeast-1.amazonaws.com/noimage+template.jpg' }}"
+                        alt="Generic placeholder image"
                         style="width: 100px;">
                     <div class="media-body">
                         <h4>{{ $user->name }}</h4>
