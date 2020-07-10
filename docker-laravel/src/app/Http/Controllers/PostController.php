@@ -79,7 +79,7 @@ class PostController extends Controller
     // TODO: add comopressing metho like lambda
     $post = new Post;
     $post->title = $request->title;
-    $post->sequence_body = nl2br($request->sequence_body, false);
+    $post->sequence_body = $request->sequence_body;
     $post->user_id = $request->user()->id;
 
     $file_name = date('Y_m_d_His') . '-' . $this->random();
@@ -100,13 +100,13 @@ class PostController extends Controller
 
       $decoded_data[] =
                 InterventionImage::make(base64_decode($data))->resize(
-                  700,
+                  1080,
                   null,
                   function ($constraint): void {
                     $constraint->aspectRatio();
                   }
                 )
-                  ->stream('jpg', 50);
+                  ->stream('jpg', 80);
 
       $paths[] = Storage::disk('s3')->put($file_name . '_' . $items[$i], $decoded_data[$j], 'public');
       $post->{'image_' . $items[$i]} = Storage::disk('s3')->url($file_name . '_' . $items[$i]);
@@ -121,7 +121,7 @@ class PostController extends Controller
             $constraint->aspectRatio();
           }
         )
-          ->stream('jpg', 50);
+          ->stream('jpg', 80);
 
         Storage::disk('s3')->put($file_name . '_thumbnail', $decoded_thumbnail, 'public');
         $post->thumbnail_mobile = Storage::disk('s3')->url($file_name . '_thumbnail');
@@ -200,7 +200,7 @@ class PostController extends Controller
   {
     $file_name = date('Y_m_d_His') . '-' . $this->random();
     $post->title = $request->title;
-    $post->sequence_body = nl2br($request->sequence_body, false);
+    $post->sequence_body = $request->sequence_body;
 
     // upload images to S3 & get url to put them into DB
     $items = ['top', 'seq1', 'seq2', 'seq3', 'seq4'];
@@ -217,13 +217,13 @@ class PostController extends Controller
       list(, $data) = explode(',', $images[$j]);
       $decoded_data[] =
                 InterventionImage::make(base64_decode($data))->resize(
-                  700,
+                  1080,
                   null,
                   function ($constraint): void {
                     $constraint->aspectRatio();
                   }
                 )
-                  ->stream('jpg', 50);
+                  ->stream('jpg', 80);
       $paths[] = (Storage::disk('s3')->put($file_name . '_' . $items[$i], $decoded_data[$j], 'public'));
       $post->{'image_' . $items[$i]} = Storage::disk('s3')->url($file_name . '_' . $items[$i]);
       // store thumbnail of top image
@@ -236,7 +236,7 @@ class PostController extends Controller
             $constraint->aspectRatio();
           }
         )
-          ->stream('jpg', 50);
+          ->stream('jpg', 80);
 
         Storage::disk('s3')->put($file_name . '_thumbnail', $decoded_thumbnail, 'public');
         $post->thumbnail_mobile = Storage::disk('s3')->url($file_name . '_thumbnail');
