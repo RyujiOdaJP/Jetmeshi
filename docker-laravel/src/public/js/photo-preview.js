@@ -56,7 +56,9 @@
     $(`${croppieDivId} a.upload-result`).bind('click', function() {
       $uploadCrop.croppie('result', {
         type: 'canvas',
-        size: '1080',
+        size: 'viewport',
+        quality: '0.5',
+        format: 'jpeg',
       }).then(function(resp) {
         $(`#sent_${imageId}`).val(resp);
         console.log(imageId);
@@ -66,7 +68,7 @@
         try {
           target.innerHTML =
           `<img id="edited_${imageId}" class="edited" src="${resp}"
-          name="edited_images" width="100%" value="${resp}">`;
+          name="edited_images" width="100%">`;
         } catch (e) {
           console.log(e);
         }
@@ -94,6 +96,7 @@
 
   // run individual images editing method
   const imageElements = document.getElementsByName('input_images');
+  const sizeLimit = 1024 * 1024 * 2;
 
   for (const imageElement of imageElements) {
     imageElement.addEventListener('change', function(ev) {
@@ -105,6 +108,10 @@
       targetImage = document.getElementById(`target_${imageId}`);
       // eslint-disable-next-line no-invalid-this
       const fileList = this.files;
+      if (fileList[0].size > sizeLimit) {
+        alert('ファイルサイズは2MB以下にしてください'); // エラーメッセージを表示
+        return; // 終了する
+      }
       createBlob(fileList);
       croppieJS(imageId, `#croppie_${imageId}`, blobUrl, targetImage);
     });

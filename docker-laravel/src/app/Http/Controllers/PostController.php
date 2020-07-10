@@ -100,7 +100,7 @@ class PostController extends Controller
 
       $decoded_data[] =
                 InterventionImage::make(base64_decode($data))->resize(
-                  1080,
+                  700,
                   null,
                   function ($constraint): void {
                     $constraint->aspectRatio();
@@ -217,7 +217,7 @@ class PostController extends Controller
       list(, $data) = explode(',', $images[$j]);
       $decoded_data[] =
                 InterventionImage::make(base64_decode($data))->resize(
-                  1080,
+                  700,
                   null,
                   function ($constraint): void {
                     $constraint->aspectRatio();
