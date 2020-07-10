@@ -35,7 +35,7 @@
                 @endauth
             </div>
             <div class="w-100 row">
-                <p class="offset-1 col-10">{{ $user->bio }}</p>
+                <p class="offset-1 col-10">{!! nl2br($user->bio) !!}</p>
             </div>
             <div class="row justify-content-center w-100 m-0 user_evaluation">
                 <div class="col-4">
@@ -56,7 +56,7 @@
             <dl class="row m-0 justify-content-center">
                 @can ('edit', $user)
                 <dt class="col-md-3"><i class="far fa-envelope"></i>{{ __('　E-Mail') }}</dt>
-                <dd class="col-md-7">{{ $user->email }}</dd>
+                <dd class="col-md-7"><a href="{{'mailto:' . $user->email }}">{{ $user->email }}</a></dd>
                 @endcan
                 <dt class="col-md-3"><i class="fab fa-twitter"></i>{{ __('　Twitter') }}</dt>
                 <dd class="col-md-7">{{ $user->twitter }}</dd>

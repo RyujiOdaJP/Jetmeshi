@@ -21,21 +21,20 @@ class Like extends Model
     return $this->belongsTo('App\Post');
   }
 
-
   public static function liked_post_ids()
   {
     $post_ids = [];
     $arr =
       self::select('post_id')
-      ->where('user_id', Auth::id())
-      ->where('likes', 1)
-      ->get()
-      ->toArray();
+        ->where('user_id', Auth::id())
+        ->where('likes', 1)
+        ->get()
+        ->toArray();
 
-      foreach ($arr as $post_id) {
-        $post_ids[] = $post_id['post_id'];
-      }
-      return
+    foreach ($arr as $post_id) {
+      $post_ids[] = $post_id['post_id'];
+    }
+    return
       $post_ids;
   }
 }

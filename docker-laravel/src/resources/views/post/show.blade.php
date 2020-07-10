@@ -10,7 +10,7 @@
         @slot('post', $post)
         @slot('star_avg', $star_avg)
         @slot('tag_names', $tag_names)
-        @slot('grid', 'row')
+        @slot('grid', '')
         @endcomponent
     </div>
     <div class="container mb-3">
@@ -21,7 +21,7 @@
                 <p class="card-text">
                     {{-- {{ htmlspecialchars($post->sequence_body, ENT_QUOTES, 'UTF-8') }} --}}
                     {{-- {{preg_replace ("<br />","\n",$post->sequence_body)}} --}}
-                    {!! $post->sequence_body !!}
+                    {!! nl2br($post->sequence_body) !!}
                 </p>
             </div>
         </div>
@@ -88,7 +88,7 @@
                             @endfor
                 </p>
                 <p class="card-text">
-                    {{ $review->review_body }}
+                    {!! nl2br($review->review_body) !!}
                 </p>
                 @endforeach
                 @else
@@ -97,9 +97,27 @@
             </div>
         </div>
     </div>
+    <div class="container mb-3">
+        <div class="card ml-auto mr-auto">
+            <div class="card-body">
+                <h4 class="card-title">投稿者</h4>
+                <div class="media mt-3 mb-3 offset-1 align-items-center">
+                    <a href="{{ url( 'user/' . $post->user_id) }}">
+                        <img class="d-flex mr-3 rounded-circle"
+                            src="{{ ($post->user()->select('image')->first())['image'] ?? 'https://cm-jetmeshi.s3-ap-northeast-1.amazonaws.com/noimage+template.jpg' }}"
+                            alt="Generic placeholder image"
+                            style="width: 100px;">
+                    </a>
+                    <div class="media-body">
+                        <h4>{{ ($post->user()->select('name')->first())['name'] }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="container">
 
+<div class="container">
     <div class="row justify-content-center">
         @auth
         @can('edit', $post)

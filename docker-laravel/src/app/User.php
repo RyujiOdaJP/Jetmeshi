@@ -81,7 +81,6 @@ class User extends Authenticatable
       ->count();
   }
 
-
   public static function liked_posts_by_user()
   {
     $arr =

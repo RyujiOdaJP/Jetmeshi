@@ -134,8 +134,10 @@ class UserController extends Controller
 
     $file_name = date('Y_m_d_His') . '-' . $this->random();
     $image = $request->sent_image;
-    list(, $data) = explode(',', $image);
-    $decoded_sumnail =
+
+    if ($image !== null) {
+      list(, $data) = explode(',', $image);
+      $decoded_sumnail =
         InterventionImage::make(base64_decode($data))->resize(
           300,
           null,
@@ -145,9 +147,9 @@ class UserController extends Controller
         )
           ->stream('jpg', 50);
 
-    Storage::disk('s3')->put($file_name . '_user_image', $decoded_sumnail, 'public');
-    $user->image = Storage::disk('s3')->url($file_name . '_user_image');
-
+      Storage::disk('s3')->put($file_name . '_user_image', $decoded_sumnail, 'public');
+      $user->image = Storage::disk('s3')->url($file_name . '_user_image');
+    }
     $user->save();
     return redirect('user/' . $user->id)->with('my_status', __('Updated a user.'));
   }
