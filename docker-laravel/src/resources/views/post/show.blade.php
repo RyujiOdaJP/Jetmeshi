@@ -19,7 +19,9 @@
                 <h4 class="card-title">{{__('手順')}}</h4>
 
                 <p class="card-text">
-                    {{ $post->sequence_body }}
+                    {{-- {{ htmlspecialchars($post->sequence_body, ENT_QUOTES, 'UTF-8') }} --}}
+                    {{-- {{preg_replace ("<br />","\n",$post->sequence_body)}} --}}
+                    {!! $post->sequence_body !!}
                 </p>
             </div>
         </div>

@@ -79,7 +79,7 @@ class PostController extends Controller
     // TODO: add comopressing metho like lambda
     $post = new Post;
     $post->title = $request->title;
-    $post->sequence_body = $request->sequence_body;
+    $post->sequence_body = nl2br($request->sequence_body, false);
     $post->user_id = $request->user()->id;
 
     $file_name = date('Y_m_d_His') . '-' . $this->random();
@@ -200,7 +200,7 @@ class PostController extends Controller
   {
     $file_name = date('Y_m_d_His') . '-' . $this->random();
     $post->title = $request->title;
-    $post->sequence_body = $request->sequence_body;
+    $post->sequence_body = nl2br($request->sequence_body, false);
 
     // upload images to S3 & get url to put them into DB
     $items = ['top', 'seq1', 'seq2', 'seq3', 'seq4'];
