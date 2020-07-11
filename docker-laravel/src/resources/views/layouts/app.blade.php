@@ -17,7 +17,7 @@
     みんなのアイデアを共有しましょう！" />
     <meta property="og:site_name" content="Jetmeshi" />
     <meta property="og:image" content="{{ asset('images/otama_edited.png') }}" />
-    <meta name="twitter:card" content="Summary Card" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@SyodoB" />
     <meta name="twitter:image" content="{{ asset('images/otama_edited.png') }}">
 
