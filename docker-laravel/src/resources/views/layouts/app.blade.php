@@ -7,11 +7,9 @@
 <!doctype html>
 {{-- <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"> --}}
 <html lang="en">
-
-<head>
+<head prefix="og:http://ogp.me/ns# fb:http://ogp.me/ns/fb# website:http://ogp.me/ns/website#">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <head prefix="og:http://ogp.me/ns# fb:http://ogp.me/ns/fb# website:http://ogp.me/ns/website#">
     <meta property="og:url" content="https://app.jetmeshi" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="即席飯アプリ" />
