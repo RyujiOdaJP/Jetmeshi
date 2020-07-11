@@ -19,6 +19,7 @@
     <meta property="og:image" content="{{ asset('images/otama_edited.png') }}" />
     <meta name="twitter:card" content="Summary Card" />
     <meta name="twitter:site" content="@SyodoB" />
+    <meta name="twitter:image" content="{{ asset('images/otama_edited.png') }}">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
