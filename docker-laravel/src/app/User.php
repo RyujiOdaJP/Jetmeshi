@@ -99,10 +99,10 @@ class User extends Authenticatable
     $post_ids;
   }
 
-  public function sendPasswordResetNotification($token): void
-  {
-    $this->notify(new TextPasswordReset($token));
-  }
+//   public function sendPasswordResetNotification($token): void
+//   {
+//     $this->notify(new TextPasswordReset($token));
+//   }
 
   /**
    * 現在のユーザー、または引数で渡されたIDが管理者かどうかを返す.

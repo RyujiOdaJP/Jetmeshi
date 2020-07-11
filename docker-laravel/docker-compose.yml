@@ -57,34 +57,23 @@ services:
     ports:
       - 3307:3306
 
-  # db-testing:
-  #   image: mysql:8.0
-  #   volumes:
-  #     - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
-  #   tmpfs:
-  #     - /var/lib/mysql
-  #     - /var/log/mysql
-  #   environment:
-  #     - MYSQL_DATABASE=${DB_NAME:-JETmysql}
-  #     - MYSQL_USER=${DB_USERNAME:-root}
-  #     - MYSQL_PASSWORD=${DB_PASS:-secret}
-  #     - MYSQL_ROOT_PASSWORD=${DB_PASS:-secret}
-  #     - TZ=${TZ:-Asia/Tokyo}
-  #   ports:
-  #     - ${DB_TESTING_PORT:-13307}:13306
-
-  node:
-    image: node:12.14-alpine
-    tty: true
+  https-portal:
+    image: steveltn/https-portal:latest
+    ports:
+      - '80:80'
+      - '443:443'
+    links:
+      - web
+    restart: always
+    environment:
+      DOMAINS: 'app.jetmeshi.net -> http://web:80'
+      STAGE: 'production'
+      # FORCE_RENEW: 'true'
+      ERROR_LOG: default
+      ACCESS_LOG: default
+      CLIENT_MAX_BODY_SIZE: 50M
     volumes:
-      - ${PROJECT_PATH:-./src}:/work
-    working_dir: /work
-
-  # redis:
-  #   image: redis:5.0-alpine
-  #   volumes:
-  #     - redis-store:/data
-
+      - ./org-chimata-ssl-certs:/var/lib/https-portal
  
 volumes:
   db-logs-store:

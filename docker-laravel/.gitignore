@@ -10,3 +10,4 @@ logs
 README.md
 docker-laravel
 .DS_Store
+/org-chimata-ssl-certs/
