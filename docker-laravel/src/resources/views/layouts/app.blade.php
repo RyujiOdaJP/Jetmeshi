@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/ fb# prefix属性: http://ogp.me/ns/ prefix属性#">
+    <head prefix="og:http://ogp.me/ns# fb:http://ogp.me/ns/fb# website:http://ogp.me/ns/website#">
     <meta property="og:url" content="https://app.jetmeshi" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="即席飯アプリ" />
@@ -19,6 +19,8 @@
     みんなのアイデアを共有しましょう！" />
     <meta property="og:site_name" content="Jetmeshi" />
     <meta property="og:image" content="{{ asset('images/otama_edited.png') }}" />
+    <meta name="twitter:card" content="Summary Card" />
+    <meta name="twitter:site" content="@SyodoB" />
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
