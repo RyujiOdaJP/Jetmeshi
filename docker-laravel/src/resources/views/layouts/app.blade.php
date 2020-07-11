@@ -158,10 +158,10 @@
         <div class="container text-center text-dark">
             <ul class="nav justify-content-md-center">
 
-                <li class=" nav-item"><a class="nav-link" href="{{ url('') }}"><i
+                <li class=" nav-item"><a class="nav-link" href="{{ url('https://github.com/RyujiOdaJP/Jetmeshi') }}"><i
                             class="fas fa-info-circle"></i>{{ __(' アプリについて') }}</a></li>
-                <li class=" nav-item"><a class="nav-link" href="{{ url('') }}"><i
-                            class="fas fa-info-circle"></i>{{ __('プライバシーポリシー') }}</a></li>
+                {{-- <li class=" nav-item"><a class="nav-link" href="{{ url('') }}"><i
+                            class="fas fa-info-circle"></i>{{ __('プライバシーポリシー') }}</a></li> --}}
             </ul>
             <div class="col-12 nav-item"><a class="nav-link">© 2020 RyujiOdaJP, All rights reserved</a></div>
         </div>

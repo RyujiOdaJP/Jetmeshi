@@ -25,16 +25,39 @@ Let's share everyone's ideas!
 + Review on creator's posts and display avarage on post.
 + Responsive Nav-menu that is able to slide from right.
 
++ 画像を1080px圧縮してからS3に保存。GDライブラリ使用。
++ croppieJSによる画像のトリミング。
++ AJAXによるLIKE投稿とmordal windowへのリスティング。
++ タグ管理。
++ タイトル、タグ、予算、調理時間で検索。
++ クリエイターの投稿にレビューをつけて、投稿にアベレージを表示。
++ 右からスライドできるレスポンシブナビメニュー。
+
 ## Back borns
 
 + Language: PHP, JavaScript, SCSS, HTML, MySQL
 + Framework: Laravel v7., blade template, Bootstrap4.5, jQuery3.5.
-+ Tool: Circle CI, Docker, Adobe XD(wire frame), mermaid.js, (sequence), lint tool(CSfixer, ESlint), cz-emoji, webpack.mix.js, MySQL Workbench, VScode
-+ Infrastructure: AWS (ECS, S3, Cloud Front), Mailgun
++ Tool: Circle CI, Docker, letsencrypt(SSL), Adobe XD(wire frame), mermaid.js(sequence), lint tool(CSfixer, ESlint), cz-emoji, webpack.mix.js, MySQL Workbench, VScode
++ Infrastructure: AWS (lightsail, S3)
+
+## ER-Diagram
+
+<img src="https://cm-jetmeshi.s3-ap-northeast-1.amazonaws.com/Screen+Shot+2020-07-11+at+16.39.56.png">
+
+## AWS
+
+<img src="https://cm-jetmeshi.s3-ap-northeast-1.amazonaws.com/jetmeshi-aws.jpg">
+
+## Sequence Diagram
+
+```sh
+https://github.com/RyujiOdaJP/Jetmeshi/blob/master/Sequence.pdf
+```
 
 ## Install
 
 ```sh
+composer install
 yarn install
 ```
 
