@@ -16,10 +16,10 @@
     <meta property="og:description" content="料理は面倒…、外食は高い…、でも栄養は摂りたい…、そんな需要を満たす最速フードを集めたサイトです。
     みんなのアイデアを共有しましょう！" />
     <meta property="og:site_name" content="Jetmeshi" />
-    <meta property="og:image" content="{{ asset('images/otama_edited.png') }}" />
+    <meta property="og:image" content="https://cm-jetmeshi.s3-ap-northeast-1.amazonaws.com/top.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@SyodoB" />
-    <meta name="twitter:image" content="{{ asset('images/otama_edited.png') }}">
+    <meta name="twitter:image" content="https://cm-jetmeshi.s3-ap-northeast-1.amazonaws.com/top.png">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
