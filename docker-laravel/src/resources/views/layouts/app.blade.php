@@ -20,7 +20,7 @@
 <head prefix="og:http://ogp.me/ns# fb:http://ogp.me/ns/fb# website:http://ogp.me/ns/website#">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta property="og:url" content="{{ 'https://app.jetmeshi' . $url }}" />
+    <meta property="og:url" content="{{ $url }}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="即席飯アプリ" />
     <meta property="og:description" content="料理は面倒…、外食は高い…、でも栄養は摂りたい…、そんな需要を満たす最速フードを集めたサイトです。
