@@ -25,10 +25,10 @@
                     <label for="budget_min" class="d-block">
                         <i class="fas fa-yen-sign"></i>{{ __(' 調理費用') }}
                     </label>
-                    <input id="budget_min" type="number" min="0" max="2000" step="50" value=""
+                    <input id="budget_min" type="number" min="0" max="10000" step="50" value=""
                         class="form-control custom-control-inline" name="budget_min">
                     <span>~</span>
-                    <input id="budget_max" type="number" min="0" max="2000" step="50" value=""
+                    <input id="budget_max" type="number" min="0" max="10000" step="50" value=""
                         class="form-control custom-control-inline" name="budget_max">
                     <span>円</span>
                 </div>
