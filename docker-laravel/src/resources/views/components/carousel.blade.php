@@ -100,7 +100,8 @@
         {{-- <a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
         class="twitter-share-button" data-url="{{('https://app.jetmeshi.net/post/' . $post->id)}}"
         data-via="SyodoB" data-hashtags="Jetmeshi" data-lang="ja" data-show-count="false">Tweet</a> --}}
-        <a href="https://twitter.com/intent/tweet?text=【Jetmeshi】即席飯を作ってみた！{{ $post->title }}&url={{('https://app.jetmeshi.net/post/' . $post->id)}}&related=@SyodoB" target="_blank" rel="nofollow" class="btn btn-Twitter">
+        <a href="https://twitter.com/intent/tweet?text=【Jetmeshi】即席飯を作ってみた！{{ $post->title .' by ' . $post->user()->select('name')->first()['name'] }}&url={{('https://app.jetmeshi.net/post/' . $post->id)}}&related=@SyodoB"
+        target="_blank" rel="nofollow" class="btn btn-Twitter">
             <span><i class="fab fa-twitter"></i>ツイートする</span>
         </a>
     </div>
