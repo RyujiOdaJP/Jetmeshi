@@ -5,7 +5,7 @@
     $url = str_replace(url('/'),"",request()->fullUrl());
     $share_imgae = '';
     if (strpos($url, 'post/')) {
-        $post_id = str_replace('https://app.jetmeshi.net/post/', "", $url);
+        $post_id = str_replace('http://app.jetmeshi.net/post/', "", $url);
         if (is_numeric($post_id)){
         $share_image = (App\Post::select('image_top')->where('id', $post_id)->first())['image_top'];}
         // dd($post_id);
