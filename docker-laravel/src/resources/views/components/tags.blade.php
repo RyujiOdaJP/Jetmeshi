@@ -30,7 +30,7 @@
         @for ( $l = count($tags) - floor(count($tags) / 2), $i = $l; $i < floor(count($tags)); $i++ )
         <div class="custom-control custom-checkbox">
             <input type="checkbox" id="{{ 'customCheck' . $i }}" class="custom-control-input" name="tags[]"
-                value="{{ $i }}">
+                value="{{ $i+1 }}">
             <label class="custom-control-label" for="{{ 'customCheck'. $i }}">{{ $tags[$i]['name'] }}</label>
         </div>
         @endfor

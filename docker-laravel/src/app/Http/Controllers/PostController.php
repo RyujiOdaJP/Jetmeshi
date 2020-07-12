@@ -35,6 +35,7 @@ class PostController extends Controller
     $posts = Post::latest()->Paginate(10);
     // to display seraching window
     $tags = Tag::all();
+    // dd($tags);
 
     for ($i = 0; $i < count($posts); $i++) {
       $names_array = [];
@@ -63,8 +64,9 @@ class PostController extends Controller
    */
   public function create()
   {
-    $tags = Tag::select('name')->get();
+    // $tags = Tag::select('name')->get();
     // dd($tags);
+    $tags = Tag::select('id', 'name')->orderBy('id')->get();
     return view('post.create', compact('tags'));
   }
 
