@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\ServiceProvider;
+
 // use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,9 +31,9 @@ class AppServiceProvider extends ServiceProvider
     // if (request()->isSecure()) {
     //     $URL->forceScheme('https');
     // }
-    if(config('app.env') === 'production'){
-        // asset()やurl()がhttpsで生成される
-        URL::forceScheme('https');
+    if (config('app.env') === 'production') {
+      // asset()やurl()がhttpsで生成される
+      URL::forceScheme('https');
     }
     // $is_production = env('APP_ENV') === 'production' ? true : false;
     // View::share('is_production', $is_production);
