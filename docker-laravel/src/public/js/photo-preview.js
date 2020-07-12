@@ -56,7 +56,7 @@
     $(`${croppieDivId} a.upload-result`).bind('click', function() {
       $uploadCrop.croppie('result', {
         type: 'canvas',
-        size: 'viewport',
+        size: 'original',
         quality: '0.8',
         format: 'jpeg',
       }).then(function(resp) {
@@ -96,7 +96,7 @@
 
   // run individual images editing method
   const imageElements = document.getElementsByName('input_images');
-  const sizeLimit = 1024 * 1024 * 2;
+  const sizeLimit = 1024 * 1024 * 3;
 
   for (const imageElement of imageElements) {
     imageElement.addEventListener('change', function(ev) {
@@ -109,7 +109,7 @@
       // eslint-disable-next-line no-invalid-this
       const fileList = this.files;
       if (fileList[0].size > sizeLimit) {
-        alert('ファイルサイズは2MB以下にしてください'); // エラーメッセージを表示
+        alert('ファイルサイズは3MB以下にしてください'); // エラーメッセージを表示
         return; // 終了する
       }
       createBlob(fileList);
