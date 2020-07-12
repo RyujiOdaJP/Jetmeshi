@@ -84,6 +84,7 @@
     </div>
     @auth
     <div class="card-body">
+
         <button type="button" id="{{'btn_'.$post->id}}" data-like="{{ $post->id }}" name="likes"
             class="btn btn-outline-secondary">
             <i class="fas fa-heart"></i>
@@ -95,6 +96,14 @@
                 @endif
             </span>
         </button>
+        {{-- <a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+        class="twitter-share-button" data-url="{{('https://app.jetmeshi.net/post/' . $post->id)}}"
+        data-via="SyodoB" data-hashtags="Jetmeshi" data-lang="ja" data-show-count="false">Tweet</a> --}}
+        <a href="https://twitter.com/intent/tweet?text=【Jetmeshi】即席飯を作ってみた！&url={{('https://app.jetmeshi.net/post/' . $post->id)}}&related=@SyodoB" target="_blank" rel="nofollow" class="btn btn-Twitter">
+            <span><i class="fab fa-twitter"></i>ツイートする</span>
+        </a>
+
     </div>
     @endauth
 </div>
+

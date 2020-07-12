@@ -6105,6 +6105,7 @@ a:hover {
 }
 
 .btn-Jetgreen:hover {
+  color: #fff;
   background-color: #218838;
   border-color: #1e7e34;
 }
@@ -6131,6 +6132,26 @@ a:hover {
 
 :focus,
 .btn-Jetblue.focus {
+  box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
+}
+
+.btn-Twitter {
+  background-color: #00acee;
+  border-color: #00acee;
+}
+
+.btn-Twitter span {
+  color: #fff;
+}
+
+.btn-Twitter:hover {
+  color: #fff;
+  background-color: #5cb9f1;
+  border-color: #569ac5;
+}
+
+:focus,
+.btn-Twitter.focus {
   box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
 }
 

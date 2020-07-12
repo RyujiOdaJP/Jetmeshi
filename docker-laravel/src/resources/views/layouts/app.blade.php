@@ -2,6 +2,16 @@
     $liked_posts = App\Like::liked_post_ids();
     $app_post = new App\Post;
     // $liked_posts = App\User::liked_posts_by_user();
+    $url = str_replace(url('/'),"",request()->fullUrl());
+    $share_imgae = '';
+    if (strpos($url, 'post/')) {
+        $post_id = str_replace('/post/', "", $url);
+        if (is_numeric($post_id)){
+        $share_image = (App\Post::select('image_top')->where('id', $post_id)->first())['image_top'];}
+        // dd($post_id);
+    }else {
+        # code...
+    }
 @endphp
 
 <!doctype html>
@@ -10,16 +20,16 @@
 <head prefix="og:http://ogp.me/ns# fb:http://ogp.me/ns/fb# website:http://ogp.me/ns/website#">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta property="og:url" content="https://app.jetmeshi" />
+    <meta property="og:url" content="{{ 'https://app.jetmeshi' . $url }}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="即席飯アプリ" />
     <meta property="og:description" content="料理は面倒…、外食は高い…、でも栄養は摂りたい…、そんな需要を満たす最速フードを集めたサイトです。
     みんなのアイデアを共有しましょう！" />
     <meta property="og:site_name" content="Jetmeshi" />
-    <meta property="og:image" content="https://cm-jetmeshi.s3-ap-northeast-1.amazonaws.com/top.png" />
+    <meta property="og:image" content="{{ $share_image ?? 'https://cm-jetmeshi.s3-ap-northeast-1.amazonaws.com/top.png'}}" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@SyodoB" />
-    <meta name="twitter:image" content="https://cm-jetmeshi.s3-ap-northeast-1.amazonaws.com/top.png">
+    <meta name="twitter:image" content="{{ $share_image ?? 'https://cm-jetmeshi.s3-ap-northeast-1.amazonaws.com/top.png'}}">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -34,6 +44,7 @@
     {{-- <script src="{{ asset('js/lib/croppie.js') }}"></script> --}}
     <script src="{{ asset('js/likes-ajax.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.js"></script>
+    {{-- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> --}}
 
     <!-- favicon.ico -->
     <link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/vnd.microsoft.icon">
