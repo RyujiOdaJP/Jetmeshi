@@ -30,5 +30,19 @@ $title = env('APP_NAME');
     </div>
 </div>
 
+<div class="container mb-3">
+    <div class="card ml-auto mr-auto">
+        <div class="card-body">
+            <h4 class="card-title">Jet Meshi is 何　</h4>
+            <p>
+                料理は面倒…、外食は高い…、でも栄養は摂りたい…、そんな需要を満たす最速フードを集めたサイトです。<br>
+                みんなのアイデアを共有しましょう！<br>
+                Cooking is a hassle...eating out is expensive...but I want to get nutrition... <br>
+                this is a site that collects the fastest food to meet such a demand. Let's share everyone's ideas!
+            </p>
+        </div>
+    </div>
+</div>
+
 <script src=" {{ asset('js/top.js') }} "></script>
 @endsection
