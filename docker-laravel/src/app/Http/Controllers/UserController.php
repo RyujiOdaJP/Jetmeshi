@@ -17,23 +17,23 @@ use InterventionImage;
 
 class UserController extends Controller
 {
-  public function random($length = 8)
-  {
-    return substr(str_shuffle('1234567890abcdefghijklmnopqrstuvwxyz'), 0, $length);
-  }
+//   public function random($length = 8)
+//   {
+//     return substr(str_shuffle('1234567890abcdefghijklmnopqrstuvwxyz'), 0, $length);
+//   }
 
-  /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function index()
-  {
-    //User-me
-    $users = User::paginate(5);
-    //edit関数のcompact('users')は['users' => $users]としているのと同意です。
-    return view('user.index', compact('users'));
-  }
+//   /**
+//    * Display a listing of the resource.
+//    *
+//    * @return \Illuminate\Http\Response
+//    */
+//   public function index()
+//   {
+//     // All users
+//     $users = User::paginate(5);
+//     //edit関数のcompact('users')は['users' => $users]としているのと同意です。
+//     return view('user.index', compact('users'));
+//   }
 
   /**
    * Display the specified resource.
@@ -49,52 +49,52 @@ class UserController extends Controller
    * 一致するモデルインスタンスがデータベースへ存在しない場合、
    * 404 HTTPレスポンスが自動的に生成されます。
    */
-  public function show(User $user)
-  {
-    //show user's profile
-    $user->posts = $user->posts()->paginate(6);
-    $stars_avg = [];
-    $rate_array =
-        $user->posts()
-          ->select('id')
-          ->where('user_id', $user->id)
-          ->get()->toArray();
-    $sum = 0;
-    $count = 0;
-    $rate = 0;
-    $tag_names = [];
-    // to display seraching window
-    $tags = Tag::all();
+//   public function show(User $user)
+//   {
+//     //show user's profile
+//     $user->posts = $user->posts()->paginate(6);
+//     $stars_avg = [];
+//     $rate_array =
+//         $user->posts()
+//           ->select('id')
+//           ->where('user_id', $user->id)
+//           ->get()->toArray();
+//     $sum = 0;
+//     $count = 0;
+//     $rate = 0;
+//     $tag_names = [];
+//     // to display seraching window
+//     $tags = Tag::all();
 
-    foreach ($rate_array as $id) {
-      $avg = Review::where('post_id', '=', $id['id'])->avg('stars');
-      $sum += $avg;
+//     foreach ($rate_array as $id) {
+//       $avg = Review::where('post_id', '=', $id['id'])->avg('stars');
+//       $sum += $avg;
 
-      if ($avg != null) {
-        $count++;
-      }
-    }
+//       if ($avg != null) {
+//         $count++;
+//       }
+//     }
 
-    if ($sum != 0) {
-      $rate = round($sum / $count, 1);
-    }
+//     if ($sum != 0) {
+//       $rate = round($sum / $count, 1);
+//     }
 
-    for ($i = 0; $i < count($user->posts); $i++) {
-      $names_array = [];
-      $stars_avg[] = Review::where('post_id', '=', $user->posts[$i]->id)->avg('stars');
-      $tag_values = $user->posts[$i]->tags()->get();
+//     for ($i = 0; $i < count($user->posts); $i++) {
+//       $names_array = [];
+//       $stars_avg[] = Review::where('post_id', '=', $user->posts[$i]->id)->avg('stars');
+//       $tag_values = $user->posts[$i]->tags()->get();
 
-      //   if( $tag_values[$i]->name->exists()){
-      foreach ($tag_values as $tag_value) {
-        $names_array[] = $tag_value->name;
-      }
-      $tag_names[] = $names_array;
-    }
-    return view(
-      'user.show',
-      compact('user', 'stars_avg', 'tags', 'tag_names', 'rate')
-    );
-  }
+//       //   if( $tag_values[$i]->name->exists()){
+//       foreach ($tag_values as $tag_value) {
+//         $names_array[] = $tag_value->name;
+//       }
+//       $tag_names[] = $names_array;
+//     }
+//     return view(
+//       'user.show',
+//       compact('user', 'stars_avg', 'tags', 'tag_names', 'rate')
+//     );
+//   }
 
   /**
    * Show the form for editing the specified resource.
@@ -103,12 +103,12 @@ class UserController extends Controller
    * @param User $user
    * @return \Illuminate\Http\Response
    */
-  public function edit(User $user)
-  {
-    //edit the owner's profile
-    $this->authorize('edit', $user);
-    return view('user.edit', compact('user'));
-  }
+//   public function edit(User $user)
+//   {
+//     //edit the owner's profile
+//     $this->authorize('edit', $user);
+//     return view('user.edit', compact('user'));
+//   }
 
   /**
    * Update the specified resource in storage.
@@ -118,51 +118,51 @@ class UserController extends Controller
    * @param User                     $user
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, User $user)
-  {
-    $this->authorize('edit', $user);
-    $request->validate([
-        'name' => 'min:1|max:30',
-        'bio' => 'max:500',
-        ]);
-    $user->name = $request->name;
-    $user->bio = $request->bio;
-    $user->twitter = $request->twitter;
-    $user->instagram = $request->instagram;
-    $user->github = $request->github;
-    $user->facebook = $request->facebook;
+//   public function update(Request $request, User $user)
+//   {
+//     $this->authorize('edit', $user);
+//     $request->validate([
+//         'name' => 'min:1|max:30',
+//         'bio' => 'max:500',
+//         ]);
+//     $user->name = $request->name;
+//     $user->bio = $request->bio;
+//     $user->twitter = $request->twitter;
+//     $user->instagram = $request->instagram;
+//     $user->github = $request->github;
+//     $user->facebook = $request->facebook;
 
-    $file_name = date('Y_m_d_His') . '-' . $this->random();
-    $image = $request->sent_image;
+//     $file_name = date('Y_m_d_His') . '-' . $this->random();
+//     $image = $request->sent_image;
 
-    if ($image !== null) {
-      list(, $data) = explode(',', $image);
-      $decoded_sumnail =
-        InterventionImage::make(base64_decode($data))->resize(
-          300,
-          null,
-          function ($constraint): void {
-            $constraint->aspectRatio();
-          }
-        )
-          ->stream('jpg', 50);
+//     if ($image !== null) {
+//       list(, $data) = explode(',', $image);
+//       $decoded_sumnail =
+//         InterventionImage::make(base64_decode($data))->resize(
+//           300,
+//           null,
+//           function ($constraint): void {
+//             $constraint->aspectRatio();
+//           }
+//         )
+//           ->stream('jpg', 50);
 
-      Storage::disk('s3')->put($file_name . '_user_image', $decoded_sumnail, 'public');
-      $user->image = Storage::disk('s3')->url($file_name . '_user_image');
-    }
-    $user->save();
-    return redirect('user/' . $user->id)->with('my_status', __('Updated a user.'));
-  }
+//       Storage::disk('s3')->put($file_name . '_user_image', $decoded_sumnail, 'public');
+//       $user->image = Storage::disk('s3')->url($file_name . '_user_image');
+//     }
+//     $user->save();
+//     return redirect('user/' . $user->id)->with('my_status', __('Updated a user.'));
+//   }
 
-  public function unable(Request $request, User $user)
-  {
-    //ここでのポイントは、DBファサードではなく、Eloquent ORM にてdelete()メソッドを実行するという事です。
-    // find()メソッドに削除対象のIDを渡してインスタンスを取得し、delete()メソッドを実行する事でdeleted_atカラムにタイムスタンプが挿入.
-    $this->authorize('edit', $user);
-    $user = User::find($request->id);
-    $user->delete();
-    return redirect('/')->with('my_status', __('Deleted a user.'));
-  }
+//   public function unable(Request $request, User $user)
+//   {
+//     //ここでのポイントは、DBファサードではなく、Eloquent ORM にてdelete()メソッドを実行するという事です。
+//     // find()メソッドに削除対象のIDを渡してインスタンスを取得し、delete()メソッドを実行する事でdeleted_atカラムにタイムスタンプが挿入.
+//     $this->authorize('edit', $user);
+//     $user = User::find($request->id);
+//     $user->delete();
+//     return redirect('/')->with('my_status', __('Deleted a user.'));
+//   }
 
   public function show_change_password_form()
   {
@@ -171,7 +171,6 @@ class UserController extends Controller
 
   public function change_password(Request $request, User $user)
   {
-    // $current_pw_on_db = $user->select('password')->where('id', Auth::id())->get();
     $current_pw_on_db = Auth::user()->password;
     //現在のパスワードが正しいかを調べる
     // dd($request->current_password);

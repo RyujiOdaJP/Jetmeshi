@@ -16,11 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-  // return view('welcome');
   return view('top');
-});
-Route::get('/welcome', function () {
-  return view('welcome');
 });
 
 Auth::routes();
@@ -28,15 +24,22 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // resouce(query, controller) will declare index, create, store, show, edit, update, destory methodes to controller
-Route::resource('user', 'UserController', ['except' => ['create', 'store', 'destroy']]);
+// Route::resource('user', 'UserController', ['except' => ['create', 'store', 'destroy']]);
+Route::get('user/', 'IndexUserController')->name('user.index');
 
-Route::delete('/user/{id}', 'UserController@unable')->name('user.unable');
+Route::get('user/{user}', 'ShowUserController')->name('user.show');
+
+Route::get('user/{user}/edit', 'EditUserController')->name('user.edit');
+
+Route::match(['put', 'patch'], 'user/{user}', 'UpdateUserController')->name('user.update');
+
+Route::delete('user/{user}', 'DestroyUserController')->name('user.destroy');
 
 Route::resource('post', 'PostController');
 
-Route::post('/post/review/{post}', 'ReviewController@store')->name('review.store');
+Route::post('post/review/{post}', 'ReviewController@store')->name('review.store');
 
-Route::get('/search', 'SearchController@index')->name('search');
+Route::get('search', 'SearchController@index')->name('search');
 
 Route::post('like/{post}', 'LikeController@ajaxstore')->name('like');
 
