@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ChangePasswordRequest extends FormRequest
 {
@@ -29,5 +30,17 @@ class ChangePasswordRequest extends FormRequest
             'current_password' => 'required',
             'new_password' => 'required|string|min:6|confirmed',
         ];
+  }
+  public function current_pw_on_db(){
+    return Auth::user()->password;
+  }
+  public function current_password(){
+    return $this->input('current_password');
+  }
+  public function new_password(){
+    return $this->input('new_password');
+  }
+  public function change_password() {
+    return bcrypt($this->input('new_password'));
   }
 }

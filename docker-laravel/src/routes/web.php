@@ -35,6 +35,10 @@ Route::match(['put', 'patch'], 'user/{user}', 'UpdateUserController')->name('use
 
 Route::delete('user/{user}', 'DestroyUserController')->name('user.destroy');
 
+Route::get('changepassword', 'ShowChangePasswordController')->name('changepassword.form');
+
+Route::match(['put', 'patch'], 'changepassword/{user}', 'ChangePasswordController')->name('changepassword');
+
 Route::resource('post', 'PostController');
 
 Route::post('post/review/{post}', 'ReviewController@store')->name('review.store');
@@ -46,10 +50,6 @@ Route::post('like/{post}', 'LikeController@ajaxstore')->name('like');
 Route::post('post/like/{post}', 'LikeController@ajaxstore')->name('like.post');
 
 Route::post('user/like/{post}', 'LikeController@ajaxstore')->name('like.user');
-
-Route::get('changepassword', 'UserController@show_change_password_form');
-
-Route::match(['put', 'patch'], 'changepassword/{user}', 'UserController@change_password')->name('changepassword');
 
 // Route::get('like', function(){
 //     return 'ok';
