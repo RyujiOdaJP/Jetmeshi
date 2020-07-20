@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Post;
@@ -8,7 +10,7 @@ use App\Tag;
 
 class IndexPostController extends PostController
 {
-    public function __invoke()
+  public function __invoke()
   {
     $stars_avg = [];
     $tag_names = [];

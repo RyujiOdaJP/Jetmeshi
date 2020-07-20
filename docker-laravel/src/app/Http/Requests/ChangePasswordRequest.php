@@ -31,16 +31,24 @@ class ChangePasswordRequest extends FormRequest
             'new_password' => 'required|string|min:6|confirmed',
         ];
   }
-  public function current_pw_on_db(){
+
+  public function current_pw_on_db()
+  {
     return Auth::user()->password;
   }
-  public function current_password(){
+
+  public function current_password()
+  {
     return $this->input('current_password');
   }
-  public function new_password(){
+
+  public function new_password()
+  {
     return $this->input('new_password');
   }
-  public function change_password() {
+
+  public function change_password()
+  {
     return bcrypt($this->input('new_password'));
   }
 }

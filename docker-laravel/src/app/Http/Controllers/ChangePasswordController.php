@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangePasswordRequest;
-use Illuminate\Support\Facades\Hash;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class ChangePasswordController extends Controller
 {
@@ -20,8 +20,8 @@ class ChangePasswordController extends Controller
     if (strcmp($request->current_password(), $request->new_password()) == 0) {
       return redirect()->back()->with('change_password_error', '新しいパスワードが現在のパスワードと同じです。違うパスワードを設定してください。');
     }
-        $user->password = $request->change_password();
-        $user->save();
-        return redirect()->back()->with('change_password_success', 'パスワードを変更しました。');
+    $user->password = $request->change_password();
+    $user->save();
+    return redirect()->back()->with('change_password_success', 'パスワードを変更しました。');
   }
 }
