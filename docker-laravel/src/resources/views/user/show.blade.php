@@ -35,7 +35,7 @@
                 @endauth
             </div>
             <div class="w-100 row">
-                <p class="offset-1 col-10">{!! nl2br($user->bio) !!}</p>
+                <p class="offset-1 col-10">{!! nl2br($user->bio ?? '') !!}</p>
             </div>
             <div class="row justify-content-center w-100 m-0 user_evaluation">
                 <div class="col-4">
