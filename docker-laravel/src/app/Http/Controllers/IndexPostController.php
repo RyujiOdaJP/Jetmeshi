@@ -10,6 +10,11 @@ use App\Tag;
 
 class IndexPostController extends PostController
 {
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
   public function __invoke()
   {
     $stars_avg = [];
