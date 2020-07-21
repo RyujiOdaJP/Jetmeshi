@@ -43,8 +43,8 @@
                 {{ old_value($post, 'budget') }}
             </span>円
         </label>
-        <input id="budget" type="range" min="0" max="10000" value="{{ old_value($post, 'budget') }}" step="10"
-            class="custom-range" name="budget" rows="8" required>
+        <input id="budget" type="number" min="0" max="10000" value="{{ old_value($post, 'budget') }}"
+            step="10" class="form-control custom-control-inline" name="budget" rows="8" required>
         </input>
         @if ($errors->has('budget'))
         <span class="invalid-feedback" role="alert">
