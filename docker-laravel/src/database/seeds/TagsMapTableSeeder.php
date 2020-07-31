@@ -23,7 +23,7 @@ class TagsMapTableSeeder extends Seeder
                 'updated_at' => $faker->dateTime(),
                 'tag_id' => $faker->numberBetween(1, 12),
                 'post_id' => $faker->numberBetween(1, 80),
-                'using_status' => $faker->boolean(50),
+                // 'using_status' => $faker->boolean(50),
             ]);
     }
   }

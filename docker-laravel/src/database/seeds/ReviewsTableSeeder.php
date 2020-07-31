@@ -26,7 +26,7 @@ class ReviewsTableSeeder extends Seeder
                 'post_id' => $faker->numberBetween(1, 80),
                 'stars' => $faker->numberBetween(1, 5),
                 'review_body' => $faker->text(),
-                'using_status' => $faker->boolean(50),
+                // 'using_status' => $faker->boolean(50),
             ]);
     }
   }

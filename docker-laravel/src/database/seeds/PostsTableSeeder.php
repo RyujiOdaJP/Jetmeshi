@@ -22,8 +22,8 @@ class PostsTableSeeder extends Seeder
                 'updated_at' => $faker->dateTime(),
                 'title' => $faker->text(20),
                 'image_top' => $faker->url,
-                'sumnail_pc' => $faker->url,
-                'sumnail_mobile' => $faker->url,
+                'thumbnail_pc' => $faker->url,
+                'thumbnail_mobile' => $faker->url,
                 'image_seq1' => $faker->url,
                 'image_seq2' => $faker->url,
                 'image_seq3' => $faker->url,
@@ -32,7 +32,7 @@ class PostsTableSeeder extends Seeder
                 'cooking_time' => $faker->numberBetween(1, 40),
                 'budget' => $faker->numberBetween(100, 500),
                 'user_id' => $faker->numberBetween(1, 20),
-                'using_status' => $faker->boolean(50),
+                // 'using_status' => $faker->boolean(50),
             ]);
     }
     // for ($i = 0; $i < 10; $i++) {

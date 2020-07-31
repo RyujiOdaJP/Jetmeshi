@@ -37,7 +37,7 @@ class TagsTableSeeder extends Seeder
     for ($i = 0; $i < count($tags); $i++) {
       DB::table('tags')->insert([
             'name' => $tags[$i],
-            'using_status' => $faker->boolean(50),
+            // 'using_status' => $faker->boolean(50),
             ]);
     }
   }

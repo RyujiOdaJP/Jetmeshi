@@ -22,7 +22,7 @@ class LikesTableSeeder extends Seeder
                 'updated_at' => $faker->dateTime(),
                 'user_id' => $faker->numberBetween(1, 20),
                 'post_id' => $faker->numberBetween(1, 80),
-                'using_status' => $faker->boolean(50),
+                // 'using_status' => $faker->boolean(50),
             ]);
     }
   }

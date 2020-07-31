@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => $faker->dateTime(),
             'created_at' => $faker->dateTime(),
             'updated_at' => $faker->dateTime(),
-            'using_status' => true,
+            // 'using_status' => true,
         ]);
     DB::table('users')->insert([
             'name' => 'foo1',
@@ -37,7 +37,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => $faker->dateTime(),
             'created_at' => $faker->dateTime(),
             'updated_at' => $faker->dateTime(),
-            'using_status' => false,
+            // 'using_status' => false,
         ]);
 
     $providers = [];
@@ -67,7 +67,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => $faker->dateTime(),
                 'provider_id' => $provider_id[$i],
                 'provider_name' => $providers[$i],
-                'using_status' => $faker->boolean(50),
+                // 'using_status' => $faker->boolean(50),
             ]);
     }
   }
