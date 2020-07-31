@@ -37,13 +37,13 @@ Route::match(['put', 'patch'], 'changepassword/{user}', 'ChangePasswordControlle
 
 // Route::resource('post', 'PostController');
 // Post
-Route::get('post/', 'IndexPostController@index')->name('post.index');
-Route::get('post/create', 'CreatePostController')->name('post.create');
-Route::post('post/', 'StorePostController')->name('post.store');
-Route::get('post/{post}', 'ShowPostController@show')->name('post.show');
-Route::get('post/{post}/edit', 'EditPostController')->name('post.edit');
-Route::match(['put', 'patch'], 'post/{post}', 'UpdatePostController')->name('post.update');
-Route::delete('post/{post}', 'DestroyPostController')->name('post.destroy');
+Route::get('post/', 'Post\IndexPostController@index')->name('post.index');
+Route::get('post/create', 'Post\CreatePostController')->name('post.create');
+Route::post('post/', 'Post\StorePostController')->name('post.store');
+Route::get('post/{post}', 'Post\ShowPostController@show')->name('post.show');
+Route::get('post/{post}/edit', 'Post\EditPostController')->name('post.edit');
+Route::match(['put', 'patch'], 'post/{post}', 'Post\UpdatePostController')->name('post.update');
+Route::delete('post/{post}', 'Post\DestroyPostController')->name('post.destroy');
 
 Route::post('post/review/{post}', 'ReviewController@store')->name('review.store');
 Route::get('search', 'SearchController@index')->name('search');
