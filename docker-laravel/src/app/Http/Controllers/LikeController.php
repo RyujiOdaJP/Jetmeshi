@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Like;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
-  /**
+  /*
    * Store a newly created 'LIKE' in storage from client through ajax.
    *
    * @param Illuminate\Http\Request $request
@@ -18,7 +18,9 @@ class LikeController extends Controller
    * @param mixed                   $id
    * @return \Illuminate\Http\Response
    */
-  public function ajaxstore(Request $request, Like $likes, $id)
+  use SoftDeletes;
+
+  public function ajaxstore(Like $likes, $id)
   {
     // dd($_GET['userId']);
     $likes->user_id = Auth::id();

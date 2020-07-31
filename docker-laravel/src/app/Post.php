@@ -77,7 +77,7 @@ class Post extends Model
    * @param mixed $collumn
    * @return Illuminate\Database\Eloquent\Concerns\HasRelationships::hasMany
    */
-  public function likes($collumn)
+  public function likes($collumn = null)
   {
     return $this->hasMany('App\Like', $collumn);
   }
@@ -99,17 +99,22 @@ class Post extends Model
    */
   public static function post_title($id)
   {
+    // if ((self::select('deleted_at')->where('id', $id) == null)) {
     return
-    (self::select('title')
-      ->where('id', $id)
-      ->first())['title'];
+        self::select('title')
+          ->where('id', $id)
+          ->first()['title'] ?? null;
+    // }
   }
 
   public static function post_thumbnail($id)
   {
+    // if ((self::onlyTrashed()->where('id', $id))) {
     return
-    (self::select('thumbnail_mobile')
-      ->where('id', $id)
-      ->first())['thumbnail_mobile'];
+        self::select('thumbnail_mobile')
+          ->where('id', $id)
+          ->first()['thumbnail_mobile'] ?? null;
+    // }
+    // return dd(self::select('deleted_at')->where('id', $id));
   }
 }
