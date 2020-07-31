@@ -22,10 +22,10 @@ RUN apk add --update nodejs nodejs-npm
 RUN apk update && \
   apk add --update --no-cache --virtual=.build-dependencies \
     autoconf=~2.69 \
-    gcc=~9.3 \
-    g++=~9.3 \
-    make=~4.3 \
-    git=~2.26 && \
+    gcc=~9.2 \
+    g++=~9.2 \
+    make=~4.2 \
+    git=~2.24 && \
   # for gd
   apk add --update --no-cache \
     freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
@@ -34,8 +34,8 @@ RUN apk update && \
   docker-php-ext-configure gd --with-freetype --with-jpeg && \
   docker-php-ext-install -j$(nproc) gd && \
   apk add --update --no-cache \
-    icu-dev=~67.1 \
-    libzip-dev=~1.6 \
+    icu-dev=~64.2 \
+    libzip-dev=~1.5 \
     oniguruma-dev=~6.9 && \
   pecl install xdebug && \
   # git clone https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis && \

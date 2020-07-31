@@ -17,7 +17,7 @@ class ShowPostController extends PostController
    * @param Review $reviews
    * @return \Illuminate\Http\Response
    */
-  public function __invoke(Post $post, Review $reviews)
+  public function show(Post $post, Review $reviews)
   {
     $reviews = Review::where('post_id', $post->id)->get();
     $id_exist = Review::where('post_id', $post->id)->exists();

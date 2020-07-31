@@ -15,7 +15,7 @@ class IndexPostController extends PostController
    *
    * @return \Illuminate\Http\Response
    */
-  public function __invoke()
+  public function index()
   {
     $stars_avg = [];
     $tag_names = [];

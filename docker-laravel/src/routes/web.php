@@ -37,10 +37,10 @@ Route::match(['put', 'patch'], 'changepassword/{user}', 'ChangePasswordControlle
 
 // Route::resource('post', 'PostController');
 // Post
-Route::get('post/', 'IndexPostController')->name('post.index');
+Route::get('post/', 'IndexPostController@index')->name('post.index');
 Route::get('post/create', 'CreatePostController')->name('post.create');
 Route::post('post/', 'StorePostController')->name('post.store');
-Route::get('post/{post}', 'ShowPostController')->name('post.show');
+Route::get('post/{post}', 'ShowPostController@show')->name('post.show');
 Route::get('post/{post}/edit', 'EditPostController')->name('post.edit');
 Route::match(['put', 'patch'], 'post/{post}', 'UpdatePostController')->name('post.update');
 Route::delete('post/{post}', 'DestroyPostController')->name('post.destroy');
