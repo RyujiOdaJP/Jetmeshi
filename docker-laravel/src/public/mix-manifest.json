@@ -1,4 +1,5 @@
 {
     "/css/app.css": "/css/app.css",
-    "/css/bootstrap-Offcanvas.css": "/css/bootstrap-Offcanvas.css"
+    "/css/bootstrap-Offcanvas.css": "/css/bootstrap-Offcanvas.css",
+    "/css/error-page.css": "/css/error-page.css"
 }

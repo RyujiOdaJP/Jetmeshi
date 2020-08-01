@@ -18,5 +18,6 @@ mix
     // .js('resources/js/jquery-3.5.1.min.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/bootstrap-Offcanvas.scss', 'public/css')
+    .sass('resources/sass/error-page.scss', 'public/css')
     ;
 
