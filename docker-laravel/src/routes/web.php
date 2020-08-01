@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +20,12 @@ Route::get('/', function () {
   return view('top');
 });
 
-Auth::routes();
-
-// resouce(query, controller) will declare index, create, store, show, edit, update, destory methodes to controller
-// Route::resource('user', 'UserController', ['except' => ['create', 'store', 'destroy']]);
+Auth::routes(['verify' => true]);
+// RestoreUser
+Route::get('restore', function () {
+    return view('auth.restore');
+});
+Route::post('restore', 'Auth\RestoreUserController')->name('restore');
 
 // User
 Route::get('user/', 'User\IndexUserController')->name('user.index');
@@ -32,10 +35,13 @@ Route::match(['put', 'patch'], 'user/{user}', 'User\UpdateUserController')->name
 Route::delete('user/{user}', 'User\DestroyUserController')->name('user.destroy');
 
 // ChangePassword
-Route::get('changepassword', 'ShowChangePasswordController')->name('changepassword.form');
-Route::match(['put', 'patch'], 'changepassword/{user}', 'ChangePasswordController')->name('changepassword');
+Route::get('changepassword', 'Auth\ShowChangePasswordController')->name('changepassword.form');
+Route::match(['put', 'patch'], 'changepassword/{user}', 'Auth\ChangePasswordController')->name('changepassword');
 
-// Route::resource('post', 'PostController');
+// ChangeEmail
+Route::get('changeemail', 'Auth\ShowChangeEmailController')->name('changeemail.form');
+Route::post('changeemail/{user}', 'Auth\ChangeEmailController')->name('changeemail');
+
 // Post
 Route::get('post/', 'Post\IndexPostController@index')->name('post.index');
 Route::get('post/create', 'Post\CreatePostController')->name('post.create');

@@ -149,6 +149,7 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ url('user/' . Auth::id()) }}">{{ __('ユーザ画面') }}</a>
                             <a class="dropdown-item" href="{{ url('changepassword') }}">{{ __('パスワード変更') }}</a>
+                            <a class="dropdown-item" href="{{ url('changeemail') }}">{{ __('メールアドレス変更') }}</a>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
                                 {{ __('ログアウト') }}

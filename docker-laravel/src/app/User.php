@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace App;
 
+use Illuminate\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\CustomPasswordReset;
 
 //モデルはテーブルとマッピングされたオブジェクトです。
 // DB操作を行うためのクラスになります。
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmailContract
 {
-  use Notifiable;
+  use Notifiable, MustVerifyEmail;
   use SoftDeletes;
 
   /**
@@ -99,10 +102,10 @@ class User extends Authenticatable
     $post_ids;
   }
 
-//   public function sendPasswordResetNotification($token): void
-//   {
-//     $this->notify(new TextPasswordReset($token));
-//   }
+  public function sendPasswordResetNotification($token): void
+  {
+    $this->notify(new CustomPasswordReset($token));
+  }
 
   /**
    * 現在のユーザー、または引数で渡されたIDが管理者かどうかを返す.
