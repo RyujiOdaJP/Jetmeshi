@@ -6064,7 +6064,7 @@ readers do not read off random characters that represent icons */
 .jumbotron-hero {
   position: relative;
   height: 60vh;
-  background: url(/images/otama_edited.png?c78aadec6bba08ef360496b66c407b52) center center;
+  background: url("https://cm-jetmeshi.s3-ap-northeast-1.amazonaws.com/otama_edited.png") center center;
   background-size: cover;
 }
 
