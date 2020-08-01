@@ -25,11 +25,11 @@ Auth::routes();
 // Route::resource('user', 'UserController', ['except' => ['create', 'store', 'destroy']]);
 
 // User
-Route::get('user/', 'IndexUserController')->name('user.index');
-Route::get('user/{user}', 'ShowUserController')->name('user.show');
-Route::get('user/{user}/edit', 'EditUserController')->name('user.edit');
-Route::match(['put', 'patch'], 'user/{user}', 'UpdateUserController')->name('user.update');
-Route::delete('user/{user}', 'DestroyUserController')->name('user.destroy');
+Route::get('user/', 'User\IndexUserController')->name('user.index');
+Route::get('user/{user}', 'User\ShowUserController')->name('user.show');
+Route::get('user/{user}/edit', 'User\EditUserController')->name('user.edit');
+Route::match(['put', 'patch'], 'user/{user}', 'User\UpdateUserController')->name('user.update');
+Route::delete('user/{user}', 'User\DestroyUserController')->name('user.destroy');
 
 // ChangePassword
 Route::get('changepassword', 'ShowChangePasswordController')->name('changepassword.form');

@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\Review;
 use App\Tag;
 use App\User;
+use App\Http\Controllers\Controller;
 
 class ShowUserController extends Controller
 {
