@@ -57,7 +57,7 @@
                             </div>
                         </div>
 
-                        {{-- <div class="form-group row mb-0">
+                        <div class="form-group row mb-0">
                             <div class="col-md-8 mr-auto ml-auto text-center">
                                 @if (Route::has('password.request'))
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
@@ -65,7 +65,7 @@
                                 </a>
                                 @endif
                             </div>
-                        </div> --}}
+                        </div>
 
                         @component('components.btn-auth')
                         @slot('controller', 'LOGIN')
