@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class DestroyUserController extends Controller
 {
