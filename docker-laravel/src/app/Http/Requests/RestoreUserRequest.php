@@ -33,11 +33,11 @@ class RestoreUserRequest extends FormRequest
                 'string',
                 'email',
                 'max:255',
-                'exists:users,email,deleted_at,NOT_NULL'
+                'exists:users,email,deleted_at,NOT_NULL',
             ],
             [
                 'email.exists' => '入力されたメールアドレスは使用されています。',
-            ]
+            ],
         ];
   }
 

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use App\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use InterventionImage;
-use App\User;
-use Illuminate\Support\Facades\Auth;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -77,22 +77,21 @@ class UpdateUserRequest extends FormRequest
     $image = $this->input('sent_image');
 
     if ($image != null) {
-        list(, $data) = explode(',', $image);
-        $decoded_sumnail =
+      list(, $data) = explode(',', $image);
+      $decoded_thumbnail =
               InterventionImage::make(base64_decode($data))->resize(
-                  300,
-                  null,
-                  function ($constraint): void {
+                300,
+                null,
+                function ($constraint): void {
                     $constraint->aspectRatio();
-                }
+                  }
               )
                 ->stream('jpg', 50);
 
-        Storage::disk('s3')->put($file_name . '_user_image', $decoded_sumnail, 'public');
-        return $this->image = Storage::disk('s3')->url($file_name . '_user_image');
+      Storage::disk('s3')->put($file_name . '_user_image', $decoded_thumbnail, 'public');
+      return $this->image = Storage::disk('s3')->url($file_name . '_user_image');
     }
-    else {
-        return $user->select('image')->where('id', Auth::id())->get()->toArray()[0];
-    }
+
+    return $user->select('image')->where('id', Auth::id())->get()->toArray()[0];
   }
 }

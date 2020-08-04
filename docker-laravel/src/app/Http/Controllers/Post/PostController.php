@@ -27,8 +27,8 @@ class PostController extends Controller
       $size,
       null,
       function ($constraint): void {
-          $constraint->aspectRatio();
-        }
+        $constraint->aspectRatio();
+      }
     )
       ->stream('jpg', $quality);
   }

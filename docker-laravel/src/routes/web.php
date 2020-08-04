@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +23,7 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 // RestoreUser
 Route::get('restore', function () {
-    return view('auth.restore');
+  return view('auth.restore');
 });
 Route::post('restore', 'Auth\RestoreUserController')->name('restore');
 

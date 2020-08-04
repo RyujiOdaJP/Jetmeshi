@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Notifications\CustomPasswordReset;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
-use App\Notifications\CustomPasswordReset;
 
 //モデルはテーブルとマッピングされたオブジェクトです。
 // DB操作を行うためのクラスになります。
