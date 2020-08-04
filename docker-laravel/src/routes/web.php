@@ -42,7 +42,7 @@ Route::match(['put', 'patch'], 'changepassword/{user}', 'Auth\ChangePasswordCont
 Route::get('changeemail', 'Auth\ShowChangeEmailController')->name('changeemail.form');
 Route::post('changeemail/{user}', 'Auth\ChangeEmailController')->name('changeemail');
 // 新規メールアドレスに更新
-Route::get('reset/{token}', 'ResetEmailController')->name('reset.email');
+Route::get('reset/{token}', 'Auth\ResetEmailController')->name('reset.email');
 
 // Post
 Route::get('post/', 'Post\IndexPostController@index')->name('post.index');

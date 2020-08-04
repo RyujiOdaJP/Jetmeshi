@@ -72,11 +72,11 @@ class UpdateUserRequest extends FormRequest
 
   public function image()
   {
-    $user = new User;
-    $file_name = date('Y_m_d_His') . '-' . $this->random();
+    // $no_image = 'https://cm-jetmeshi.s3-ap-northeast-1.amazonaws.com/noimage+template.jpg';
     $image = $this->input('sent_image');
 
     if ($image != null) {
+      $file_name = date('Y_m_d_His') . '-' . $this->random();
       list(, $data) = explode(',', $image);
       $decoded_thumbnail =
               InterventionImage::make(base64_decode($data))->resize(
@@ -91,7 +91,22 @@ class UpdateUserRequest extends FormRequest
       Storage::disk('s3')->put($file_name . '_user_image', $decoded_thumbnail, 'public');
       return $this->image = Storage::disk('s3')->url($file_name . '_user_image');
     }
+  }
 
-    return $user->select('image')->where('id', Auth::id())->get()->toArray()[0];
+  public function userUpdateParameters()
+  {
+    $param_arr = [
+        'name' => $this->name(),
+        'bio' => $this->bio(),
+        'twitter' => $this->twitter(),
+        'instagram' => $this->instagram(),
+        'github' => $this->github(),
+        'facebook' => $this->facebook(),
+    ];
+
+    if ($this->image() == null) {
+      return $param_arr;
+    }
+    return $param_arr + ['image' => $this->image()];
   }
 }
