@@ -45,9 +45,9 @@ class CustomChangeEmail extends Notification
       ->subject('メールアドレス変更') // 件名
       ->view('emails.changeEmail') // メールテンプレートの指定
       ->action(
-          'メールアドレス変更',
-          url('reset', $this->token) //アクセスするURL
-        );
+        'メールアドレス変更',
+        url('reset', $this->token) //アクセスするURL
+      );
   }
 
   /**

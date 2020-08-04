@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use App\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ChangeEmailRequest extends FormRequest
 {
@@ -25,13 +27,14 @@ class ChangeEmailRequest extends FormRequest
    */
   public function rules()
   {
+    $user = new User;
     return [
             'email' => [
-                'required',
+                // 'required',
                 'string',
                 'email',
                 'max:255',
-                'unique:users',
+                Rule::unique('users')->ignore($user->id),
             ],
             [
                 'email.unique' => '入力されたメールアドレスは使用されています。',

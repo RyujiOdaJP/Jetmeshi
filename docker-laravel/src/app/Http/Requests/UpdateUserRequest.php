@@ -83,8 +83,8 @@ class UpdateUserRequest extends FormRequest
                 300,
                 null,
                 function ($constraint): void {
-                    $constraint->aspectRatio();
-                  }
+                  $constraint->aspectRatio();
+                }
               )
                 ->stream('jpg', 50);
 
