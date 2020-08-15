@@ -20,7 +20,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
   use SoftDeletes;
 
   /**
-   * Declare soft dalete.
+   * Declare soft delete.
    *
    * @var array
    */
@@ -57,8 +57,11 @@ class User extends Authenticatable implements MustVerifyEmailContract
   protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    /**
+     * @var mixed
+     */
 
-  /**
+    /**
    * リレーション (1対多の関係).
    *
    * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -102,7 +105,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
       $post_ids[] = $post_id['post_id'];
     }
     return
-    $post_ids;
+    $post_ids ?? null;
   }
 
   public function sendPasswordResetNotification($token): void
