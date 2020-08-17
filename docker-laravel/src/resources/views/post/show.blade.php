@@ -3,6 +3,37 @@
 @endphp
 @extends('layouts.app')
 @section('content')
+<!-- Modal -->
+<div class="modal fade" id="report-modal" tabindex="-1" role="dialog" aria-labelledby="report-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="report-modal-label">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+              このレビューを報告しますか？
+          </p>
+          <input type="checkbox" name="harmful" id="harmful">
+          <label for="harmful">誹謗中傷を含んでいる</label>
+          <input type="checkbox" name="irrevant" id="irrevant">
+          <label for="irrevant">投稿内容と関係がない</label>
+          <input type="checkbox" name="personal" id="personal">
+          <label for="personal">個人情報を流出させている</label>
+          <input type="checkbox" name="inappropriate" id="inappropriate">
+          <label for="inappropriate">不適切な表現（暴力、性的、差別）</label>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <div class="container post_show">
     <div class="container mt-2">
@@ -19,8 +50,6 @@
                 <h4 class="card-title">{{__('手順')}}</h4>
 
                 <p class="card-text">
-                    {{-- {{ htmlspecialchars($post->sequence_body, ENT_QUOTES, 'UTF-8') }} --}}
-                    {{-- {{preg_replace ("<br />","\n",$post->sequence_body)}} --}}
                     {!! nl2br($post->sequence_body) !!}
                 </p>
             </div>
@@ -36,7 +65,7 @@
                     enctype="multipart/form-data">
                     @csrf
                     @method('POST')
-                    <div class="form-group row mb-2">
+                    <div class="form-group mb-2">
                         <div class="col-md-4">
                             <label for="stars" class="mb-0">{{__('評価')}}</label>
                             <div id="stars" class="evaluation">
@@ -44,11 +73,11 @@
                                 <label for="star1">★</label>
                                 <input id="star2" type="radio" name="star" value="4" />
                                 <label for="star2">★</label>
-                                <input id="star3" type="radio" name="star" value="3" />
+                                <input id="star3" type="radio" name="star" value="3" checked />
                                 <label for="star3">★</label>
                                 <input id="star4" type="radio" name="star" value="2" />
                                 <label for="star4">★</label>
-                                <input id="star5" type="radio" name="star" value="1" checked />
+                                <input id="star5" type="radio" name="star" value="1" />
                                 <label for="star5">★</label>
                             </div>
                         </div>
@@ -90,6 +119,7 @@
                 <p class="card-text">
                     {!! nl2br($review->review_body) !!}
                 </p>
+                <div class="report" data-toggle="modal" data-target="#report-modal">問題を報告</div>
                 @endforeach
                 @else
                 <h6 class="card-subtitle mb-2 text-muted">{{__('レビューがありません')}}</h6>

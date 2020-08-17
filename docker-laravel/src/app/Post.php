@@ -24,9 +24,9 @@ class Post extends Model
    * Declare search index.
    *  @var array
    */
-  protected $fillable = [
-    'title', 'cooking_time', 'budget',
-  ];
+//   protected $fillable = [
+//     'title', 'cooking_time', 'budget',
+//   ];
 
   /**
    *casting likes value as integer.

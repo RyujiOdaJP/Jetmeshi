@@ -55,6 +55,7 @@ Route::delete('post/{post}', 'Post\DestroyPostController')->name('post.destroy')
 
 Route::post('post/review/{post}', 'ReviewController@store')->name('review.store');
 Route::get('search', 'SearchController@index')->name('search');
+Route::post('report/{review}', 'ReportController')->name('report');
 
 Route::post('like/{post}', 'LikeController@ajaxstore')->name('like');
 Route::post('post/like/{post}', 'LikeController@ajaxstore')->name('like.post');
