@@ -15,7 +15,7 @@ class ReportRequest extends FormRequest
    */
   public function authorize()
   {
-    return false;
+    return true;
   }
 
   /**
@@ -26,6 +26,7 @@ class ReportRequest extends FormRequest
   public function rules()
   {
     return [
+        'reports' => 'required_without_all:harmful,irrevant,personal,innapproriate',
         ];
   }
 
@@ -44,12 +45,23 @@ class ReportRequest extends FormRequest
   public function personal()
   {
     return
-        $this->input('irrevant');
+        $this->input('personal');
   }
 
   public function innaproriate()
   {
     return
-        $this->input('innaproriate');
+        $this->input('innapproriate');
+  }
+
+  public function report_arr()
+  {
+    return
+    [
+        'harmful' => $this->harmful(),
+        'irrevant' => $this->irrevant(),
+        'personal' => $this->personal(),
+        'innapropriate' => $this->innaproriate(),
+    ];
   }
 }
