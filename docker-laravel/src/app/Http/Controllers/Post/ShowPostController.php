@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Post;
 
 use App\Post;
+use App\Report;
 use App\Review;
+use Illuminate\Support\Facades\Auth;
 
 class ShowPostController extends PostController
 {
@@ -15,9 +17,10 @@ class ShowPostController extends PostController
    * @param int    $id
    * @param Post   $post
    * @param Review $reviews
+   * @param Report $report
    * @return \Illuminate\Http\Response
    */
-  public function show(Post $post, Review $reviews)
+  public function show(Post $post, Review $reviews, Report $report)
   {
     $reviews = Review::where('post_id', $post->id)->get();
     $id_exist = Review::where('post_id', $post->id)->exists();
@@ -28,6 +31,9 @@ class ShowPostController extends PostController
     foreach ($tag_values as $tag_value) {
       $tag_names[] = $tag_value->name;
     }
-    return view('post.show', compact('post', 'reviews', 'id_exist', 'star_avg', 'tag_names'));
+
+    // dd($reviews->toArray()['id']);
+    ($reports = $report->select('review_id')->where('user_id', Auth::id())->whereIn('review_id', $reviews)->get());
+    return view('post.show', compact('post', 'reviews', 'id_exist', 'star_avg', 'tag_names', 'reports'));
   }
 }
