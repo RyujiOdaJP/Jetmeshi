@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+declare(strict_types=1);
 
-use Illuminate\Http\Request;
+namespace App\Http\Controllers;
 
 class ReportController extends Controller
 {
-    public function __invoke()
-    {
-        
-    }
+  public function __invoke(): void
+  {
+  }
 }

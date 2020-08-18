@@ -20,4 +20,9 @@ class Review extends Model
     return $this->belongsTo('App\Post');
     // ->latest();
   }
+
+  public function reports(): void
+  {
+    $this->hasMany('App\Report');
+  }
 }
