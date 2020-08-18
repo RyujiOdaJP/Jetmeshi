@@ -13,14 +13,14 @@ use Illuminate\Routing\Redirector;
 
 class DestroyPostController extends PostController
 {
-    /**
-     * Remove the specified resource from storage
-     *
-     * @param Post $post
-     * @param Like $like
-     * @return Application|RedirectResponse|Redirector
-     * @throws AuthorizationException
-     */
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param Post $post
+   * @param Like $like
+   * @throws AuthorizationException
+   * @return Application|Redirector|RedirectResponse
+   */
   public function __invoke(Post $post, Like $like)
   {
     //Soft delete

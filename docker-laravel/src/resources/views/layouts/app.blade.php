@@ -136,8 +136,9 @@
                     </li>
                     @if (Route::has('register'))
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}"><i
-                                class="fas fa-user"></i>{{ __(' アカウント作成') }}</a>
+                        <a class="nav-link" href="{{ route('register') }}">
+                            <i class="fas fa-user"></i>{{ __(' アカウント作成') }}
+                        </a>
                     </li>
                     @endif
                     @else

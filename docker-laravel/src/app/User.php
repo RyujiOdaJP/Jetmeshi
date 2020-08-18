@@ -33,7 +33,6 @@ class User extends Authenticatable implements MustVerifyEmailContract
    *
    * @var array
    */
-
   protected $guarded = [
         'id',
         'created_at',
@@ -57,11 +56,12 @@ class User extends Authenticatable implements MustVerifyEmailContract
   protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    /**
-     * @var mixed
-     */
 
-    /**
+  /**
+   * @var mixed
+   */
+
+  /**
    * リレーション (1対多の関係).
    *
    * @return \Illuminate\Database\Eloquent\Relations\HasMany
