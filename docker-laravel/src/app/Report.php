@@ -8,8 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
 {
-  public function reviews(): void
+  /**
+   * Define an inverse one-to-one or many relationship.
+   *
+   * @return Illuminate\Database\Eloquent\Concerns\HasRelationships::belongsTo
+   */
+  public function review()
   {
-    $this->belongsTo('App\Review');
+    return $this->belongsTo('App\Review');
   }
 }
