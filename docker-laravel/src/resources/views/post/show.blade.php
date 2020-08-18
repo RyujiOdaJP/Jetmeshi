@@ -13,27 +13,31 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="{{url('post/review/report/') . $post->id}}" method="post" enctype="multipart/form-data">
+        <form action="{{url('post/review/report/')}}" method="post" enctype="multipart/form-data">
             @csrf
-            @method('POST');
+            @method('POST')
             <div class="modal-body">
             <p>
                 このレビューを報告しますか？
             </p>
+            {{-- hidden input for validation at least 1 check required --}}
+                <input type="hidden" name="reports" value="">
+                <input type="hidden" id="review_id" name="review_id" value="">
+                <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" name="harmful" id="harmful">
+                    <input type="checkbox" name="harmful" id="harmful" value="1">
                     <label for="harmful">誹謗中傷を含んでいる</label>
                 </div>
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" name="irrevant" id="irrevant">
+                    <input type="checkbox" name="irrevant" id="irrevant" value="1">
                     <label for="irrevant">投稿内容と関係がない</label>
                 </div>
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" name="personal" id="personal">
+                    <input type="checkbox" name="personal" id="personal" value="1">
                     <label for="personal">個人情報を流出させている</label>
                 </div>
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" name="inappropriate" id="inappropriate">
+                    <input type="checkbox" name="inappropriate" id="inappropriate" value="1">
                     <label for="inappropriate">不適切な表現（暴力、性的、差別）</label>
                 </div>
             </div>
@@ -112,7 +116,7 @@
                 <h4 class="card-title">{{__('レビュー')}}</h4>
                 @if ($id_exist ?? '')
                 @foreach ($reviews as $review)
-                <h6 class="card-subtitle mb-2">
+                <h6 class="card-subtitle mb-2 mt-3">
                     　<a href="{{ url('user/' . $review->user->id) }}" class=""><img src="{{ $review->user->image }}"
                             alt="user_img" class="rounded-circle" style="width: 50px"></a>
                     {{ ' ' . $review->user->name }}
@@ -129,9 +133,18 @@
                 <p class="card-text">
                     {!! nl2br($review->review_body) !!}
                 </p>
-                <a href="" class="report" data-toggle="modal" data-target="#report-modal">
-                    <i class="fas fa-flag"></i> 問題を報告
-                </a>
+                @auth
+                    @if (true)
+                    <a href="" id="{{'report_' . $review->id}}" class="report card-text" data-toggle="modal" data-target="#report-modal" data-id="{{ $review->id }}">
+                            <i class="fas fa-flag"></i> 問題を報告
+                        </a>
+                    @else
+                    <a href="" class="report disabled" data-toggle="modal" data-target="#report-modal">
+                        <i class="fas fa-flag"></i> 問題報告済み
+                    </a>
+                    @endif
+                @endauth
+
                 @endforeach
                 @else
                 <h6 class="card-subtitle mb-2 text-muted">{{__('レビューがありません')}}</h6>
