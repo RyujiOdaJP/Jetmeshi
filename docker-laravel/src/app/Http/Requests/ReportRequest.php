@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ReportRequest extends FormRequest
 {
@@ -30,6 +31,16 @@ class ReportRequest extends FormRequest
         ];
   }
 
+  public function user_id()
+  {
+    return
+        Auth::id();
+  }
+  public function review_id()
+  {
+    return
+        $this->input('review_id');
+  }
   public function harmful()
   {
     return
@@ -58,6 +69,8 @@ class ReportRequest extends FormRequest
   {
     return
     [
+        'user_id' => $this->user_id(),
+        'review_id' => $this->review_id(),
         'harmful' => $this->harmful(),
         'irrevant' => $this->irrevant(),
         'personal' => $this->personal(),

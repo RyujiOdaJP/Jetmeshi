@@ -13,17 +13,17 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="{{url('post/review/report/')}}" method="post" enctype="multipart/form-data">
+        <form action="{{ url('report') . '/' . $post->id }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('POST')
-            <div class="modal-body">
-            <p>
-                このレビューを報告しますか？
-            </p>
+            <div class="modal-body form-group">
+                <p>
+                    このレビューを報告しますか？
+                </p>
             {{-- hidden input for validation at least 1 check required --}}
                 <input type="hidden" name="reports" value="">
+                {{-- <input type="hidden" name="user_id" value="{{ Auth::id() }}"> --}}
                 <input type="hidden" id="review_id" name="review_id" value="">
-                <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" name="harmful" id="harmful" value="1">
                     <label for="harmful">誹謗中傷を含んでいる</label>

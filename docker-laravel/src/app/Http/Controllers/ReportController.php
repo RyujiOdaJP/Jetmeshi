@@ -10,11 +10,12 @@ use App\Post;
 
 class ReportController extends Controller
 {
-  public function __invoke(ReportRequest $request, Report $report, Post $post)
+  public function __invoke(ReportRequest $request, Report $report, $id)
   {
+    // dd($request->user_id());
     $report->save(
       $request->report_arr()
     );
-    return redirect('post/' . $post->id)->with('my_status', __('Reported a review issue.'));
+    return redirect('post/' . $id)->with('my_status', __('Reported a review issue.'));
   }
 }
