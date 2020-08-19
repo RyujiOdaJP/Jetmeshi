@@ -36,7 +36,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
   protected $guarded = [
         'id',
         'created_at',
-        // 'updated_at',
+        'updated_at',
     ];
 
   /**

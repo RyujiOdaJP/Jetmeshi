@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
 {
+  protected $guarded = ['id'];
+
   /**
    * Define an inverse one-to-one or many relationship.
    *

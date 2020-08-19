@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Like extends Model
 {
-  protected $fillable = [''];
+  protected $guarded = ['id'];
 
   protected $dates = ['deleted_at'];
 

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Review extends Model
 {
+  protected $guarded = ['id'];
+
   //TODO: make relation with post&user
     public function user() // 単数形
     {

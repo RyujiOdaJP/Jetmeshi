@@ -20,6 +20,8 @@ class Post extends Model
 
   protected $dates = ['deleted_at'];
 
+  protected $guarded = ['id'];
+
   /**
    * Declare search index.
    *  @var array

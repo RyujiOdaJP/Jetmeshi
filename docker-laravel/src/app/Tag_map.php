@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag_map extends Model
 {
-  protected $fillable = ['post_id', 'tag_id'];
+  protected $guarded = ['id'];
 }
