@@ -36,11 +36,13 @@ class ReportRequest extends FormRequest
     return
         Auth::id();
   }
+
   public function review_id()
   {
     return
         $this->input('review_id');
   }
+
   public function harmful()
   {
     return
@@ -59,10 +61,10 @@ class ReportRequest extends FormRequest
         $this->input('personal');
   }
 
-  public function innaproriate()
+  public function inapproriate()
   {
     return
-        $this->input('innapproriate');
+        $this->input('inapproriate');
   }
 
   public function report_arr()
@@ -74,7 +76,7 @@ class ReportRequest extends FormRequest
         'harmful' => $this->harmful(),
         'irrevant' => $this->irrevant(),
         'personal' => $this->personal(),
-        'innapropriate' => $this->innaproriate(),
+        'inappropriate' => $this->inapproriate(),
     ];
   }
 }

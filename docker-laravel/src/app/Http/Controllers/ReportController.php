@@ -6,16 +6,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ReportRequest;
 use App\Report;
-use App\Post;
 
 class ReportController extends Controller
 {
   public function __invoke(ReportRequest $request, Report $report, $id)
   {
-    // dd($request->user_id());
-    $report->save(
+    // dd($request->report_arr());
+    $report->create(
       $request->report_arr()
     );
-    return redirect('post/' . $id)->with('my_status', __('Reported a review issue.'));
+    return redirect('/')->with('my_status', __('Reported a review issue.'));
   }
 }
