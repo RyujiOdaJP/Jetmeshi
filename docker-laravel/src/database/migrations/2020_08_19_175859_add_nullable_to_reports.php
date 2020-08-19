@@ -1,35 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class AddNullableToReports extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::table('reports', function (Blueprint $table) {
-            $table->Integer('harmful')->nullable()->change();
-            $table->Integer('irrevant')->nullable()->change();
-            $table->Integer('personal')->nullable()->change();
-            $table->Integer('inappropriate')->nullable()->change();
-        });
-    }
+  /**
+   * Run the migrations.
+   */
+  public function up(): void
+  {
+    Schema::table('reports', function (Blueprint $table): void {
+      $table->Integer('harmful')->nullable()->change();
+      $table->Integer('irrevant')->nullable()->change();
+      $table->Integer('personal')->nullable()->change();
+      $table->Integer('inappropriate')->nullable()->change();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::table('reports', function (Blueprint $table) {
-            //
-        });
-    }
+  /**
+   * Reverse the migrations.
+   */
+  public function down(): void
+  {
+    Schema::table('reports', function (Blueprint $table): void {
+    });
+  }
 }
