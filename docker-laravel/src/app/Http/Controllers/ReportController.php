@@ -15,6 +15,6 @@ class ReportController extends Controller
     $report->create(
       $request->report_arr()
     );
-    return redirect('/')->with('my_status', __('Reported a review issue.'));
+    return redirect('post/' . $id)->with('my_status', __('Reported a review issue.'));
   }
 }
