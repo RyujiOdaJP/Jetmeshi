@@ -14,7 +14,10 @@ class AddNullableToReports extends Migration
     public function up()
     {
         Schema::table('reports', function (Blueprint $table) {
-            //
+            $table->Integer('harmful')->nullable()->change();
+            $table->Integer('irrevant')->nullable()->change();
+            $table->Integer('personal')->nullable()->change();
+            $table->Integer('inappropriate')->nullable()->change();
         });
     }
 

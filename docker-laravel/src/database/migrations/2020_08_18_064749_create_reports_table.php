@@ -19,10 +19,10 @@ class CreateReportsTable extends Migration
         ->onDelete('cascade')->onUpdate('cascade')->change();
       $table->foreignId('review_id')->constrained()
         ->onDelete('cascade')->onUpdate('cascade')->change();
-      $table->tinyInteger('harmful');
-      $table->tinyInteger('irrevant');
-      $table->tinyInteger('personal');
-      $table->tinyInteger('inappropriate');
+      $table->Integer('harmful');
+      $table->Integer('irrevant');
+      $table->Integer('personal');
+      $table->Integer('inappropriate');
       $table->timestamps();
     });
   }
