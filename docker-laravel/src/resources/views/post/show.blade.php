@@ -134,12 +134,12 @@
                     {!! nl2br($review->review_body) !!}
                 </p>
                 @auth
-                    @if (true)
+                    @if (!in_array($review->id, $report_arr))
                     <a href="" id="{{'report_' . $review->id}}" class="report card-text" data-toggle="modal" data-target="#report-modal" data-id="{{ $review->id }}">
                             <i class="fas fa-flag"></i> 問題を報告
                         </a>
                     @else
-                    <a href="" class="report disabled" data-toggle="modal" data-target="#report-modal">
+                    <a href="" class="report btn disabled" data-toggle="modal" data-target="#report-modal">
                         <i class="fas fa-flag"></i> 問題報告済み
                     </a>
                     @endif

@@ -18,9 +18,10 @@ class ShowPostController extends PostController
    * @param Post   $post
    * @param Review $reviews
    * @param Report $report
+   * @param Report $reports
    * @return \Illuminate\Http\Response
    */
-  public function show(Post $post, Review $reviews, Report $report)
+  public function show(Post $post, Review $reviews, Report $reports)
   {
     $reviews = Review::where('post_id', $post->id)->get();
     $id_exist = Review::where('post_id', $post->id)->exists();
@@ -33,7 +34,14 @@ class ShowPostController extends PostController
     }
 
     // dd($reviews->toArray()['id']);
-    ($reports = $report->select('review_id')->where('user_id', Auth::id())->whereIn('review_id', $reviews)->get());
-    return view('post.show', compact('post', 'reviews', 'id_exist', 'star_avg', 'tag_names', 'reports'));
+    $report_arr = [];
+    $reports =
+        $reports->select('review_id')->where('user_id', Auth::id())
+          ->get()->toArray();
+
+    foreach ($reports as $key => $value) {
+      $report_arr[] = $value['review_id'];
+    }
+    return view('post.show', compact('post', 'reviews', 'id_exist', 'star_avg', 'tag_names', 'report_arr'));
   }
 }
