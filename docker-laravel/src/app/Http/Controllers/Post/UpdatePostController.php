@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Post;
 
 use App\Post;
-use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Storage;
 
 class UpdatePostController extends PostController
@@ -14,10 +14,9 @@ class UpdatePostController extends PostController
   /**
    * Update the specified resource in storage.
    *
-   * @param \app\Http\Requests\StorePost $request
-   * @param int                          $id
-   * @param Post                         $post
-   * @return \Illuminate\Http\Response
+   * @param Post $post
+   * @param Request $request
+   * @return Redirector
    */
   public function __invoke(Request $request, Post $post)
   {

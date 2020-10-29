@@ -11,3 +11,8 @@ README.md
 docker-laravel
 .DS_Store
 /org-chimata-ssl-certs/
+circleci-demo-go
+.DS_Store
+credentials.csv
+node_modules
+.idea

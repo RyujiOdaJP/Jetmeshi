@@ -76,7 +76,7 @@ services:
       - TZ=${TZ:-Asia/Tokyo}
       # - TZ=Asia/Tokyo
     ports:
-      - ${DB_TESTING_PORT}:3306
+      - ${DB_TESTING_PORT}:3309
 
   https-portal:
     image: steveltn/https-portal:latest
