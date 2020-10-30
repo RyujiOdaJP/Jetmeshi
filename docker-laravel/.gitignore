@@ -16,3 +16,4 @@ circleci-demo-go
 credentials.csv
 node_modules
 .idea
+.env.example
