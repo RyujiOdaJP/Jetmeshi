@@ -44,3 +44,5 @@ config('database.connections.mysql.port');
 exit
 $users\040=\040App\134User::all();
 exit
+env(DB_TESTING_HOST)
+exit

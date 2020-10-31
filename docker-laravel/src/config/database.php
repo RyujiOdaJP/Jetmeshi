@@ -43,22 +43,22 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
-        // 'testing' =>[
-        //     'driver' => 'mysql',
-        //     'host' => env('DB_TESTING_HOST', '127.0.0.1'),
-        //     'port' => env('DB_TESTING_PORT', ''),
-        //     'database' => env('DB_TESTING_NAME', 'JETmysqltest'),
-        //     'username' => env('DB_USERNAME', 'root'),
-        //     'password' => env('DB_PASSWORD', ''),
-        //     'unix_socket' => env('DB_SOCKET', ''),
-        //     'charset' => 'utf8mb4',
-        //     'collation' => 'utf8mb4_unicode_ci',
-        //     'prefix'   => '',
-        //     'options'  => [
-        //     // テストデータの永続化
-        //      PDO::ATTR_PERSISTENT => false,
-        //     ],
-        // ],
+         'testing' =>[
+             'driver' => 'mysql',
+             'host' => env('DB_TESTING_HOST', '127.0.0.1'),
+             'port' => env('DB_TESTING_PORT', '3309'),
+             'database' => env('DB_TESTING_NAME', 'JETmysqltest'),
+             'username' => env('DB_USERNAME', 'root'),
+             'password' => env('DB_PASSWORD', ''),
+             'unix_socket' => env('DB_SOCKET', ''),
+             'charset' => 'utf8mb4',
+             'collation' => 'utf8mb4_unicode_ci',
+             'prefix'   => '',
+             'options'  => [
+             // テストデータの永続化
+              PDO::ATTR_PERSISTENT => false,
+             ],
+         ],
 
         'mysql' => [
             'driver' => 'mysql',

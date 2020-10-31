@@ -18,7 +18,7 @@ class DestroyPostControllerTest extends TestCase
     {
 
         $post = factory(PostAlias::class)->make();
-//        dd($post);
+        dd($post);
         $this->assertTrue(true);
     }
 }
