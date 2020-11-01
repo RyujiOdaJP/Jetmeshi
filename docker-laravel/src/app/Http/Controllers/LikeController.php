@@ -20,7 +20,7 @@ class LikeController extends Controller
    */
   use SoftDeletes;
 
-  public function ajaxstore(Like $likes, $id)
+  public function ajaxStore(Like $likes, $id)
   {
     // dd($_GET['userId']);
     $likes->user_id = Auth::id();
@@ -34,13 +34,9 @@ class LikeController extends Controller
       ->where('user_id', '=', $likes->user_id)
       ->where('post_id', '=', $likes->post_id);
 
-    try {
       //code...
-      if ($likes_count['likes'] == null) {
-        // create new like recode
-      }
-    } catch (\Throwable $th) {
-      // ignore error of offset array
+      if (!empty($likes_count['likes'])) {
+
       $likes->likes = 1;
       $likes->save();
       return [

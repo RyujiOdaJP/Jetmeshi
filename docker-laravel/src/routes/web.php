@@ -57,6 +57,6 @@ Route::post('post/review/{post}', 'ReviewController@store')->name('review.store'
 Route::get('search', 'SearchController@index')->name('search');
 Route::post('report/{post}', 'ReportController')->name('report');
 
-Route::post('like/{post}', 'LikeController@ajaxstore')->name('like');
-Route::post('post/like/{post}', 'LikeController@ajaxstore')->name('like.post');
-Route::post('user/like/{post}', 'LikeController@ajaxstore')->name('like.user');
+Route::post('like/{post}', 'LikeController@ajaxStore')->name('like');
+Route::post('post/like/{post}', 'LikeController@ajaxStore')->name('like.post');
+Route::post('user/like/{post}', 'LikeController@ajaxStore')->name('like.user');

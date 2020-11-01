@@ -46,3 +46,10 @@ $users\040=\040App\134User::all();
 exit
 env(DB_TESTING_HOST)
 exit
+env(APP_ENV)
+env.testing(APP_ENV)
+(DB_CONNECTION)
+ebv(DB_CONNECTION)
+env(DB_CONNECTION)
+bye
+exit
